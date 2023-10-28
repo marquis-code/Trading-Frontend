@@ -1,238 +1,211 @@
 <template>
-  <main class="lg:flex text-white gap-x-3 space-y-10 lg:space-y-0">
-    <section class="space-y-6 lg:w-8/12 lg:h-screen overflow-y-auto sticky">
-      <section class="">
-        <div class="space-y-2">
-          <p class="text-gray-500">
-            Total Balance
-          </p>
-          <div class="flex items-center gap-x-2">
-            <h1 class="text-white text-3xl font-semibold">
-              1.82937456
-            </h1> <span class="block  bg-[#5CC5F7] px-3 py-1 rounded-md font-medium text-xs">BTC</span>
-          </div>
-          <p class="text-gray-500">
-            $20,974.23
+  <main class="space-y-6">
+    <div class="grid grid-cols-1 gap-4 lg:grid-cols-3 lg:gap-8">
+      <div
+        class="h-[300px] rounded-lg bg-gray-50 lg:col-span-2 border hidden md:block border-blue-500"
+      >
+        <graph-2 />
+      </div>
+      <div class="rounded-lg bg-blue-50 border">
+        <div class="px-3 py-2">
+          <h1 class="text-gray-700 text-sm font-bold">MY ASSETS</h1>
+          <p class="text-gray-400 text-xl">
+            $ <span class="text-xl text-gray-900">19,89,111.68</span>
           </p>
         </div>
-      </section>
-      <div class="md:flex w-full gap-x-10 pt-6 space-y-6 lg:space-y-0">
-        <div class="h-full rounded-lg py-3 bg-white border space-y-6 w-full">
-          <div class="flex justify-between items-center px-6">
-            <p class="font-medium">
-              Market Analysis
-            </p>
-            <div>
-              <select class="border outline-none rounded-md bg-gray-100 text-sm px-3 py-2.5">
-                <option>Monthly</option>
-                <option>Weekly</option>
-                <option>Yearly</option>
-              </select>
+        <div class="md:flex items-center gap-x-6 p-3 space-y-6 md:space-y-0">
+          <div
+            class="h-[300px] md:w-1/2 rounded-lg flex justify-between flex-col bg-[url('~/assets/img/trading-stat.jpg')] bg-cover bg-top bg-no-repeat"
+          >
+            <div class="p-3">
+              <div
+                class="rounded-full bg-red-400 p-2 h-10 w-10 flex justify-center items-center"
+              >
+                <img
+                  src="@/assets/img/money-wallet.png"
+                  class="h-7 w-7"
+                  alt=""
+                />
+              </div>
+            </div>
+            <div class="border-t-[0.4px] border-white">
+              <div class="px-3 py-2">
+                <p class="text-white text-xs">Funding</p>
+                <p class="text-lg font-semibold text-white">$12,556.00</p>
+              </div>
             </div>
           </div>
-          <graph-2 />
+          <div
+            class="h-[300px] md:w-1/2 rounded-lg flex justify-between flex-col bg-[url('~/assets/img/recession.jpg')] bg-cover bg-top bg-no-repeat"
+          >
+            <div class="p-3">
+              <div
+                class="rounded-full bg-red-400 p-2 h-10 w-10 flex justify-center items-center"
+              >
+                <img src="@/assets/img/analytics.png" class="h-7 w-7" alt="" />
+              </div>
+            </div>
+            <div class="border-t-[0.4px] border-white">
+              <div class="px-3 py-2">
+                <p class="text-white text-xs">Trading</p>
+                <p class="text-lg font-semibold text-white">$9,934.68</p>
+              </div>
+            </div>
+          </div>
         </div>
       </div>
-      <div>
-        <trading-overview />
+    </div>
+    <div class="grid grid-cols-1 gap-4 lg:grid-cols-3 lg:gap-8">
+      <div
+        class="rounded-lg lg:col-span-2 border border-blue-300 p-3 space-y-6"
+      >
+        <div class="flex justify-between items-center">
+          <div class="md:w-3/12 relative">
+            <div class="absolute top-2 left-3">
+              <img src="@/assets/img/search.svg" alt="" />
+            </div>
+            <input
+              class="border-[0.4px] rounded-full outline-none border-blue-300 pl-8 py-2 text-xs w-full bg-blue-50"
+              type="search"
+              placeholder="Search"
+            />
+          </div>
+          <div>
+            <select
+              class="bg-blue-500 text-sm text-white px-3 py-2.5 rounded-full outline-none"
+            >
+              <option>All Assets</option>
+            </select>
+          </div>
+        </div>
+        <user-dashboard-assets-table :assets-list="assetsList" />
       </div>
-    </section>
-    <section class="lg:w-3/12 px-2 lg:space-y-4 space-y-10 lg:h-screen overflow-y-auto lg:fixed top-32 right-0 lg:pr-6">
-      <div class="space-y-10 pr-10">
-        <h1>Recent Transactions</h1>
+      <div
+        class="rounded-lg bg-white py-10 px-6 space-y-4 border border-gray-600"
+      >
+        <h1 class="text-gray-600">Recent Transactions</h1>
         <div class="space-y-6">
           <div
-            v-for="n in [{
-              name: 'Bitcoin',
-              action: 'Buy',
-              duration: 'Today, 15:20 PM',
-              amount: '$5,642',
-              url: 'eth'
-            }, {
-              name: 'Ethereum',
-              action: 'Received',
-              duration: 'Today, 10:20 AM',
-              amount: '+0.245 ETH',
-              url: 'bit'
-            }, {
-              name: 'Polkadot',
-              action: 'Buy',
-              duration: 'Today, 15:20 PM',
-              amount: '$5,642',
-              url: 'eth'
-            }, {
-              name: 'Cardano',
-              action: 'Received',
-              duration: 'Yesterday, 17:20 PM',
-              amount: '$3,642',
-              url: 'bit'
-            }]"
-            :key="n"
-            class="flex justify-between items-center"
+            v-for="(item, index) in transactionsList"
+            :key="index"
+            class="flex justify-between items-center text-sm"
           >
-            <div class="flex items-center gap-x-2">
-              <div><img :src="require(`~/assets/img/${n.url}.png`)" alt="" class="h-6 w-6"></div>
+            <div class="flex items-center gap-x-3">
+              <div class="rounded-full border p-2">
+                <img
+                  :src="require(`@/assets/img/${item.icon}.png`)"
+                  class="h-7 w-7"
+                  alt=""
+                />
+              </div>
               <div>
-                <h1 class="text-sm">
-                  {{ n.name }}
-                </h1>
+                <p class="font-medium">
+                  {{ item.description }}
+                </p>
                 <p class="text-xs text-gray-500">
-                  {{ n.action }}
+                  {{ item.date }}
                 </p>
               </div>
             </div>
-
-            <div>
-              <h1 class="text-sm">
-                {{ n.amount }}
-              </h1>
-              <p class="text-xs text-gray-500">
-                {{ n.duration }}
-              </p>
+            <div
+              :class="[
+                item.type === 'credit' ? 'text-green-500' : 'text-red-500',
+              ]"
+            >
+              <span class="font-medium">
+                {{ item.type === "credit" ? "+" : "-" }}</span
+              >
+              <span class="font-medium">{{ item.amount }}</span>
             </div>
           </div>
         </div>
       </div>
-      <div class="w-full space-y-6 pr-10">
-        <h1>Assets</h1>
-        <div class="lg:space-y-6 flex-col space-y-6 md:space-y-0 md:flex md:flex-row lg:flex-col gap-x-6 justify-between items-center">
-          <div class="px-3 w-full pt-3 rounded-md bg-gradient-to-r from-cyan-500 to-blue-500 bitcoin border border-red-500 h-[100px]">
-            <div class="flex justify-between items-center">
-              <p class="font-bold text-white">
-                BTC
-              </p>
-              <h1 class="font-semibold text-white">
-                $234,542,326
-              </h1>
-            </div>
-            <div class="flex justify-between items-center" />
-          </div>
-
-          <div class="px-3 w-full pt-3 rounded-md bg-gradient-to-r from-cyan-500 to-blue-500 bitcoin border border-red-500 h-[100px]">
-            <div class="flex justify-between items-center">
-              <p class="font-bold text-white">
-                ETH
-              </p>
-              <h1 class="font-semibold text-white">
-                $234,542,555
-              </h1>
-            </div>
-            <div class="flex justify-between items-center" />
-          </div>
-        </div>
-      </div>
-    </section>
+    </div>
   </main>
 </template>
 
 <script>
 export default {
-  layout: 'dashboard',
-  data () {
+  layout: "user-dashboard",
+  data() {
     return {
-      tableData: [{
-        invoice: '97412378923',
-        client: 'Microsoft Corporation',
-        issued: '14 Jan 2022',
-        issuedDay: 'Friday',
-        due: '01 Feb 2022',
-        dueDay: 'Tuesday',
-        amount: '$15,792',
-        status: 'pending'
-      }, {
-        invoice: '97412378923',
-        client: 'Microsoft Corporation',
-        issued: '14 Jan 2022',
-        issuedDay: 'Friday',
-        due: '01 Feb 2022',
-        dueDay: 'Tuesday',
-        amount: '$15,792',
-        status: 'completed'
-      }, {
-        invoice: '97412378923',
-        client: 'Microsoft Corporation',
-        issued: '14 Jan 2022',
-        issuedDay: 'Friday',
-        due: '01 Feb 2022',
-        dueDay: 'Tuesday',
-        amount: '$15,792',
-        status: 'pending'
-      }, {
-        invoice: '97412378923',
-        client: 'Microsoft Corporation',
-        issued: '14 Jan 2022',
-        issuedDay: 'Friday',
-        due: '01 Feb 2022',
-        dueDay: 'Tuesday',
-        amount: '$15,792',
-        status: 'completed'
-      }, {
-        invoice: '97412378923',
-        client: 'Microsoft Corporation',
-        issued: '14 Jan 2022',
-        issuedDay: 'Friday',
-        due: '01 Feb 2022',
-        dueDay: 'Tuesday',
-        amount: '$15,792',
-        status: 'pending'
-      }, {
-        invoice: '97412378923',
-        client: 'Microsoft Corporation',
-        issued: '14 Jan 2022',
-        issuedDay: 'Friday',
-        due: '01 Feb 2022',
-        dueDay: 'Tuesday',
-        amount: '$15,792',
-        status: 'completed'
-      },
-      {
-        invoice: '97412378923',
-        client: 'Microsoft Corporation',
-        issued: '14 Jan 2022',
-        issuedDay: 'Friday',
-        due: '01 Feb 2022',
-        dueDay: 'Tuesday',
-        amount: '$15,792',
-        status: 'pending'
-      }, {
-        invoice: '97412378923',
-        client: 'Microsoft Corporation',
-        issued: '14 Jan 2022',
-        issuedDay: 'Friday',
-        due: '01 Feb 2022',
-        dueDay: 'Tuesday',
-        amount: '$15,792',
-        status: 'completed'
-      },
-      {
-        invoice: '97412378923',
-        client: 'Microsoft Corporation',
-        issued: '14 Jan 2022',
-        issuedDay: 'Friday',
-        due: '01 Feb 2022',
-        dueDay: 'Tuesday',
-        amount: '$15,792',
-        status: 'pending'
-      }, {
-        invoice: '97412378923',
-        client: 'Microsoft Corporation',
-        issued: '14 Jan 2022',
-        issuedDay: 'Friday',
-        due: '01 Feb 2022',
-        dueDay: 'Tuesday',
-        amount: '$15,792',
-        status: 'completed'
-      }],
-      tableHeaders: ['invoice', 'client', 'issued', 'due', 'amount', 'status']
-    }
-  }
-}
+      transactionsList: [
+        {
+          description: "Recieved Funds",
+          date: "Sep,6, 2023 13:06",
+          type: "credit",
+          amount: "$8000",
+          item: "deposit",
+          icon: "deposit",
+        },
+        {
+          description: "Withdrawal Funds",
+          date: "Sep,6, 2023 13:06",
+          type: "debit",
+          amount: "$8000",
+          item: "deposit",
+          icon: "withdraw",
+        },
+        {
+          description: "Receieved BitCoin",
+          date: "Sep,6, 2023 13:06",
+          type: "credit",
+          amount: "2.1",
+          item: "BTC",
+          icon: "bit",
+        },
+        {
+          description: "Receieved Ethereum",
+          date: "Sep,6, 2023 13:06",
+          type: "credit",
+          amount: "2.1",
+          item: "ETH",
+          icon: "ethereum",
+        },
+        {
+          description: "Receieved Solona",
+          date: "Sep,6, 2023 13:06",
+          type: "credit",
+          amount: "2.1",
+          item: "BTC",
+          icon: "solana",
+        },
+      ],
+      assetsList: [
+        {
+          name: "BNB",
+          price: "$214.08",
+          rate: "+0.23%",
+          balance: "122,356",
+          proportion: 80,
+          icon: "bit",
+        },
+        {
+          name: "BTC",
+          price: "$214.08",
+          rate: "+0.23%",
+          balance: "122,356",
+          proportion: 75,
+          icon: "binance",
+        },
+        {
+          name: "USDT",
+          price: "$214.08",
+          rate: "+0.23%",
+          balance: "122,356",
+          proportion: 14,
+          icon: "usdt",
+        },
+        {
+          name: "XRP",
+          price: "$214.08",
+          rate: "+0.23%",
+          balance: "122,356",
+          proportion: 14,
+          icon: "xrp",
+        },
+      ],
+    };
+  },
+};
 </script>
-
-<style scoped>
- .bitcoin {
-   background: url('@/assets/img/bitcoin.jpg');
-   background-repeat: no-repeat;
-   background-size: cover;
- }
-</style>

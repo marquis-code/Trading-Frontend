@@ -4,10 +4,8 @@
 
 <script>
 export default {
- layout: 'dashboard'
-}
+  layout: "user-dashboard",
+};
 </script>
 
-<style>
-
-</style>
+<style></style>

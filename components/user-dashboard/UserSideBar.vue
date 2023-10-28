@@ -1,0 +1,140 @@
+<template>
+  <div
+    class="flex w-2/12 h-screen flex-col justify-between bg-blue-50 relative"
+  >
+    <div class="px-4 py-6">
+      <span
+        class="grid h-10 w-32 place-content-center rounded-lg text-xs text-gray-600"
+      >
+        <img
+          src="@/assets/img/fidelityvalues.png"
+          alt="logo"
+          class="h-10 w-10"
+        />
+      </span>
+
+      <ul class="mt-6 space-y-1">
+        <li class="space-y-6">
+          <nuxt-link
+            v-for="{ name, url, icon } in sidebarItems"
+            :key="name"
+            :to="url"
+            class="rounded-md space-y-2 pl-3 py-2.5 text-sm font-light text-gray-700 flex items-center space-x-3"
+          >
+            <div class="bg-white shadow-sm h-8 w-8 p-2 rounded-full">
+              <img
+                :src="require(`~/assets/img/${icon}.png`)"
+                alt="icons"
+                class=""
+              />
+            </div>
+            <p class="text-gray-600 pb-2">
+              {{ name }}
+            </p>
+          </nuxt-link>
+        </li>
+      </ul>
+    </div>
+
+    <div class="absolute bottom-0 inset-x-0 bottom-0 border-t border-gray-100">
+      <a href="#" class="flex items-center gap-2 bg-white p-4 hover:bg-gray-50">
+        <img
+          alt="Man"
+          src="https://images.unsplash.com/photo-1600486913747-55e5470d6f40?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1770&q=80"
+          class="h-10 w-10 rounded-full object-cover"
+        />
+
+        <div>
+          <p class="text-xs">
+            <strong class="block font-medium">Eric Frusciante</strong>
+
+            <span> eric@frusciante.com </span>
+          </p>
+        </div>
+      </a>
+    </div>
+  </div>
+</template>
+
+<script>
+export default {
+  data() {
+    return {
+      showMobileNav: false,
+      showMobile: false,
+      isMobile: false,
+      sidebarItems: [
+        {
+          name: "Dashboard",
+          icon: "analytics",
+          url: "/dashboard",
+        },
+        {
+          name: "Profile",
+          icon: "profile",
+          url: "/dashboard/profile",
+        },
+        {
+          name: "Deposit",
+          icon: "deposit",
+          url: "/dashboard/deposit",
+        },
+        {
+          name: "Buy plans",
+          icon: "investment",
+          url: "/dashboard/purchase-plans",
+        },
+        {
+          name: "Transaction history",
+          icon: "history",
+          url: "/dashboard/transaction-history",
+        },
+        // {
+        //   name: 'Investment',
+        //   icon: 'dashboard',
+        //   url: '/dashboard/investment'
+        // }
+        // {
+        //   name: 'Withdrawn',
+        //   icon: 'withdraw.png',
+        //   url: '/dashboard/withdraw'
+        // }
+      ],
+    };
+  },
+  watch: {
+    $route() {
+      if (this.isMobile) {
+        this.showMobile = !this.showMobile;
+      }
+    },
+  },
+  mounted() {
+    this.onResize();
+    window.addEventListener("resize", this.onResize, { passive: true });
+  },
+  methods: {
+    onResize() {
+      this.isMobile = window.innerWidth < 900;
+    },
+    toggleMobileNavbar() {
+      this.showMobileNav = !this.showMobileNav;
+      this.$emit("toggleNav", this.showMobileNavbar);
+    },
+    toggleNavbar() {
+      this.showMobile = !this.showMobile;
+    },
+  },
+};
+</script>
+
+<style scoped>
+.nuxt-link-active {
+  font-weight: bold;
+}
+/* exact link will show the primary color for only the exact matching link */
+.nuxt-link-exact-active {
+  background-color: black;
+  color: white;
+}
+</style>

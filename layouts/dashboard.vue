@@ -32,7 +32,7 @@
       </div>
 
       <div class="sticky inset-x-0 bottom-0 border-t border-gray-100">
-        <a href="#" class="flex items-center gap-2 bg-white p-4 hover:bg-gray-50">
+        <a href="#" class="flex items-center gap-2 bg-white p-4 hover:bg-black">
           <img
             alt="Man"
             src="https://images.unsplash.com/photo-1600486913747-55e5470d6f40?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1770&q=80"
@@ -93,7 +93,7 @@
           </div>
         </div>
         <div class="flex items-center p-2 mt-12 space-x-4 justify-self-end">
-          <img src="https://source.unsplash.com/100x100/?portrait" alt="" class="w-12 h-12 rounded-lg dark:bg-gray-500">
+          <img src="https://source.unsplash.com/100x100/?portrait" alt="" class="w-12 h-12 rounded-lg dark:bg-black0">
           <div>
             <h2 class="text-lg font-semibold">
               SubNine
@@ -137,7 +137,7 @@
           </p>
           <div class="relative flex-shrink-0">
             <span class="absolute bottom-0 right-0 w-4 h-4 dark:bg-green-600 border rounded-full dark:text-gray-100 dark:border-gray-900" />
-            <img src="https://source.unsplash.com/50x50/?portrait" alt="" class="w-10 h-10 border rounded-full dark:bg-gray-500 dark:border-gray-700">
+            <img src="https://source.unsplash.com/50x50/?portrait" alt="" class="w-10 h-10 border rounded-full dark:bg-black0 dark:border-gray-700">
           </div>
         </div>
       </div>

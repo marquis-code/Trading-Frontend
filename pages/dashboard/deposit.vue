@@ -54,7 +54,7 @@
 
 <script>
 export default {
-  layout: 'dashboard',
+  layout: 'user-dashboard',
   data () {
     return {
       wallet: [
