@@ -137,3 +137,6 @@
     </div> -->
   </section>
 </template>
+
+<script>
+// MyRegistrationComponent.vue

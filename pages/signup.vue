@@ -24,15 +24,22 @@
                 fill="currentColor"
               />
             </svg> -->
-            <img src="@/assets/img/fidelityvalues.png" alt="logo" class="h-10 w-10">
+            <img
+              src="@/assets/img/fidelityvalues.png"
+              alt="logo"
+              class="h-10 w-10"
+            >
           </a>
 
-          <h2 class="mt-6 text-2xl font-bold text-white sm:text-3xl md:text-4xl">
+          <h2
+            class="mt-6 text-2xl font-bold text-white sm:text-3xl md:text-4xl"
+          >
             Welcome to Fidelity Values
           </h2>
 
           <p class="mt-4 leading-relaxed text-white/90">
-            Trade global financial markets ON OVER 1,000 ASSETS. Forex, Stocks, Commodities, Indices & Cryptocurrencies
+            Trade global financial markets ON OVER 1,000 ASSETS. Forex, Stocks,
+            Commodities, Indices & Cryptocurrencies
           </p>
         </div>
       </section>
@@ -58,7 +65,11 @@
                   fill="currentColor"
                 />
               </svg> -->
-              <img src="@/assets/img/fidelityvalues.png" alt="logo" class="h-10 w-10">
+              <img
+                src="@/assets/img/fidelityvalues.png"
+                alt="logo"
+                class="h-10 w-10"
+              >
             </a>
 
             <h1
@@ -68,16 +79,17 @@
             </h1>
 
             <p class="mt-4 leading-relaxed text-gray-500">
-              Trade global financial markets ON OVER 1,000 ASSETS. Forex, Stocks, Commodities, Indices & Cryptocurrencies
+              Trade global financial markets ON OVER 1,000 ASSETS. Forex,
+              Stocks, Commodities, Indices & Cryptocurrencies
             </p>
           </div>
 
-          <form class="mt-8 grid grid-cols-6 gap-6" @submit.prevent="handleSubmit">
+          <form
+            class="mt-8 grid grid-cols-6 gap-6"
+            @submit.prevent="handleSubmit"
+          >
             <div class="col-span-6 sm:col-span-3">
-              <label
-                for="FirstName"
-                class="block text-sm  text-white"
-              >
+              <label for="FirstName" class="block text-sm text-white">
                 First Name
               </label>
 
@@ -91,10 +103,7 @@
             </div>
 
             <div class="col-span-6 sm:col-span-3">
-              <label
-                for="LastName"
-                class="block text-sm  text-white"
-              >
+              <label for="LastName" class="block text-sm text-white">
                 Last Name
               </label>
 
@@ -108,7 +117,7 @@
             </div>
 
             <div class="col-span-6">
-              <label for="Email" class="block text-sm  text-white">
+              <label for="Email" class="block text-sm text-white">
                 Email
               </label>
 
@@ -122,10 +131,7 @@
             </div>
 
             <div class="col-span-6 sm:col-span-3">
-              <label
-                for="Password"
-                class="block text-sm  text-white"
-              >
+              <label for="Password" class="block text-sm text-white">
                 Password
               </label>
 
@@ -141,7 +147,7 @@
             <div class="col-span-6 sm:col-span-3">
               <label
                 for="PasswordConfirmation"
-                class="block text-sm  text-white"
+                class="block text-sm text-white"
               >
                 Password Confirmation
               </label>
@@ -169,10 +175,14 @@
             <div class="col-span-6 sm:flex sm:items-center sm:gap-4">
               <button
                 :disabled="!isFormEmpty"
-                :class="[!isFormEmpty || processing ? 'opacity-25 cursor-not-allowed' : '']"
+                :class="[
+                  !isFormEmpty || formBusy
+                    ? 'opacity-25 cursor-not-allowed'
+                    : '',
+                ]"
                 class="inline-block shrink-0 text-xs rounded-md border border-green-500 bg-green-600 px-12 py-3 font-medium text-white transition"
               >
-                {{ processing ? 'processing...' : ' Create an account' }}
+                {{ formBusy ? "processing..." : " Create an account" }}
               </button>
 
               <p class="mt-4 text-sm text-white sm:mt-0">
@@ -190,10 +200,12 @@
 </template>
 
 <script>
+// import UserQuery from '~/Query/UserQuery.gql'
 export default {
   data () {
     return {
       processing: false,
+      formBusy: false,
       form: {
         first_name: '',
         last_name: '',
@@ -205,22 +217,75 @@ export default {
   },
   computed: {
     isFormEmpty () {
-      return !!(this.form.first_name && this.form.last_name && this.form.email && this.form.password && this.form.confirm_password)
+      return !!(
+        this.form.first_name &&
+        this.form.last_name &&
+        this.form.email &&
+        this.form.password &&
+        this.form.confirm_password
+      )
     }
   },
   methods: {
-    handleSubmit () {
-      this.processing = true
-      setTimeout(() => {
-        this.processing = false
-        this.$toastr.s('Account was successfully created')
-        this.$router.push('/email-verification')
-      }, 1000)
+    // async handleSubmit () {
+    //   try {
+    //     const response = await this.$auth.loginWith('graphql', {
+    //       query: `
+    //           mutation newUser(
+    //             $email: String
+    //             $password: String
+    //             $firstName: String
+    //             $lastName: String
+    //           ) {
+    //             newUser(
+    //               email: $email
+    //               password: $password
+    //               firstName: $firstName
+    //               lastName: $lastName
+    //             ) {
+    //               token
+    //             }
+    //           }
+    //         `,
+    //       variables: {
+    //         input: {
+    //           firstName: this.form.first_name,
+    //           lastName: this.form.last_name,
+    //           password: this.password,
+    //           email: this.email
+    //         }
+    //       }
+    //     })
+    //     console.log('User registered:', response)
+    //   } catch (error) {
+    //     console.error('Registration error:', error)
+    //   }
+    // }
+    async handleSubmit () {
+      try {
+        const response = await this.$auth.loginWith('graphql', {
+          variables: {
+            email: this.form.email,
+            password: this.form.password,
+            firstName: this.form.first_name,
+            lastName: this.form.last_name
+          }
+        })
+
+        if (response.data.newUser && response.data.newUser.token) {
+          // User registered successfully
+          console.log('User registered:', response)
+        } else {
+          // Handle registration failure
+          console.error('Registration error:', response)
+        }
+      } catch (error) {
+        // Handle network or other errors
+        console.error('Registration error:', error)
+      }
     }
   }
 }
 </script>
 
-<style>
-
-</style>
+<style></style>
