@@ -2,31 +2,55 @@ import { gql } from 'graphql-tag'
 
 import { LocalScheme } from '~auth/runtime'
 
-const LOGIN_MUTATION = gql`
-  mutation newUser($email: String, $password: String) {
-    newUser(email: $email, password: $password) {
-      token
+export const LOGIN_MUTATION = gql`
+  mutation userLogin($email: String!, $password: String!) {
+    userLogin(email: $email, password: $password) {
+      jwt,
+      user {
+        id
+        firstName
+        lastName
+        email
+        accountBalance
+        tradingBalance
+        profit
+        walletAddress
+        timeAdded
+      }
     }
   }
-`
+`;
 
-const REGISTER_MUTATION = gql`
-  mutation SignupMutation(
-    $email: String
-    $password: String
-    $firstName: String
-    $lastName: String
+export const REGISTER_MUTATION = gql`
+  mutation newUser(
+    $email: String!
+    $password: String!
+    $firstName: String!
+    $lastName: String!
   ) {
     newUser(
-      email: $email
-      password: $password
-      firstName: $firstName
-      lastName: $lastName
+      input: {
+        email: $email
+        password: $password
+        firstName: $firstName
+        lastName: $lastName
+      }
     ) {
-      token
+      jwt,
+      user {
+        id
+        firstName
+        lastName
+        email
+        accountBalance
+        tradingBalance
+        profit
+        walletAddress
+        timeAdded
+      }
     }
   }
-`
+`;
 
 export const LOGOUT_MUTATION = gql`
   mutation LogOutMutation {
@@ -35,14 +59,20 @@ export const LOGOUT_MUTATION = gql`
 `
 
 export const USER_DETAILS_QUERY = gql`
-  query UserDetailsQuery {
-    me {
+  query getUser {
+    User {
       id
-      name
+      firstName
+      lastName
       email
+      accountBalance
+      tradingBalance
+      profit
+      walletAddress
+      timeAdded
     }
   }
-`
+`;
 
 export default class GraphQLScheme extends LocalScheme {
   async login (credentials, { reset = true } = {}) {

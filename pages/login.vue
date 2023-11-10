@@ -36,12 +36,17 @@
               <a rel="noopener noreferrer" href="#">Forgot Password?</a>
             </div>
           </div>
-          <button
-            type="submit"
-            class="block w-full p-3 text-center rounded-sm dark:text-gray-900 dark:bg-violet-400"
-          >
-            Sign in
-          </button>
+          <div class="w-full">
+            <button
+              :disabled="!isFormEmpty"
+              :class="[
+                !isFormEmpty || formBusy ? 'opacity-25 cursor-not-allowed' : '',
+              ]"
+              class="w-full shrink-0 text-xs rounded-md border border-green-500 bg-green-600 px-12 py-3 font-medium text-white transition"
+            >
+              {{ formBusy ? "processing..." : "Sign In" }}
+            </button>
+          </div>
         </form>
         <div class="flex items-center pt-4 space-x-1">
           <div class="flex-1 h-px sm:w-16 dark:bg-gray-700" />
@@ -102,39 +107,66 @@
 </template>
 
 <script>
+import { LOGIN_MUTATION } from '~/schemes/graphqlScheme.js'
 export default {
   data () {
     return {
+      formBusy: false,
       form: {
         email: '',
         password: ''
       }
     }
   },
+  computed: {
+    isFormEmpty () {
+      return !!(this.form.email && this.form.password)
+    }
+  },
+  mounted () {
+    if (window.process) {
+      const user = window.localStorage.getItem('user')
+      const parsedUser = JSON.parse(user)
+      if (Object.keys(parsedUser)?.length) {
+        this.$router.push('/dashboard')
+      }
+    }
+  },
   methods: {
-    // login () {
-    //   this.$toastr.s('Logged in successfully')
-    //   this.$router.push('/dashboard')
-    // }
     async login () {
+      this.formBusy = true
       try {
-        const response = await this.$auth.loginWith('graphql', {
+        const { data } = await this.$apollo.mutate({
+          mutation: LOGIN_MUTATION,
           variables: {
             email: this.form.email,
             password: this.form.password
           }
         })
-
-        if (response.data.newUser && response.data.newUser.token) {
-          // User registered successfully
-          console.log('User registered:', response)
-        } else {
-          // Handle registration failure
-          console.error('Registration error:', response)
-        }
+        const { jwt, user } = data.userLogin
+        this.$router.push('/dashboard')
+        // console.log(user, "b");
+        // localStorage.setItem("user", user);
+        // this.$auth.loginWith("local", {
+        //   data: {
+        //     token: jwt,
+        //   },
+        //   redirect: "/dashboard",
+        // });
+        this.formBusy = false
+        localStorage.setItem('user', JSON.stringify(user))
       } catch (error) {
-        // Handle network or other errors
-        console.error('Registration error:', error)
+        this.formBusy = false
+        if (!error.message) {
+          const { jwt, user } = data.userLogin
+          localStorage.setItem('user', JSON.stringify(user))
+          this.$toast.success('Login was successful.').goAway(1500)
+          this.$router.push('/dashboard')
+        } else {
+          this.$toast
+            .error(error.message)
+            .goAway(1500)
+        }
       }
     }
   }

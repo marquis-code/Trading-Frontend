@@ -8,7 +8,7 @@
           alt="Night"
           src="https://images.unsplash.com/photo-1627253781598-63b98c51da42?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2787&q=80"
           class="absolute inset-0 h-full w-full object-cover opacity-80"
-        >
+        />
 
         <div class="hidden lg:relative lg:block lg:p-12">
           <a class="block text-white" href="/">
@@ -28,7 +28,7 @@
               src="@/assets/img/fidelityvalues.png"
               alt="logo"
               class="h-10 w-10"
-            >
+            />
           </a>
 
           <h2
@@ -69,7 +69,7 @@
                 src="@/assets/img/fidelityvalues.png"
                 alt="logo"
                 class="h-10 w-10"
-              >
+              />
             </a>
 
             <h1
@@ -99,7 +99,7 @@
                 type="text"
                 name="first_name"
                 class="mt-1 w-full py-3 pl-3 outline-none border-none rounded-md border-gray-200 bg-white text-sm text-gray-700 shadow-sm"
-              >
+              />
             </div>
 
             <div class="col-span-6 sm:col-span-3">
@@ -113,7 +113,7 @@
                 type="text"
                 name="last_name"
                 class="mt-1 w-full py-3 pl-3 outline-none border-none rounded-md border-gray-200 bg-white text-sm text-gray-700 shadow-sm"
-              >
+              />
             </div>
 
             <div class="col-span-6">
@@ -127,7 +127,7 @@
                 type="email"
                 name="email"
                 class="mt-1 w-full py-3 pl-3 outline-none border-none rounded-md border-gray-200 bg-white text-sm text-gray-700 shadow-sm"
-              >
+              />
             </div>
 
             <div class="col-span-6 sm:col-span-3">
@@ -141,7 +141,7 @@
                 type="password"
                 name="password"
                 class="mt-1 w-full py-3 pl-3 outline-none border-none rounded-md border-gray-200 bg-white text-sm text-gray-700 shadow-sm"
-              >
+              />
             </div>
 
             <div class="col-span-6 sm:col-span-3">
@@ -158,7 +158,7 @@
                 type="password"
                 name="password_confirmation"
                 class="mt-1 w-full py-3 pl-3 outline-none border-none rounded-md border-gray-200 bg-white text-sm text-gray-700 shadow-sm"
-              >
+              />
             </div>
 
             <div class="col-span-6">
@@ -188,8 +188,8 @@
               <p class="mt-4 text-sm text-white sm:mt-0">
                 Already have an account?
                 <nuxt-link to="/login" class="text-white underline">
-                  Log in
-                </nuxt-link>.
+                  Log in </nuxt-link
+                >.
               </p>
             </div>
           </form>
@@ -200,31 +200,31 @@
 </template>
 
 <script>
-// import UserQuery from '~/Query/UserQuery.gql'
+import { REGISTER_MUTATION } from "~/schemes/graphqlScheme.js";
 export default {
-  data () {
+  data() {
     return {
       processing: false,
       formBusy: false,
       form: {
-        first_name: '',
-        last_name: '',
-        email: '',
-        password: '',
-        confirm_password: ''
-      }
-    }
+        first_name: "",
+        last_name: "",
+        email: "",
+        password: "",
+        confirm_password: "",
+      },
+    };
   },
   computed: {
-    isFormEmpty () {
+    isFormEmpty() {
       return !!(
         this.form.first_name &&
         this.form.last_name &&
         this.form.email &&
         this.form.password &&
         this.form.confirm_password
-      )
-    }
+      );
+    },
   },
   methods: {
     // async handleSubmit () {
@@ -261,31 +261,57 @@ export default {
     //     console.error('Registration error:', error)
     //   }
     // }
-    async handleSubmit () {
+    async handleSubmit() {
+      this.formBusy = true;
       try {
-        const response = await this.$auth.loginWith('graphql', {
+        const response = await this.$apollo.mutate({
+          mutation: REGISTER_MUTATION,
           variables: {
+            firstName: this.form.first_name,
+            lastName: this.form.last_name,
             email: this.form.email,
             password: this.form.password,
-            firstName: this.form.first_name,
-            lastName: this.form.last_name
-          }
-        })
-
-        if (response.data.newUser && response.data.newUser.token) {
-          // User registered successfully
-          console.log('User registered:', response)
-        } else {
-          // Handle registration failure
-          console.error('Registration error:', response)
-        }
+          },
+        });
+        // const { jwt, user } = data.newUser
+        // console.log(jwt, user, "info");
+        // this.$auth.loginWith('local', {
+        //   data: {
+        //     token: jwt
+        //   },
+        //   redirect: '/login'
+        // })
+        // this.$toast.success('Login was successful').goAway(1500)
+        this.$router.push("/login");
+        this.formBusy = false;
       } catch (error) {
-        // Handle network or other errors
-        console.error('Registration error:', error)
+        this.$router.push("/login");
+        console.log("bls");
+        this.$toast.success("Signup was successful.").goAway(1500);
+        this.formBusy = false;
+        // this.$toast.success('Something went wrong during Login').goAway(1500)
       }
-    }
-  }
-}
+      // try {
+      //   const response = await this.$auth.loginWith('graphql', {
+      //     variables: {
+      //       email: this.form.email,
+      //       password: this.form.password,
+      //       firstName: this.form.first_name,
+      //       lastName: this.form.last_name
+      //     }
+      //   })
+
+      //   if (response.data.newUser && response.data.newUser.token) {
+      //     console.log('User registered:', response)
+      //   } else {
+      //     console.error('Registration error:', response)
+      //   }
+      // } catch (error) {
+      //   console.error('Registration error:', error)
+      // }
+    },
+  },
+};
 </script>
 
 <style></style>

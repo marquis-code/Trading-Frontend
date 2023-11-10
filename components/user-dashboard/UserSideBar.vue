@@ -46,9 +46,12 @@
 
         <div>
           <p class="text-xs">
-            <strong class="block font-medium">Eric Frusciante</strong>
+            <strong class="block font-medium"
+              >{{ loggedUser?.firstName || "" }}
+              {{ loggedUser?.lastName || "" }}</strong
+            >
 
-            <span> eric@frusciante.com </span>
+            <span> {{ loggedUser?.email || "" }}</span>
           </p>
         </div>
       </a>
@@ -63,6 +66,7 @@ export default {
       showMobileNav: false,
       showMobile: false,
       isMobile: false,
+      loggedUser: {},
       sidebarItems: [
         {
           name: "Dashboard",
@@ -112,6 +116,10 @@ export default {
   mounted() {
     this.onResize();
     window.addEventListener("resize", this.onResize, { passive: true });
+    const user = window.localStorage.getItem("user");
+    if (!user) {
+      this.$router.push("/login");
+    }
   },
   methods: {
     onResize() {

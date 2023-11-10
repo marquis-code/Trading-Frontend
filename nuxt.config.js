@@ -83,6 +83,7 @@ export default {
     '@nuxtjs/axios',
     // https://go.nuxtjs.dev/pwa
     '@nuxtjs/pwa',
+    '@nuxtjs/toast',
     // https://go.nuxtjs.dev/content
     '@nuxt/content',
     'bootstrap-vue/nuxt',
@@ -94,6 +95,19 @@ export default {
       }
     ]
   ],
+  toast: {
+    position: 'top-center',
+    register: [
+      // Register custom toasts
+      {
+        name: 'my-error',
+        message: 'Oops...Something went wrong',
+        options: {
+          type: 'error'
+        }
+      }
+    ]
+  },
   sweetalert: {
     confirmButtonColor: '#41b882',
     cancelButtonColor: '#ff7674'
