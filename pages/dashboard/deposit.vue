@@ -27,8 +27,30 @@
       </p>
       <div class="p-6 space-y-6">
         <div class="space-y-1">
-          <label class="text-xs text-gray-700 font-medium">Amount</label>
+          <label class="text-xs text-gray-700 font-medium">Deposit Amount</label>
           <input placeholder="Enter amount in USD" type="number" class="py-2 border border-gray-600 text-sm rounded-md w-full outline-none pl-6">
+        </div>
+        <div class="space-y-1">
+          <label class="text-xs text-gray-700 font-medium">Deposit Type</label>
+          <select v-model="depositType" class="py-2 border border-gray-600 text-sm rounded-md w-full outline-none pl-6">
+            <option value="" disabled>
+              ---- Select deposit type -----
+            </option>
+            <option value="bitcoin">
+              Bitcoin
+            </option>
+            <option value="ethereum">
+              Etheruem
+            </option>
+            <option value="bank">
+              Bank Account
+            </option>
+          </select>
+          <!-- <input placeholder="Enter amount in USD" type="number" class="py-2 border border-gray-600 text-sm rounded-md w-full outline-none pl-6"> -->
+        </div>
+        <div class="space-y-1">
+          <label class="text-xs text-gray-700 font-medium">Wallet address</label>
+          <input readonly :value="computedWalletAddress" class="py-2 bg-gray-100 cursor-not-allowed border border-gray-600 text-sm rounded-md w-full outline-none pl-6">
         </div>
         <div class="space-y-1">
           <label class="text-xs text-gray-700 font-medium">Upload Image</label>
@@ -47,6 +69,11 @@
             </div>
           </div>
         </div>
+        <div class="w-full">
+          <button class="w-full text-white  bg-black py-3 px-3 rounded-md">
+            Submit
+          </button>
+        </div>
       </div>
     </section>
   </main>
@@ -57,6 +84,7 @@ export default {
   layout: 'user-dashboard',
   data () {
     return {
+      depositType: 'bank',
       wallet: [
         {
           name: 'Bitcoin',
@@ -66,15 +94,20 @@ export default {
           name: 'Ethereum erc-20',
           code: 'bc1q2frjcspcjt2mancf2d9ta3emgj6aw07fkf286v'
         },
+        // {
+        //   name: 'Litecoin',
+        //   code: 'bc1q2frjcspcjt2mancf2d9ta3emgj6aw07fkf286v'
+        // },
         {
-          name: 'Litecoin',
-          code: 'bc1q2frjcspcjt2mancf2d9ta3emgj6aw07fkf286v'
-        },
-        {
-          name: 'Dogecoin',
-          code: 'bc1q2frjcspcjt2mancf2d9ta3emgj6aw07fkf286v'
+          name: 'Bank Account',
+          code: '00907654378889'
         }
       ]
+    }
+  },
+  computed: {
+    computedWalletAddress () {
+      return this.depositType === 'bitcoin' ? this.wallet[0].code : this.depositType === 'ethereum' ? this.wallet[1].code : this.depositType === 'bank' ? this.wallet[2].code : ''
     }
   },
   methods: {
@@ -83,6 +116,12 @@ export default {
       cb.writeText(val).then(() => this.$toastr.s('Copied to clipboard'))
     }
   }
+  // computed:{
+  //   computedWalletAddress(){
+
+  //   }
+  // return this.deppsitType === 'bitcoin' ? this.wallet[0].code ? this.deppsitType === 'ethereum' ? this.wallet[1].code : this.wallet[2].code
+  // }
 }
 </script>
 

@@ -20,7 +20,18 @@ export default {
       {
         id: 'tawk',
         src: '/js/chatbot.js'
-      }
+      },
+      // {
+      //   id: 'NASDAQ',
+      //   src: 'https://articlefeeds.nasdaq.com/nasdaq/symbols?symbol={SYMBOL}'
+      // },
+      // {
+      //   id: 'Yahoo Finance',
+      //   src: 'http://feeds.finance.yahoo.com/rss/2.0/headline?s={SYMBOL}&region=US&lang=en-US'
+      // },
+      { src: 'https://webdev.prosp.devexperts.com:8095/widget/chart-react.js', async: true },
+      { src: 'https://webdev.prosp.devexperts.com:8095/widget/vendors.js', async: true },
+      { src: '/js/trading-view.js' }
     ]
   },
 
@@ -32,6 +43,7 @@ export default {
     { src: '~/plugins/vue-carousel.js', mode: 'client' },
     { src: '~/plugins/toastr.js', mode: 'client' },
     { src: '~/plugins/slider.js', mode: 'client' },
+    { src: '~/plugins/trading-view.js', mode: 'client' },
     '~/plugins/bootstrap-vue.client',
     { src: '@/plugins/aos', mode: 'client' }
   ],
@@ -50,25 +62,25 @@ export default {
   components: true,
 
   // Modules for dev and build (recommended): https://go.nuxtjs.dev/config-modules
-  buildModules: ['@nuxtjs/moment', '@nuxt/postcss8', 'nuxt-graphql-request'],
-  graphql: {
-    /**
-     * An Object of your GraphQL clients
-     */
-    clients: {
-      default: {
-        /**
-         * The client endpoint url
-         */
-        endpoint: 'https://fidelityvalues.onrender.com/graphql/query',
-        /**
-         * Per-client options overrides
-         * See: https://github.com/prisma-labs/graphql-request#passing-more-options-to-fetch
-         */
-        options: {}
-      }
-    }
-  },
+  buildModules: ['@nuxtjs/moment', '@nuxt/postcss8'],
+  // graphql: {
+  //   /**
+  //    * An Object of your GraphQL clients
+  //    */
+  //   clients: {
+  //     default: {
+  //       /**
+  //        * The client endpoint url
+  //        */
+  //       endpoint: 'https://fidelityvalues.onrender.com/graphql/query',
+  //       /**
+  //        * Per-client options overrides
+  //        * See: https://github.com/prisma-labs/graphql-request#passing-more-options-to-fetch
+  //        */
+  //       options: {}
+  //     }
+  //   }
+  // },
   loadingIndicator: {
     name: 'chasing-dots',
     color: 'purple',
@@ -78,7 +90,6 @@ export default {
   // Modules: https://go.nuxtjs.dev/config-modules
   modules: [
     '@nuxtjs/auth-next',
-    '@nuxtjs/apollo',
     // https://go.nuxtjs.dev/axios
     '@nuxtjs/axios',
     // https://go.nuxtjs.dev/pwa
@@ -122,22 +133,22 @@ export default {
     baseURL: 'https://fidelityvalues.onrender.com'
   },
   auth: {
-    strategies: {
-      graphql: {
-        scheme: '~/schemes/graphqlScheme.js',
-        provider: 'nuxt-auth-graphql',
-        endpoint: 'https://fidelityvalues.onrender.com/graphql/query', // Your GraphQL API endpoint
-        tokenType: 'Bearer',
-        tokenName: 'Authorization'
-      }
-    },
-    redirect: {
-      login: '/login',
-      register: { url: '/api/auth/user', method: 'post', propertyName: 'user' },
-      logout: '/login?logout=true',
-      callback: false,
-      home: '/dashboard'
-    }
+    // strategies: {
+    //   graphql: {
+    //     scheme: '~/schemes/graphqlScheme.js',
+    //     provider: 'nuxt-auth-graphql',
+    //     endpoint: 'https://fidelityvalues.onrender.com/graphql/query', // Your GraphQL API endpoint
+    //     tokenType: 'Bearer',
+    //     tokenName: 'Authorization'
+    //   }
+    // },
+    // redirect: {
+    //   login: '/login',
+    //   register: { url: '/api/auth/user', method: 'post', propertyName: 'user' },
+    //   logout: '/login?logout=true',
+    //   callback: false,
+    //   home: '/dashboard'
+    // }
   },
 
   // PWA module configuration: https://go.nuxtjs.dev/pwa

@@ -60,7 +60,7 @@
               </li> -->
             </ul>
           </div>
-
+<!--
           <div class="sm:text-left">
             <p class="text-lg font-medium ">
               Helpful Links
@@ -75,29 +75,8 @@
                   {{ title }}
                 </nuxt-link>
               </li>
-              <!-- <li>
-                <a
-                  class="group flex justify-center gap-1.5 ltr:sm:justify-start rtl:sm:justify-end"
-                  href="/"
-                >
-                  <span
-                    class=" transition group-hover:/75"
-                  >
-                    Live Chat
-                  </span>
-
-                  <span class="relative flex h-2 w-2">
-                    <span
-                      class="absolute inline-flex h-full w-full animate-ping rounded-full bg-teal-400 opacity-75"
-                    />
-                    <span
-                      class="relative inline-flex h-2 w-2 rounded-full bg-teal-500"
-                    />
-                  </span>
-                </a>
-              </li> -->
             </ul>
-          </div>
+          </div> -->
 
           <div class="md:text-center sm:text-left">
             <p class="text-lg font-medium ">

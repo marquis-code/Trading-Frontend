@@ -195,12 +195,14 @@
         </button>
       </div>
     </b-modal>
+    <div class="flex justify-center items-center w-11/12 mx-auto">
+      <div id="chart-widget"></div>
+    </div>
   </div>
 </template>
 
 <script>
-// import MarqueeText from 'vue-marquee-text-component'
-// import Advertmodal from '@/components/Modals/Advertmodal.vue'
+// import TradingWidget from '@/components/TradingWidget.vue'
 import HeroSection from '@/components/HeroSection.vue'
 import AdvertCTA from '@/components/AdvertCTA.vue'
 export default {
@@ -208,6 +210,7 @@ export default {
   data () {
     return {
       activeCarouselIndex: 0,
+      tradingWidgetUrl: 'https://webdev.prosp.devexperts.com:8095/widget/vendors.js',
       timer: 0,
       carouselImages: [
         {
@@ -256,8 +259,6 @@ export default {
   }
 }
 </script>
-
-<!--Start of Tawk.to Script-->
 <style>
   .modal-backdrop {
     position: fixed;
@@ -331,4 +332,3 @@ export default {
     transition: opacity .5s ease;
   }
 </style>
-<!--End of Tawk.to Script-->

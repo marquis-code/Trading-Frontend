@@ -117,9 +117,9 @@ export default {
     this.onResize();
     window.addEventListener("resize", this.onResize, { passive: true });
     const user = window.localStorage.getItem("user");
-    if (!user) {
-      this.$router.push("/login");
-    }
+    // if (!user) {
+    //   this.$router.push("/login");
+    // }
   },
   methods: {
     onResize() {

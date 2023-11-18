@@ -160,6 +160,19 @@
                 class="mt-1 w-full py-3 pl-3 outline-none border-none rounded-md border-gray-200 bg-white text-sm text-gray-700 shadow-sm"
               />
             </div>
+            <div class="col-span-6">
+              <label for="referralCode" class="block text-sm text-white">
+                Referral Code
+              </label>
+
+              <input
+                id="referralCode"
+                v-model="form.referralCode"
+                type="text"
+                name="referralCode"
+                class="mt-1 w-full py-3 pl-3 outline-none border-none rounded-md border-gray-200 bg-white text-sm text-gray-700 shadow-sm"
+              />
+            </div>
 
             <div class="col-span-6">
               <p class="text-sm text-white">
@@ -200,7 +213,7 @@
 </template>
 
 <script>
-import { REGISTER_MUTATION } from "~/schemes/graphqlScheme.js";
+// import { REGISTER_MUTATION } from "~/schemes/graphqlScheme.js";
 export default {
   data() {
     return {
@@ -211,6 +224,7 @@ export default {
         last_name: "",
         email: "",
         password: "",
+        referralCode: "",
         confirm_password: "",
       },
     };
@@ -261,55 +275,55 @@ export default {
     //     console.error('Registration error:', error)
     //   }
     // }
-    async handleSubmit() {
-      this.formBusy = true;
-      try {
-        const response = await this.$apollo.mutate({
-          mutation: REGISTER_MUTATION,
-          variables: {
-            firstName: this.form.first_name,
-            lastName: this.form.last_name,
-            email: this.form.email,
-            password: this.form.password,
-          },
-        });
-        // const { jwt, user } = data.newUser
-        // console.log(jwt, user, "info");
-        // this.$auth.loginWith('local', {
-        //   data: {
-        //     token: jwt
-        //   },
-        //   redirect: '/login'
-        // })
-        // this.$toast.success('Login was successful').goAway(1500)
-        this.$router.push("/login");
-        this.formBusy = false;
-      } catch (error) {
-        this.$router.push("/login");
-        console.log("bls");
-        this.$toast.success("Signup was successful.").goAway(1500);
-        this.formBusy = false;
-        // this.$toast.success('Something went wrong during Login').goAway(1500)
-      }
-      // try {
-      //   const response = await this.$auth.loginWith('graphql', {
-      //     variables: {
-      //       email: this.form.email,
-      //       password: this.form.password,
-      //       firstName: this.form.first_name,
-      //       lastName: this.form.last_name
-      //     }
-      //   })
+    // async handleSubmit() {
+    //   this.formBusy = true;
+    //   // try {
+    //   //   const response = await this.$apollo.mutate({
+    //   //     mutation: REGISTER_MUTATION,
+    //   //     variables: {
+    //   //       firstName: this.form.first_name,
+    //   //       lastName: this.form.last_name,
+    //   //       email: this.form.email,
+    //   //       password: this.form.password,
+    //   //     },
+    //   //   });
+    //   //   // const { jwt, user } = data.newUser
+    //   //   // console.log(jwt, user, "info");
+    //   //   // this.$auth.loginWith('local', {
+    //   //   //   data: {
+    //   //   //     token: jwt
+    //   //   //   },
+    //   //   //   redirect: '/login'
+    //   //   // })
+    //   //   // this.$toast.success('Login was successful').goAway(1500)
+    //   //   this.$router.push("/login");
+    //   //   this.formBusy = false;
+    //   // } catch (error) {
+    //   //   this.$router.push("/login");
+    //   //   console.log("bls");
+    //   //   this.$toast.success("Signup was successful.").goAway(1500);
+    //   //   this.formBusy = false;
+    //   //   // this.$toast.success('Something went wrong during Login').goAway(1500)
+    //   // }
+    //   // try {
+    //   //   const response = await this.$auth.loginWith('graphql', {
+    //   //     variables: {
+    //   //       email: this.form.email,
+    //   //       password: this.form.password,
+    //   //       firstName: this.form.first_name,
+    //   //       lastName: this.form.last_name
+    //   //     }
+    //   //   })
 
-      //   if (response.data.newUser && response.data.newUser.token) {
-      //     console.log('User registered:', response)
-      //   } else {
-      //     console.error('Registration error:', response)
-      //   }
-      // } catch (error) {
-      //   console.error('Registration error:', error)
-      // }
-    },
+    //   //   if (response.data.newUser && response.data.newUser.token) {
+    //   //     console.log('User registered:', response)
+    //   //   } else {
+    //   //     console.error('Registration error:', response)
+    //   //   }
+    //   // } catch (error) {
+    //   //   console.error('Registration error:', error)
+    //   // }
+    // },
   },
 };
 </script>

@@ -63,14 +63,14 @@ export default {
     return {
       stats: [
         {
-          name: 'Total Funds',
-          count: '1200',
+          name: 'Total Profit',
+          count: '₦1200',
           icon: 'funds',
           classStyle: 'bg-pink-500'
         },
         {
-          name: 'Total Customers',
-          count: '550',
+          name: 'Total Withdrawals',
+          count: '₦550',
           icon: 'customers',
           classStyle: 'bg-blue-500'
         },
@@ -81,7 +81,7 @@ export default {
           classStyle: 'bg-green-500'
         },
         {
-          name: 'Accounts',
+          name: 'Active Users',
           count: '40',
           icon: 'users',
           classStyle: 'bg-yellow-500'

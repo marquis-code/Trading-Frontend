@@ -17,7 +17,7 @@
     </section>
     <section class="text-gray-600 body-font">
       <div class="md:container md:px-5 py-24 mx-auto flex flex-wrap flex-col">
-        <div class="flex w-11/12 md:w-6/12 mx-auto flex-wrap mb-20" data-aos="zoom-in" data-aos-delay="500">
+        <div class="flex w-11/12 md:w-6/12 mx-auto justify-center items-center flex-wrap mb-20" data-aos="zoom-in" data-aos-delay="500">
           <a href="#whoweare" class="sm:px-6 py-3 w-1/2 sm:w-auto justify-center sm:justify-start border-b-2 title-font font-medium bg-gray-100 inline-flex items-center leading-none border-indigo-500 text-indigo-500 tracking-wider rounded-t">
             <svg
               fill="none"

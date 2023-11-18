@@ -17,7 +17,7 @@
           <nuxt-link to="/login" type="button" class="px-8 py-2.5 m-2 text-sm font-medium rounded dark:text-gray-50 bg-[#01257D] hover:bg-[#20305a]">
             Get started
           </nuxt-link>
-          <nuxt-link to="/login" type="button" class="px-8 py-2.5 m-2 text-sm border rounded dark:border-gray-700 dark:text-white">
+          <nuxt-link to="/about" type="button" class="px-8 py-2.5 m-2 text-sm border rounded dark:border-gray-700 dark:text-white">
             Learn more
           </nuxt-link>
         </div>

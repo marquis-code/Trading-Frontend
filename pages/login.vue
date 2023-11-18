@@ -107,7 +107,7 @@
 </template>
 
 <script>
-import { LOGIN_MUTATION } from '~/schemes/graphqlScheme.js'
+// import { LOGIN_MUTATION } from '~/schemes/graphqlScheme.js'
 export default {
   data () {
     return {

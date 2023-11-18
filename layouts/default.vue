@@ -5,7 +5,6 @@
     <footer-section />
   </main>
 </template>
-
 <style>
 .page-enter-active,
 .page-leave-active {

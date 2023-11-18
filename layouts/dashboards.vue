@@ -179,7 +179,7 @@
       </div>
     </div>
     <div class="w-full">
-      <div class="flex justify-end items-end bg-white w-full sticky top-0">
+      <div class="flex justify-end items-end bg-white w-full">
         <div class="flex items-center justify-between lg:hidden pr-6 pt-2">
           <div class="-ml-[350px] cursor-pointer" @click="$router.push('/')">
             <img src="@/assets/img/logo.jpeg" class="rounded-full h-10 w-10 ml-6 border p-1" alt="" />
