@@ -6,53 +6,41 @@
       <p class="border-b pl-6 py-4 text-sm font-semibold">
         Keep Your Profile Up-To-Date
       </p>
-      <div class="p-10 space-y-6">
+      <form class="p-10 space-y-6" @submit.prevent="updateUser">
         <div class="space-y-1">
-          <label class="text-xs text-gray-700 font-medium">Name</label>
-          <input class="py-2 border rounded-md w-full outline-none pl-6" />
-          <span class="text-xs text-gray-500"
-            >We'll never share your details with anyone else</span
-          >
+          <label class="text-xs text-gray-700 font-medium">First Name</label>
+          <input v-model="updatedUserData.firstName" type="text" class="py-2 border rounded-md w-full outline-none pl-6">
+          <span class="text-xs text-gray-500">We'll never share your details with anyone else</span>
         </div>
 
         <div class="space-y-1">
-          <label class="text-xs text-gray-700 font-medium"
-            >Email address:</label
-          >
-          <input class="py-2 border rounded-md w-full outline-none pl-6" />
-          <span class="text-xs text-gray-500"
-            >We'll never share your details with anyone else</span
-          >
+          <label class="text-xs text-gray-700 font-medium">Last Name</label>
+          <input v-model="updatedUserData.lastName" type="text" class="py-2 border rounded-md w-full outline-none pl-6">
+          <span class="text-xs text-gray-500">We'll never share your details with anyone else</span>
         </div>
 
         <div class="space-y-1">
-          <label class="text-xs text-gray-700 font-medium">Phone:</label>
-          <input class="py-2 border rounded-md w-full outline-none pl-6" />
-          <span class="text-xs text-gray-500"
-            >We'll never share your details with anyone else</span
-          >
+          <label class="text-xs text-gray-700 font-medium">Email address:</label>
+          <input v-model="updatedUserData.email" type="email" class="py-2 border rounded-md w-full outline-none pl-6">
+          <span class="text-xs text-gray-500">We'll never share your details with anyone else</span>
         </div>
 
         <div class="space-y-1">
-          <label class="text-xs text-gray-700 font-medium"
-            >Bitcoin Wallet Address:</label
-          >
-          <input class="py-2 border rounded-md w-full outline-none pl-6" />
+          <label class="text-xs text-gray-700 font-medium">Password:</label>
+          <input v-model="updatedUserData.password" type="password" class="py-2 border rounded-md w-full outline-none pl-6">
+          <span class="text-xs text-gray-500">We'll never share your details with anyone else</span>
         </div>
 
         <div class="space-y-1">
-          <label class="text-xs text-gray-700 font-medium"
-            >Ethereum address:</label
-          >
-          <input class="py-2 border rounded-md w-full outline-none pl-6" />
-          <span class="text-xs text-gray-500"
-            >We'll never share your details with anyone else</span
-          >
+          <label class="text-xs text-gray-700 font-medium">Wallet Address:</label>
+          <input v-model="updatedUserData.walletAddress" type="text" class="py-2 border rounded-md w-full outline-none pl-6">
         </div>
-        <button class="bg-green-500 text-white rounded-lg px-6 py-2.5 text-xs">
-          Update
-        </button>
-      </div>
+        <div class="w-full">
+          <button :disabled="!isFormEmpty" :class="[!isFormEmpty ? 'opacity-25 cursor-not-allowed' : null]" class="bg-green-500 w-1/2 disabled:cursor-not-allowed disabled:opacity-25 text-white rounded-lg px-6 py-3 text-sm">
+            {{ processing ? 'processing...' : 'Update' }}
+          </button>
+        </div>
+      </form>
     </section>
     <section class="bg-white lg:w-5/12 rounded-md border">
       <p class="border-b text-sm font-semibold py-4 pl-6">
@@ -60,9 +48,7 @@
       </p>
       <div class="p-6 space-y-6">
         <div class="space-y-1">
-          <label class="text-xs text-gray-700 font-medium"
-            >Means of Identity</label
-          >
+          <label class="text-xs text-gray-700 font-medium">Means of Identity</label>
           <div class="relative">
             <div
               class="h-10 bg-white flex border border-gray-200 rounded items-center"
@@ -73,7 +59,7 @@
                 name="select"
                 class="px-4 text-sm appearance-none outline-none text-gray-800 w-full"
                 checked
-              />
+              >
 
               <button
                 class="cursor-pointer outline-none focus:outline-none transition-all text-gray-300 hover:text-gray-600"
@@ -115,27 +101,24 @@
               name="show_more"
               class="hidden peer"
               checked
-            />
+            >
             <div
               class="absolute rounded shadow bg-white overflow-hidden hidden peer-checked:flex flex-col w-full mt-1 border border-gray-200"
             >
               <div class="cursor-pointer group">
                 <a
                   class="block p-2 text-sm border-transparent border-l-4 group-hover:border-blue-600 group-hover:bg-gray-100"
-                  >Drivers Licence</a
-                >
+                >Drivers Licence</a>
               </div>
               <div class="cursor-pointer group border-t">
                 <a
                   class="block p-2 text-sm border-transparent border-l-4 group-hover:border-blue-600 border-blue-600 group-hover:bg-gray-100"
-                  >Passport</a
-                >
+                >Passport</a>
               </div>
               <div class="cursor-pointer group border-t">
                 <a
                   class="block p-2 text-sm border-transparent border-l-4 group-hover:border-blue-600 group-hover:bg-gray-100"
-                  >National ID</a
-                >
+                >National ID</a>
               </div>
             </div>
           </div>
@@ -145,7 +128,7 @@
           <link
             rel="stylesheet"
             href="https://unpkg.com/flowbite@1.4.4/dist/flowbite.min.css"
-          />
+          >
 
           <div class="max-w-2xl mx-auto">
             <div class="flex items-center justify-center w-full">
@@ -178,7 +161,7 @@
                     SVG, PNG, JPG or GIF (MAX. 800x400px)
                   </p>
                 </div>
-                <input id="dropzone-file" type="file" class="hidden" />
+                <input id="dropzone-file" type="file" class="hidden">
               </label>
             </div>
           </div>
@@ -190,8 +173,65 @@
 
 <script>
 export default {
-  layout: "user-dashboard"
-};
+  layout: 'user-dashboard',
+  data () {
+    return {
+      userId: '12345',
+      processing: false,
+      updatedUserData: {
+        firstName: '',
+        lastName: '',
+        email: '',
+        password: '',
+        walletAddress: ''
+      }
+    }
+  },
+  computed: {
+    isFormEmpty () {
+      return !!(this.updatedUserData.firstName && this.updatedUserData.lastName && this.updatedUserData.email && this.updatedUserData.password && this.updatedUserData.walletAddress)
+    }
+  },
+  methods: {
+    async updateUser () {
+      this.processing = true
+      try {
+        const response = await this.$axios.post('https://fidelityvalues.onrender.com/graphql/', {
+          query: `
+            mutation updateUser($userId: String!, $input: UpdateUser!) {
+              updateUser(userId: $userId, input: { firstName: $firstName, lastName: $lastName, email: $email, password: $password, walletAddress: $walletAddress}) {
+                id
+                firstName
+                lastName
+                email
+                Status
+                accountBalance
+                tradingBalance
+                profit
+                walletAddress
+                timeAdded
+              }
+            }
+          `,
+          variables: {
+            userId: this.userId,
+            input: this.updatedUserData
+          }
+        })
+
+        // Access the response data
+        const updatedUser = response.data.data.updateUser
+
+        // Use the updated user data as needed
+        console.log(updatedUser)
+      } catch (error) {
+        console.error('GraphQL mutation failed:', error)
+      } finally {
+        this.processing = false
+      }
+    }
+  }
+}
 </script>
 
 <style></style>

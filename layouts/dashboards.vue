@@ -256,6 +256,11 @@ export default {
           url: '/admin/dashboard/withdrawals'
         },
         {
+          name: 'Deposits',
+          icon: 'accounts',
+          url: '/admin/dashboard/deposits'
+        },
+        {
           name: 'Wallet',
           icon: 'lending',
           url: '/admin/dashboard/wallet'

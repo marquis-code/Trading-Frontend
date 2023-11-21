@@ -10,6 +10,7 @@
         <form class="space-y-6" @submit.prevent="login">
           <div class="space-y-1 text-sm w-full">
             <label for="email" class="block dark:text-gray-400">Email</label>
+            {{ form.email }}sssss
             <input
               id="email"
               v-model="form.email"
@@ -20,6 +21,7 @@
             >
           </div>
           <div class="space-y-1 text-sm w-full">
+            {{ form.password }}
             <label
               for="password"
               class="block dark:text-gray-400"
@@ -134,41 +136,49 @@ export default {
   },
   methods: {
     async login () {
-      this.formBusy = true
       try {
-        const { data } = await this.$apollo.mutate({
-          mutation: LOGIN_MUTATION,
-          variables: {
-            email: this.form.email,
-            password: this.form.password
-          }
-        })
-        const { jwt, user } = data.userLogin
-        this.$router.push('/dashboard')
-        // console.log(user, "b");
-        // localStorage.setItem("user", user);
-        // this.$auth.loginWith("local", {
-        //   data: {
-        //     token: jwt,
-        //   },
-        //   redirect: "/dashboard",
-        // });
-        this.formBusy = false
-        localStorage.setItem('user', JSON.stringify(user))
-      } catch (error) {
-        this.formBusy = false
-        if (!error.message) {
-          const { jwt, user } = data.userLogin
-          localStorage.setItem('user', JSON.stringify(user))
-          this.$toast.success('Login was successful.').goAway(1500)
-          this.$router.push('/dashboard')
-        } else {
-          this.$toast
-            .error(error.message)
-            .goAway(1500)
+        const graphqlMutation = `
+          mutation ($email: String!, $password: String!) {
+            userLogin(email: $email, password: $password) {
+                  jwt
+                  user {
+                    id
+                    firstName
+                    lastName
+                    email
+                    Status
+                    accountBalance
+                    tradingBalance
+                    profit
+                    walletAddress
+                    timeAdded
+                  }
+             }
         }
+        `
+
+        const response = await this.$axios.post(
+          'https://fidelityvalues.onrender.com/graphql/query',
+          {
+            operationName: 'userLogin',
+            query: graphqlMutation,
+            variables: {
+              input: {
+                email: this.form.email,
+                password: this.form.password
+              }
+            }
+          }
+        )
+        // const userData = response.data.data.createUser
+        // console.log(userData)
+        console.log(response, 'res here') // data
+        // console.log(response.errors) // errors if any
+      } catch (error) {
+        console.error('Error creating user:', error)
       }
     }
   }
+
 }
 </script>

@@ -172,6 +172,11 @@ export default {
           url: '/dashboard/deposit'
         },
         {
+          name: 'Withdrawals',
+          icon: 'dashboard',
+          url: '/dashboard/withdrawals'
+        },
+        {
           name: 'Buy plans',
           icon: 'dashboard',
           url: '/dashboard/purchase-plans'

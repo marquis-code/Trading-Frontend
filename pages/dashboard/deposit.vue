@@ -25,14 +25,14 @@
       <p class="border-b text-sm font-semibold py-4 pl-6">
         Enter amount and upload proof of payment
       </p>
-      <div class="p-6 space-y-6">
+      <form class="p-6 space-y-6" @submit.prevent="handleDeposit">
         <div class="space-y-1">
           <label class="text-xs text-gray-700 font-medium">Deposit Amount</label>
-          <input placeholder="Enter amount in USD" type="number" class="py-2 border border-gray-600 text-sm rounded-md w-full outline-none pl-6">
+          <input v-model="form.amount" placeholder="Enter amount in USD" type="number" class="py-2 border border-gray-600 text-sm rounded-md w-full outline-none pl-6">
         </div>
-        <div class="space-y-1">
+        <div class="space-y-4">
           <label class="text-xs text-gray-700 font-medium">Deposit Type</label>
-          <select v-model="depositType" class="py-2 border border-gray-600 text-sm rounded-md w-full outline-none pl-6">
+          <select v-model="form.depositType" class="py-2 border border-gray-600 text-sm rounded-md w-full outline-none pl-6">
             <option value="" disabled>
               ---- Select deposit type -----
             </option>
@@ -46,35 +46,37 @@
               Bank Account
             </option>
           </select>
-          <!-- <input placeholder="Enter amount in USD" type="number" class="py-2 border border-gray-600 text-sm rounded-md w-full outline-none pl-6"> -->
-        </div>
-        <div class="space-y-1">
-          <label class="text-xs text-gray-700 font-medium">Wallet address</label>
-          <input readonly :value="computedWalletAddress" class="py-2 bg-gray-100 cursor-not-allowed border border-gray-600 text-sm rounded-md w-full outline-none pl-6">
-        </div>
-        <div class="space-y-1">
-          <label class="text-xs text-gray-700 font-medium">Upload Image</label>
-          <link rel="stylesheet" href="https://unpkg.com/flowbite@1.4.4/dist/flowbite.min.css">
+          <div class="space-y-1">
+            <label class="text-xs text-gray-700 font-medium">Wallet address</label>
+            <input readonly :value="computedWalletAddress" class="py-2 bg-gray-100 cursor-not-allowed border border-gray-600 text-sm rounded-md w-full outline-none pl-6">
+          </div>
+          <div class="space-y-1">
+            <label class="text-xs text-gray-700 font-medium">Upload Image</label>
+            <link rel="stylesheet" href="https://unpkg.com/flowbite@1.4.4/dist/flowbite.min.css">
 
-          <div class="max-w-2xl mx-auto">
-            <div class="flex items-center justify-center w-full">
-              <label for="dropzone-file" class="flex flex-col items-center justify-center w-full h-64 border-2 border-gray-300 border-dashed rounded-lg cursor-pointer bg-gray-50 dark:hover:bg-bray-800 dark:bg-gray-700 hover:bg-gray-100 dark:border-gray-600 dark:hover:border-gray-500 dark:hover:bg-gray-600">
-                <div class="flex flex-col items-center justify-center pt-5 pb-6">
-                  <svg class="w-10 h-10 mb-3 text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M7 16a4 4 0 01-.88-7.903A5 5 0 1115.9 6L16 6a5 5 0 011 9.9M15 13l-3-3m0 0l-3 3m3-3v12" /></svg>
-                  <p class="mb-2 text-sm text-gray-500 dark:text-gray-400"><span class="font-semibold">Click to upload</span> or drag and drop</p>
-                  <p class="text-xs text-gray-500 dark:text-gray-400">SVG, PNG, JPG or GIF (MAX. 800x400px)</p>
-                </div>
-                <input id="dropzone-file" type="file" class="hidden">
-              </label>
+            <div v-if="!imagePreview" class="max-w-2xl mx-auto">
+              <div class="flex items-center justify-center w-full">
+                <label for="dropzone-file" class="flex flex-col items-center justify-center w-full h-64 border-2 border-gray-300 border-dashed rounded-lg cursor-pointer bg-gray-50 dark:hover:bg-bray-800 dark:bg-gray-700 hover:bg-gray-100 dark:border-gray-600 dark:hover:border-gray-500 dark:hover:bg-gray-600">
+                  <div class="flex flex-col items-center justify-center pt-5 pb-6">
+                    <svg class="w-10 h-10 mb-3 text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M7 16a4 4 0 01-.88-7.903A5 5 0 1115.9 6L16 6a5 5 0 011 9.9M15 13l-3-3m0 0l-3 3m3-3v12" /></svg>
+                    <p class="mb-2 text-sm text-gray-500 dark:text-gray-400"><span class="font-semibold">Click to upload</span> or drag and drop</p>
+                    <p class="text-xs text-gray-500 dark:text-gray-400">SVG, PNG, JPG or GIF (MAX. 800x400px)</p>
+                  </div>
+                  <input id="dropzone-file" type="file" class="hidden" @change="handleProofUpload">
+                </label>
+              </div>
+            </div>
+            <div v-else>
+              <img :src="imagePreview" alt="image preview" class="w-full h-32 object-cover object-center">
             </div>
           </div>
+          <div class="w-full">
+            <button :disabled="!isFormEnabled" class="w-full text-white disabled:cursor-not-allowed disabled:opacity-25  bg-black py-3 px-3 rounded-md">
+              {{ loading ? 'processing..' : 'Submit' }}
+            </button>
+          </div>
         </div>
-        <div class="w-full">
-          <button class="w-full text-white  bg-black py-3 px-3 rounded-md">
-            Submit
-          </button>
-        </div>
-      </div>
+      </form>
     </section>
   </main>
 </template>
@@ -85,6 +87,13 @@ export default {
   data () {
     return {
       depositType: 'bank',
+      imagePreview: null,
+      loading: false,
+      form: {
+        amount: '',
+        depositType: '',
+        proof: ''
+      },
       wallet: [
         {
           name: 'Bitcoin',
@@ -108,20 +117,51 @@ export default {
   computed: {
     computedWalletAddress () {
       return this.depositType === 'bitcoin' ? this.wallet[0].code : this.depositType === 'ethereum' ? this.wallet[1].code : this.depositType === 'bank' ? this.wallet[2].code : ''
+    },
+    isFormEnabled () {
+      return !!(this.form.amount && this.form.depositType && this.form.proof)
     }
   },
   methods: {
     copy (val) {
       const cb = window.navigator.clipboard
       cb.writeText(val).then(() => this.$toastr.s('Copied to clipboard'))
+    },
+    handleProofUpload (event) {
+      const file = event.target.files[0]
+
+      if (file) {
+        // Read the file and set the preview
+        const reader = new FileReader()
+        reader.onload = (e) => {
+          this.imagePreview = reader.result
+          this.form.proof = e?.target?.result
+        }
+        reader.readAsDataURL(file)
+      } else {
+        this.imagePreview = null
+      }
+    },
+    async handleDeposit () {
+      this.loading = true
+      try {
+        const response = await this.$axios.post('https://fidelityvalues.onrender.com/graphql/', {
+          query: `
+              mutation newDeposit($amount: Float!, $depositType: String!, $proof: String!) {
+                newDeposit(input: {amount: $amount, depositType: $depositType, proof: $proof})
+              }
+            `,
+          variables: { amount: this.form.amount, depositType: this.form.depositType, proof: this.form.proof }
+        })
+        const result = response.data.data.newDeposit
+        console.log(result)
+      } catch (error) {
+        console.error('GraphQL query failed:', error)
+      } finally {
+        this.loading = false
+      }
     }
   }
-  // computed:{
-  //   computedWalletAddress(){
-
-  //   }
-  // return this.deppsitType === 'bitcoin' ? this.wallet[0].code ? this.deppsitType === 'ethereum' ? this.wallet[1].code : this.wallet[2].code
-  // }
 }
 </script>
 

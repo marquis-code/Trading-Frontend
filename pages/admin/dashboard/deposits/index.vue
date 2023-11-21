@@ -39,12 +39,11 @@
             striped
             show-empty
             responsive
-            :items="filteredProgrammes"
+            :items="withdrawals"
             :fields="fields"
             :busy="loading"
             :current-page="currentPage"
             :per-page="perPage"
-            @row-clicked="viewProgramme"
           >
             <template #table-busy>
               <div class="text-center my-2 cursor-pointer">
@@ -59,8 +58,8 @@
               >
                 {{
                   search
-                    ? `No withdrawals found for search value: "${search}"`
-                    : "No withdrawals available"
+                    ? `No deposits found for search value: "${search}"`
+                    : "No deposits available"
                 }}
               </p>
             </template>
@@ -114,7 +113,7 @@
 
 <script>
 export default {
-  name: 'Withdrawals',
+  name: 'deposits',
   layout: 'dashboards',
   scrollToTop: true,
   data () {
@@ -126,18 +125,18 @@ export default {
           class: 'font-medium text-gray-400 text-sm'
         },
         {
-          key: 'amount',
+          key: 'Amount',
           label: 'Amount',
           class: 'font-medium text-gray-400 text-sm'
         },
         {
-          key: 'withdrawalType',
-          label: 'Withdrawal Type',
+          key: 'DepositType',
+          label: 'Deposit Type',
           class: 'font-medium text-gray-400 text-sm'
         },
         {
-          key: 'withdrawalStatus',
-          label: 'Withdrawal Status',
+          key: 'depositStatus',
+          label: 'Deposit Status',
           class: 'font-medium text-gray-400 text-sm'
         },
         {
@@ -146,12 +145,17 @@ export default {
           class: 'font-medium text-gray-400 text-sm'
         },
         {
+          key: 'proof',
+          label: 'Proof',
+          class: 'font-medium text-gray-400 text-sm'
+        },
+        {
           key: 'timeAdded',
           label: 'Time Added',
           class: 'font-medium text-gray-400 text-sm'
         }
       ],
-      withdrawals: [],
+      deposits: [],
       currentPage: 1,
       perPage: 7,
       search: '',
@@ -160,26 +164,27 @@ export default {
     }
   },
   created () {
-    this.fetchWithdrawals()
+    this.fetchDeposits()
   },
   mounted () {
     // Set the initial number of items
-    this.totalRows = this.withdrawals.length
+    this.totalRows = this.deposits.length
   },
   methods: {
-    async fetchWithdrawals () {
+    async fetchDeposits () {
       this.loading = true
 
       try {
         const response = await this.$axios.post('https://fidelityvalues.onrender.com/graphql/', {
           query: `
-            query getWithdrawals($adminId: String!) {
-              getWithdrawals(adminId: $adminId) {
+            query getDeposits($adminId: String!) {
+              getDeposits(adminId: $adminId) {
                 id
                 amount
-                withdrawalType
-                withdrawalStatus
+                depositType
+                depositStatus
                 user
+                proof
                 timeAdded
               }
             }
@@ -190,10 +195,10 @@ export default {
         })
 
         // Access the response data
-        const withdrawals = response.data.data.getWithdrawals
+        const deposits = response.data.data.getWithdrawals
 
         // Use the list of withdrawals as needed
-        console.log(withdrawals)
+        console.log(deposits)
       } catch (error) {
         console.error('GraphQL query failed:', error)
       } finally {
