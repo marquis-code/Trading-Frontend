@@ -145,7 +145,7 @@
         </div>
       </div>
     </section>
-    <section class="p-4 lg:p-8 bg-[#003b6d]">
+    <!-- <section class="p-4 lg:p-8 bg-[#003b6d]">
       <div class="container mx-auto space-y-12">
         <div class="flex flex-col overflow-hidden rounded-md shadow-sm lg:flex-row">
           <img src="@/assets/img/tradingAnimation.jpg" alt="" class="h-80 dark:bg-gray-500 aspect-video">
@@ -163,8 +163,10 @@
           </div>
         </div>
       </div>
+    </section> -->
+    <section class="my-20">
+      <portfolio-section />
     </section>
-    <stats />
     <AdvertCTA />
     <updated-testimonials />
     <trading-table />
@@ -196,17 +198,18 @@
       </div>
     </b-modal>
     <div class="flex justify-center items-center w-11/12 mx-auto">
-      <div id="chart-widget"></div>
+      <div id="chart-widget" />
     </div>
   </div>
 </template>
 
 <script>
 // import TradingWidget from '@/components/TradingWidget.vue'
+import PortfolioSection from '@/components/PortfolioSection.vue'
 import HeroSection from '@/components/HeroSection.vue'
 import AdvertCTA from '@/components/AdvertCTA.vue'
 export default {
-  components: { HeroSection, AdvertCTA },
+  components: { HeroSection, AdvertCTA, PortfolioSection },
   data () {
     return {
       activeCarouselIndex: 0,
@@ -238,7 +241,7 @@ export default {
   },
   mounted () {
     this.startSlider()
-    this.$bvModal.show('bv-modal-example')
+    // this.$bvModal.show('bv-modal-example')
   },
   unmounted () {
     clearInterval(this.timer)

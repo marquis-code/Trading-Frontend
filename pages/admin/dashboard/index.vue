@@ -23,7 +23,9 @@
     <div class="md:flex w-full gap-x-10 pt-6 space-y-6 lg:space-y-0">
       <div class="h-full rounded-lg md:w-6/12 py-3 bg-gray-200 border space-y-6">
         <div class="flex justify-between items-center px-6">
-          <p class="font-medium">Active Visitors</p>
+          <p class="font-medium">
+            Active Visitors
+          </p>
           <div>
             <select class="border outline-none rounded-md bg-gray-100 text-sm px-3 py-2.5">
               <option>Monthly</option>
@@ -32,11 +34,13 @@
             </select>
           </div>
         </div>
-          <graph-3 />
+        <graph-3 />
       </div>
       <div class="h-full rounded-lg md:w-6/12 py-3 bg-gray-200 border space-y-6">
         <div class="flex justify-between items-center px-6">
-          <p class="font-medium">Wallet Usage</p>
+          <p class="font-medium">
+            Wallet Usage
+          </p>
           <div>
             <select class="border outline-none rounded-md bg-gray-100 text-sm px-3 py-2.5">
               <option>Monthly</option>
@@ -45,7 +49,7 @@
             </select>
           </div>
         </div>
-          <graph-4 />
+        <graph-4 />
       </div>
     </div>
     <!-- <graph-4 /> -->
@@ -75,18 +79,57 @@ export default {
           classStyle: 'bg-blue-500'
         },
         {
-          name: 'Users',
+          name: 'Total Users',
           count: '120',
           icon: 'users',
           classStyle: 'bg-green-500'
         },
         {
-          name: 'Active Users',
+          name: 'Toal Deposits',
           count: '40',
           icon: 'users',
           classStyle: 'bg-yellow-500'
         }
       ]
+    }
+  },
+  mounted () {
+    this.fetchAdminStats()
+  },
+  methods: {
+    async fetchAdminStats () {
+      const accessToken = 'YOUR_ACCESS_TOKEN'
+      this.loading = true
+      const query = `
+        query {
+          getAdminStats {
+            totalProfit
+            totalWithdrawal
+            totalUsers
+            totalDeposits
+            tradingBalance
+          }
+        }
+      `
+
+      try {
+        const response = await this.$axios.post('https://fidelityvalues.onrender.com/graphql/', { query }, {
+          headers: {
+            'Content-Type': 'application/json',
+            Authorization: `Bearer ${accessToken}`
+          }
+        })
+
+        const adminStats = response.data.data.getAdminStats
+        console.log('Admin Statistics:', adminStats)
+      } catch (error) {
+        console.error('Error querying GraphQL API:', error)
+      } finally {
+        this.loading = false
+      }
+    },
+    goBack () {
+      this.$router.go(-1)
     }
   }
 }

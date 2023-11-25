@@ -2,214 +2,214 @@
   <main>
     <Transition name="fade">
       <!-- <b-container> -->
-        <section class="text-white">
-          <div class="flex items-center justify-between my-3">
-            <button
-              class="outline-none border bg-gray-200 text-black px-3 py-1 rounded-md text-sm"
-              @click="goBack()"
+      <section class="text-white">
+        <div class="flex items-center justify-between my-3">
+          <button
+            class="outline-none border bg-gray-200 text-black px-3 py-1 rounded-md text-sm"
+            @click="goBack()"
+          >
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              width="23"
+              height="23"
+              viewBox="0 0 24 24"
+              fill="none"
+              stroke="#747070"
+              stroke-width="2"
+              stroke-linecap="square"
+              stroke-linejoin="bevel"
             >
-              <svg
-                xmlns="http://www.w3.org/2000/svg"
-                width="23"
-                height="23"
-                viewBox="0 0 24 24"
-                fill="none"
-                stroke="#747070"
-                stroke-width="2"
-                stroke-linecap="square"
-                stroke-linejoin="bevel"
+              <path d="M19 12H6M12 5l-7 7 7 7" />
+            </svg>
+          </button>
+        </div>
+
+        <div class="sm:flex-1 pb-0 mt-3">
+          <label for="search" class="sr-only">Search</label>
+
+          <input
+            v-model="search"
+            type="text"
+            placeholder="Search.."
+            class="w-full rounded-tr-md rounded-tl-md outline-none bg-white p-3 text-gray-700 transition border focus:border-white focus:outline-none focus:outline-none focus:ring-1 focus:ring-green-500 focus:border-transparent"
+          >
+        </div>
+        <b-card class="mt-3">
+          <b-table
+            striped
+            show-empty
+            responsive
+            :items="filteredProgrammes"
+            :fields="fields"
+            :busy="loading"
+            :current-page="currentPage"
+            :per-page="perPage"
+            @row-clicked="viewProgramme"
+          >
+            <template #table-busy>
+              <div class="text-center my-2 cursor-pointer">
+                <b-spinner class="align-middle" />
+                <small>Loading...</small>
+              </div>
+            </template>
+
+            <template #empty>
+              <p
+                class="text-center text-sm text-secondary py-2 cursor-pointer"
               >
-                <path d="M19 12H6M12 5l-7 7 7 7" />
-              </svg>
-            </button>
-          </div>
+                {{
+                  search
+                    ? `No programmes found for search value: "${search}"`
+                    : "No programmes available"
+                }}
+              </p>
+            </template>
 
-          <div class="sm:flex-1 pb-0 mt-3">
-            <label for="search" class="sr-only">Search</label>
+            <template #cell(sn)="data">
+              <span class="font-medium py-2 text-sm cursor-pointer">
+                {{ data.index + 1 }}</span>
+            </template>
 
-            <input
-              v-model="search"
-              type="text"
-              placeholder="Search.."
-              class="w-full rounded-tr-md rounded-tl-md outline-none bg-white p-3 text-gray-700 transition border focus:border-white focus:outline-none focus:outline-none focus:ring-1 focus:ring-green-500 focus:border-transparent"
-            >
-          </div>
-          <b-card class="mt-3">
-            <b-table
-              striped
-              show-empty
-              responsive
-              :items="filteredProgrammes"
-              :fields="fields"
-              :busy="loading"
-              :current-page="currentPage"
-              :per-page="perPage"
-              @row-clicked="viewProgramme"
-            >
-              <template #table-busy>
-                <div class="text-center my-2 cursor-pointer">
-                  <b-spinner class="align-middle" />
-                  <small>Loading...</small>
-                </div>
-              </template>
+            <template #cell(title)="data">
+              <span class="font-medium py-2 text-sm cursor-pointer">
+                {{
+                  data?.item?.title === "null"
+                    ? "N/A"
+                    : data.item.title && data.item.title.length > 20
+                      ? data.item.title.slice(0, 20) + "..."
+                      : data.item.title
+                }}
+              </span>
+            </template>
 
-              <template #empty>
-                <p
-                  class="text-center text-sm text-secondary py-2 cursor-pointer"
-                >
-                  {{
-                    search
-                      ? `No programmes found for search value: "${search}"`
-                      : "No programmes available"
-                  }}
-                </p>
-              </template>
-
-              <template #cell(sn)="data">
-                <span class="font-medium py-2 text-sm cursor-pointer">
-                  {{ data.index + 1 }}</span>
-              </template>
-
-              <template #cell(title)="data">
-                <span class="font-medium py-2 text-sm cursor-pointer">
-                  {{
-                    data?.item?.title === "null"
-                      ? "N/A"
-                      : data.item.title && data.item.title.length > 20
-                        ? data.item.title.slice(0, 20) + "..."
-                        : data.item.title
-                  }}
-                </span>
-              </template>
-
-              <template #cell(theme)="data">
-                <span class="font-medium py-2 text-sm cursor-pointer">
-                  {{
-                    data?.item?.theme === "null"
-                      ? "N/A"
-                      : data.item.theme && data.item.theme.length > 20
-                        ? data.item.theme.slice(0, 20) + "..."
-                        : data.item.theme
-                  }}</span>
-              </template>
-
-              <template #cell(video_upload)="data">
-                <span class="font-medium py-2 text-sm">
-                  {{ data?.item?.uploadedVideoUrl ? "YES" : "NO" }}</span>
-              </template>
-
-              <template #cell(file_uploads)="data">
-                <span class="font-medium py-2 text-sm cursor-pointer">
-                  {{
-                    data?.item?.uploadedDocumentFiles
-                      ? `${data?.item?.uploadedDocumentFiles.length} ${
-                        data?.item?.uploadedDocumentFiles.length > 1
-                          ? "files"
-                          : "file"
-                      } uploaded`
-                      : "NO"
-                  }}</span>
-              </template>
-
-              <template #cell(zoom_url)="data">
-                <a
-                  :href="`zoom ${data?.item?.zoomMeetingUrl}`"
-                  class="font-medium py-2 text-sm"
-                >
-                  {{ data?.item?.zoomMeetingUrl }}</a>
-              </template>
-
-              <template #cell(status)="data">
-                <span class="font-medium py-2 text-sm">{{
-                  data?.item?.status ?? "N/A"
+            <template #cell(theme)="data">
+              <span class="font-medium py-2 text-sm cursor-pointer">
+                {{
+                  data?.item?.theme === "null"
+                    ? "N/A"
+                    : data.item.theme && data.item.theme.length > 20
+                      ? data.item.theme.slice(0, 20) + "..."
+                      : data.item.theme
                 }}</span>
-              </template>
+            </template>
 
-              <template #cell(start_date)="data">
-                <span class="font-medium py-2 text-sm">{{
-                  $moment(data.item.endDate).format("L")
+            <template #cell(video_upload)="data">
+              <span class="font-medium py-2 text-sm">
+                {{ data?.item?.uploadedVideoUrl ? "YES" : "NO" }}</span>
+            </template>
+
+            <template #cell(file_uploads)="data">
+              <span class="font-medium py-2 text-sm cursor-pointer">
+                {{
+                  data?.item?.uploadedDocumentFiles
+                    ? `${data?.item?.uploadedDocumentFiles.length} ${
+                      data?.item?.uploadedDocumentFiles.length > 1
+                        ? "files"
+                        : "file"
+                    } uploaded`
+                    : "NO"
                 }}</span>
-              </template>
+            </template>
 
-              <template #cell(end_date)="data">
-                <span class="font-medium py-2 text-sm">{{
-                  $moment(data.item.endDate).format("L")
-                }}</span>
-              </template>
+            <template #cell(zoom_url)="data">
+              <a
+                :href="`zoom ${data?.item?.zoomMeetingUrl}`"
+                class="font-medium py-2 text-sm"
+              >
+                {{ data?.item?.zoomMeetingUrl }}</a>
+            </template>
 
-              <template #cell(actions)="data">
-                <b-dropdown
-                  size="sm"
-                  variant="link"
-                  class="position-relative text-center w-100"
-                  :toggle-class="'text-decoration-none'"
-                  :disabled="downloading"
-                  :no-caret="true"
-                  right
-                >
-                  <template #button-content>
-                    <div class="flex justify-center items-center">
+            <template #cell(status)="data">
+              <span class="font-medium py-2 text-sm">{{
+                data?.item?.status ?? "N/A"
+              }}</span>
+            </template>
+
+            <template #cell(start_date)="data">
+              <span class="font-medium py-2 text-sm">{{
+                $moment(data.item.endDate).format("L")
+              }}</span>
+            </template>
+
+            <template #cell(end_date)="data">
+              <span class="font-medium py-2 text-sm">{{
+                $moment(data.item.endDate).format("L")
+              }}</span>
+            </template>
+
+            <template #cell(actions)="data">
+              <b-dropdown
+                size="sm"
+                variant="link"
+                class="position-relative text-center w-100"
+                :toggle-class="'text-decoration-none'"
+                :disabled="downloading"
+                :no-caret="true"
+                right
+              >
+                <template #button-content>
+                  <div class="flex justify-center items-center">
+                    <svg
+                      xmlns="http://www.w3.org/2000/svg"
+                      width="24"
+                      height="24"
+                      viewBox="0 0 24 24"
+                      fill="none"
+                      stroke="#000000"
+                      stroke-width="2"
+                      stroke-linecap="round"
+                      stroke-linejoin="round"
+                    >
+                      <circle cx="12" cy="12" r="1" />
+                      <circle cx="12" cy="5" r="1" />
+                      <circle cx="12" cy="19" r="1" />
+                    </svg>
+                  </div>
+                </template>
+                <b-dropdown-item @click="handleDelete(data.item._id)">
+                  <div class="flex items-center space-x-2">
+                    <p>
                       <svg
+                        class="cursor-pointer"
                         xmlns="http://www.w3.org/2000/svg"
-                        width="24"
-                        height="24"
+                        width="20"
+                        height="20"
                         viewBox="0 0 24 24"
                         fill="none"
-                        stroke="#000000"
+                        stroke="#d33a21"
                         stroke-width="2"
-                        stroke-linecap="round"
-                        stroke-linejoin="round"
+                        stroke-linecap="square"
+                        stroke-linejoin="bevel"
                       >
-                        <circle cx="12" cy="12" r="1" />
-                        <circle cx="12" cy="5" r="1" />
-                        <circle cx="12" cy="19" r="1" />
+                        <polyline points="3 6 5 6 21 6" />
+                        <path
+                          d="M19 6v14a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V6m3 0V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2"
+                        />
+                        <line x1="10" y1="11" x2="10" y2="17" />
+                        <line x1="14" y1="11" x2="14" y2="17" />
                       </svg>
-                    </div>
-                  </template>
-                  <b-dropdown-item @click="handleDelete(data.item._id)">
-                    <div class="flex items-center space-x-2">
-                      <p>
-                        <svg
-                          class="cursor-pointer"
-                          xmlns="http://www.w3.org/2000/svg"
-                          width="20"
-                          height="20"
-                          viewBox="0 0 24 24"
-                          fill="none"
-                          stroke="#d33a21"
-                          stroke-width="2"
-                          stroke-linecap="square"
-                          stroke-linejoin="bevel"
-                        >
-                          <polyline points="3 6 5 6 21 6" />
-                          <path
-                            d="M19 6v14a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V6m3 0V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2"
-                          />
-                          <line x1="10" y1="11" x2="10" y2="17" />
-                          <line x1="14" y1="11" x2="14" y2="17" />
-                        </svg>
-                      </p>
-                      <p class="text-sm">
-                        Delete programme
-                      </p>
-                    </div>
-                  </b-dropdown-item>
-                </b-dropdown>
-              </template>
-            </b-table>
+                    </p>
+                    <p class="text-sm">
+                      Delete programme
+                    </p>
+                  </div>
+                </b-dropdown-item>
+              </b-dropdown>
+            </template>
+          </b-table>
 
-            <div class="flex justify-end items-end">
-              <b-pagination
-                v-model="currentPage"
-                :total-rows="totalRows"
-                :per-page="perPage"
-                size="md"
-                class="my-3"
-              />
-            </div>
-          </b-card>
-          <!-- </div> -->
-        </section>
+          <div class="flex justify-end items-end">
+            <b-pagination
+              v-model="currentPage"
+              :total-rows="totalRows"
+              :per-page="perPage"
+              size="md"
+              class="my-3"
+            />
+          </div>
+        </b-card>
+        <!-- </div> -->
+      </section>
       <!-- </b-container> -->
     </Transition>
 

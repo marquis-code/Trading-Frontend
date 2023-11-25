@@ -4,7 +4,7 @@
       <div class="container px-5 py-24 mx-auto flex flex-col">
         <div class="lg:w-4/6 mx-auto">
           <div class="rounded-lg h-64 overflow-hidden">
-            <img alt="content" class="object-cover object-center h-full w-full" src="@/assets/img/ceoMale.jpeg">
+            <img alt="content" class="object-cover object-center h-full w-full" src="@/assets/img/ceo.jpeg">
           </div>
           <div class="flex flex-col sm:flex-row mt-10">
             <div class="sm:w-1/3 text-center sm:pr-8 sm:py-8">
@@ -24,7 +24,7 @@
               </div>
               <div class="flex flex-col items-center text-center justify-center">
                 <h2 class="font-medium title-font mt-4 text-gray-900 text-lg">
-                  George Hovey
+                  Sonia Ann Lindsey
                 </h2>
                 <div class="w-12 h-1 bg-indigo-500 rounded mt-2 mb-4" />
                 <div class="bg-black rounded-md p-3 text-white text-left space-y-4">

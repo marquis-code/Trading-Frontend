@@ -462,6 +462,7 @@ export default {
     this.fetchProgrammes()
   },
   mounted () {
+    this.fetchUsers()
     // Set the initial number of items
     this.totalRows = this.programmes.length
   },
@@ -522,6 +523,45 @@ export default {
     },
     handleEdit (id) {
       this.$router.push(`/admin/programmes/${id}`)
+    },
+    async fetchUsers () {
+      const accessToken = 'YOUR_ACCESS_TOKEN'
+      this.loading = true
+      const query = `
+        query {
+          getUsers {
+            id
+            firstName
+            lastName
+            email
+            Status
+            PlanType
+            accountBalance
+            tradingBalance
+            profit
+            eth
+            btc
+            timeAdded
+            admin
+          }
+        }
+      `
+
+      try {
+        const response = await this.$axios.post('https://fidelityvalues.onrender.com/graphql/', { query }, {
+          headers: {
+            'Content-Type': 'application/json',
+            Authorization: `Bearer ${accessToken}`
+          }
+        })
+
+        const users = response.data.data.getUsers
+        console.log('Admin Statistics:', users)
+      } catch (error) {
+        console.error('Error querying GraphQL API:', error)
+      } finally {
+        this.loading = false
+      }
     }
   }
 }

@@ -163,45 +163,44 @@ export default {
     this.fetchWithdrawals()
   },
   mounted () {
+    this.fetchAdminWithdrawals()
     // Set the initial number of items
     this.totalRows = this.withdrawals.length
   },
   methods: {
-    async fetchWithdrawals () {
+    async fetchAdminWithdrawals () {
+      const accessToken = 'YOUR_ACCESS_TOKEN'
       this.loading = true
+      const query = `
+        query {
+          getTransactions {
+            id
+            amount
+            wallet
+            transactionType
+            transactionStatus
+            user
+            proof
+            timeAdded
+          }
+        }
+      `
 
       try {
-        const response = await this.$axios.post('https://fidelityvalues.onrender.com/graphql/', {
-          query: `
-            query getWithdrawals($adminId: String!) {
-              getWithdrawals(adminId: $adminId) {
-                id
-                amount
-                withdrawalType
-                withdrawalStatus
-                user
-                timeAdded
-              }
-            }
-          `,
-          variables: {
-            adminId: this.adminId
+        const response = await this.$axios.post('https://fidelityvalues.onrender.com/graphql/', { query }, {
+          headers: {
+            'Content-Type': 'application/json',
+            Authorization: `Bearer ${accessToken}`
           }
         })
 
-        // Access the response data
-        const withdrawals = response.data.data.getWithdrawals
-
-        // Use the list of withdrawals as needed
-        console.log(withdrawals)
+        const adminStats = response.data.data.getAdminStats
+        console.log('Admin Statistics:', adminStats)
       } catch (error) {
-        console.error('GraphQL query failed:', error)
+        console.error('Error querying GraphQL API:', error)
       } finally {
         this.loading = false
       }
-    },
-    goBack () {
-      this.$router.go(-1)
     }
   }
 }

@@ -164,49 +164,47 @@ export default {
     }
   },
   created () {
-    this.fetchDeposits()
+    this.fetchAdminDeposits()
   },
   mounted () {
+    this.fetchAdminDeposits()
     // Set the initial number of items
     this.totalRows = this.deposits.length
   },
   methods: {
-    async fetchDeposits () {
+    async fetchAdminDeposits () {
+      const accessToken = 'YOUR_ACCESS_TOKEN'
       this.loading = true
+      const query = `
+        query {
+          getTransactions {
+            id
+            amount
+            wallet
+            transactionType
+            transactionStatus
+            user
+            proof
+            timeAdded
+          }
+        }
+      `
 
       try {
-        const response = await this.$axios.post('https://fidelityvalues.onrender.com/graphql/', {
-          query: `
-            query getDeposits($adminId: String!) {
-              getDeposits(adminId: $adminId) {
-                id
-                amount
-                depositType
-                depositStatus
-                user
-                proof
-                timeAdded
-              }
-            }
-          `,
-          variables: {
-            adminId: this.adminId
+        const response = await this.$axios.post('https://fidelityvalues.onrender.com/graphql/', { query }, {
+          headers: {
+            'Content-Type': 'application/json',
+            Authorization: `Bearer ${accessToken}`
           }
         })
 
-        // Access the response data
-        const deposits = response.data.data.getWithdrawals
-
-        // Use the list of withdrawals as needed
-        console.log(deposits)
+        const adminTransactions = response.data.data.getTransactions
+        console.log('Admin Statistics:', adminTransactions)
       } catch (error) {
-        console.error('GraphQL query failed:', error)
+        console.error('Error querying GraphQL API:', error)
       } finally {
         this.loading = false
       }
-    },
-    goBack () {
-      this.$router.go(-1)
     }
   }
 }

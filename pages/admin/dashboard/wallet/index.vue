@@ -6,7 +6,7 @@
           Overview
         </h1>
         <nuxt-link to="/admin/dashboard/wallet/add-wallet" class="px-3 py-2 rounded-full text-white bg-black" @click="handleClick">
-          Insert wallet
+          Update profit
         </nuxt-link>
       </div>
       <div class="grid grid-cols-1 gap-4 lg:grid-cols-3 lg:gap-8">
@@ -19,12 +19,12 @@
               <h1 class="text-xl font-medium text-white">
                 {{ item.count }}
               </h1>
-              <p class="text-xs text-gray-100">
+              <p class="text-2xl text-gray-100">
                 {{ item.name }}
               </p>
             </div>
           </div>
-          <div class="absolute top-3 right-2 cursor-pointer">
+          <div v-if="item.value !== 'bank'" class="absolute top-3 right-2 cursor-pointer">
             <button class="flex items-center gap-x-3 border-white border px-3 py-2.5 rounded-md" @click="handleWalletModal(item)">
               <span class="text-white">Update</span>
               <img class="cursor-pointer" src="@/assets/icons/more.svg" alt="more">
@@ -110,10 +110,19 @@ export default {
       selectedWallet: {},
       stats: [
         {
+          name: 'Trading Balance',
+          value: 'bank',
+          walletName: 'Bank Account',
+          count: '$3520.30',
+          address: '34567890oiuytrerghjklkrtyui',
+          icon: 'wallet',
+          classStyle: 'bg-green-500'
+        },
+        {
           name: 'BTC',
           value: 'btc',
           walletName: 'BitCoin',
-          count: '1200',
+          count: '',
           address: '34567890oiuytrerghjklkrtyui',
           icon: 'bit',
           classStyle: 'bg-pink-500'
@@ -122,19 +131,10 @@ export default {
           name: 'ETH',
           value: 'eth',
           walletName: 'Ethereum',
-          count: '$4655.56',
+          count: '',
           address: '34567890oiuytrerghjklkrtyui',
           icon: 'eth',
           classStyle: 'bg-blue-500'
-        },
-        {
-          name: 'BANK',
-          value: 'bank',
-          walletName: 'Bank Account',
-          count: '$3520.30',
-          address: '34567890oiuytrerghjklkrtyui',
-          icon: 'wallet',
-          classStyle: 'bg-green-500'
         }
       ],
       loading: false,

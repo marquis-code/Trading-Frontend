@@ -4,18 +4,22 @@
       class="container p-2 mx-auto sm:p-4 border border-gray-100 bg-white rounded-md space-y-4"
     >
       <div class="space-y-1 pl-3">
-        <h2 class="text font-semibold leading-loosed">Transaction History</h2>
-        <p class="text-gray-600 text-xs">More than 400+ Digital assets</p>
+        <h2 class="text font-semibold leading-loosed">
+          Transaction History
+        </h2>
+        <p class="text-gray-600 text-xs">
+          More than 400+ Digital assets
+        </p>
       </div>
       <div class="overflow-x-auto h-[410px]">
         <table class="min-w-full text-xs">
           <colgroup>
-            <col />
-            <col />
-            <col />
-            <col />
-            <col />
-            <col class="w-24" />
+            <col>
+            <col>
+            <col>
+            <col>
+            <col>
+            <col class="w-24">
           </colgroup>
           <thead class="bg-white border-b sticky top-0">
             <tr class="text-left">
@@ -87,115 +91,154 @@
 
 <script>
 export default {
-  layout: "user-dashboard",
-  data() {
+  layout: 'user-dashboard',
+  data () {
     return {
       tableData: [
         {
-          invoice: "97412378923",
-          client: "Microsoft Corporation",
-          issued: "14 Jan 2022",
-          issuedDay: "Friday",
-          due: "01 Feb 2022",
-          dueDay: "Tuesday",
-          amount: "$15,792",
-          status: "pending",
+          invoice: '97412378923',
+          client: 'Microsoft Corporation',
+          issued: '14 Jan 2022',
+          issuedDay: 'Friday',
+          due: '01 Feb 2022',
+          dueDay: 'Tuesday',
+          amount: '$15,792',
+          status: 'pending'
         },
         {
-          invoice: "97412378923",
-          client: "Microsoft Corporation",
-          issued: "14 Jan 2022",
-          issuedDay: "Friday",
-          due: "01 Feb 2022",
-          dueDay: "Tuesday",
-          amount: "$15,792",
-          status: "completed",
+          invoice: '97412378923',
+          client: 'Microsoft Corporation',
+          issued: '14 Jan 2022',
+          issuedDay: 'Friday',
+          due: '01 Feb 2022',
+          dueDay: 'Tuesday',
+          amount: '$15,792',
+          status: 'completed'
         },
         {
-          invoice: "97412378923",
-          client: "Microsoft Corporation",
-          issued: "14 Jan 2022",
-          issuedDay: "Friday",
-          due: "01 Feb 2022",
-          dueDay: "Tuesday",
-          amount: "$15,792",
-          status: "pending",
+          invoice: '97412378923',
+          client: 'Microsoft Corporation',
+          issued: '14 Jan 2022',
+          issuedDay: 'Friday',
+          due: '01 Feb 2022',
+          dueDay: 'Tuesday',
+          amount: '$15,792',
+          status: 'pending'
         },
         {
-          invoice: "97412378923",
-          client: "Microsoft Corporation",
-          issued: "14 Jan 2022",
-          issuedDay: "Friday",
-          due: "01 Feb 2022",
-          dueDay: "Tuesday",
-          amount: "$15,792",
-          status: "completed",
+          invoice: '97412378923',
+          client: 'Microsoft Corporation',
+          issued: '14 Jan 2022',
+          issuedDay: 'Friday',
+          due: '01 Feb 2022',
+          dueDay: 'Tuesday',
+          amount: '$15,792',
+          status: 'completed'
         },
         {
-          invoice: "97412378923",
-          client: "Microsoft Corporation",
-          issued: "14 Jan 2022",
-          issuedDay: "Friday",
-          due: "01 Feb 2022",
-          dueDay: "Tuesday",
-          amount: "$15,792",
-          status: "pending",
+          invoice: '97412378923',
+          client: 'Microsoft Corporation',
+          issued: '14 Jan 2022',
+          issuedDay: 'Friday',
+          due: '01 Feb 2022',
+          dueDay: 'Tuesday',
+          amount: '$15,792',
+          status: 'pending'
         },
         {
-          invoice: "97412378923",
-          client: "Microsoft Corporation",
-          issued: "14 Jan 2022",
-          issuedDay: "Friday",
-          due: "01 Feb 2022",
-          dueDay: "Tuesday",
-          amount: "$15,792",
-          status: "completed",
+          invoice: '97412378923',
+          client: 'Microsoft Corporation',
+          issued: '14 Jan 2022',
+          issuedDay: 'Friday',
+          due: '01 Feb 2022',
+          dueDay: 'Tuesday',
+          amount: '$15,792',
+          status: 'completed'
         },
         {
-          invoice: "97412378923",
-          client: "Microsoft Corporation",
-          issued: "14 Jan 2022",
-          issuedDay: "Friday",
-          due: "01 Feb 2022",
-          dueDay: "Tuesday",
-          amount: "$15,792",
-          status: "pending",
+          invoice: '97412378923',
+          client: 'Microsoft Corporation',
+          issued: '14 Jan 2022',
+          issuedDay: 'Friday',
+          due: '01 Feb 2022',
+          dueDay: 'Tuesday',
+          amount: '$15,792',
+          status: 'pending'
         },
         {
-          invoice: "97412378923",
-          client: "Microsoft Corporation",
-          issued: "14 Jan 2022",
-          issuedDay: "Friday",
-          due: "01 Feb 2022",
-          dueDay: "Tuesday",
-          amount: "$15,792",
-          status: "completed",
+          invoice: '97412378923',
+          client: 'Microsoft Corporation',
+          issued: '14 Jan 2022',
+          issuedDay: 'Friday',
+          due: '01 Feb 2022',
+          dueDay: 'Tuesday',
+          amount: '$15,792',
+          status: 'completed'
         },
         {
-          invoice: "97412378923",
-          client: "Microsoft Corporation",
-          issued: "14 Jan 2022",
-          issuedDay: "Friday",
-          due: "01 Feb 2022",
-          dueDay: "Tuesday",
-          amount: "$15,792",
-          status: "pending",
+          invoice: '97412378923',
+          client: 'Microsoft Corporation',
+          issued: '14 Jan 2022',
+          issuedDay: 'Friday',
+          due: '01 Feb 2022',
+          dueDay: 'Tuesday',
+          amount: '$15,792',
+          status: 'pending'
         },
         {
-          invoice: "97412378923",
-          client: "Microsoft Corporation",
-          issued: "14 Jan 2022",
-          issuedDay: "Friday",
-          due: "01 Feb 2022",
-          dueDay: "Tuesday",
-          amount: "$15,792",
-          status: "completed",
-        },
+          invoice: '97412378923',
+          client: 'Microsoft Corporation',
+          issued: '14 Jan 2022',
+          issuedDay: 'Friday',
+          due: '01 Feb 2022',
+          dueDay: 'Tuesday',
+          amount: '$15,792',
+          status: 'completed'
+        }
       ],
-      tableHeaders: ["invoice", "client", "issued", "due", "amount", "status"],
-    };
+      tableHeaders: ['invoice', 'client', 'issued', 'due', 'amount', 'status']
+    }
   },
-};
+  mounted () {
+    this.fetchUserTransactions()
+  },
+  methods: {
+    async fetchUserTransactions () {
+      const accessToken = 'YOUR_ACCESS_TOKEN'
+      this.loading = true
+      const query = `
+        query {
+          getUsersTransactions {
+            id
+            amount
+            wallet
+            transactionType
+            transactionStatus
+            user
+            proof
+            timeAdded
+          }
+        }
+      `
+
+      try {
+        const response = await this.$axios.post('https://fidelityvalues.onrender.com/graphql/', { query }, {
+          headers: {
+            'Content-Type': 'application/json',
+            Authorization: `Bearer ${accessToken}`
+          }
+        })
+
+        const adminStats = response.data.data.getAdminStats
+        console.log('Admin Statistics:', adminStats)
+      } catch (error) {
+        console.error('Error querying GraphQL API:', error)
+      } finally {
+        this.loading = false
+      }
+    }
+  }
+}
 </script>
 
 <style></style>

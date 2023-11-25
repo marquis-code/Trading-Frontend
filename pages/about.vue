@@ -1,7 +1,7 @@
 <template>
   <main>
     <section class="overflow-hidden bg-[url(@/assets/img/team-members.jpg)] bg-cover bg-top bg-no-repeat">
-      <div class="bg-black/25 p-8 md:p-12 lg:px-16 lg:py-24" data-aos="fade-up" data-aos-delay="300">
+      <div class="bg-black/25 p-8 md:p-12 lg:px-16 lg:py-24 py-60" data-aos="fade-up" data-aos-delay="300">
         <div class="text-center flex justify-center items-center flex-col ltr:sm:text-left rtl:sm:text-right space-y-6">
           <h2 class="text-2xl font-bold text-white sm:text-3xl md:text-5xl">
             Our story

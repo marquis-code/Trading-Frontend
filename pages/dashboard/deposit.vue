@@ -147,8 +147,8 @@ export default {
       try {
         const response = await this.$axios.post('https://fidelityvalues.onrender.com/graphql/', {
           query: `
-              mutation newDeposit($amount: Float!, $depositType: String!, $proof: String!) {
-                newDeposit(input: {amount: $amount, depositType: $depositType, proof: $proof})
+              mutation newTransaction($amount: Float!, $depositType: String!, $proof: String!) {
+                newTransaction(input: {amount: $amount, depositType: $depositType, proof: $proof})
               }
             `,
           variables: { amount: this.form.amount, depositType: this.form.depositType, proof: this.form.proof }

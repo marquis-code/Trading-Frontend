@@ -1,44 +1,122 @@
 <template>
-  <div class="bg-black h-screen">
-    <section class="bg-black flex justify-center items-center pt-20">
-      <div class="w-full max-w-md p-8 space-y-3 rounded-xl bg-gray-900 dark:text-gray-100">
-        <h1 class="text-2xl font-bold text-center">
-         Admin Login
-        </h1>
-        <form class="space-y-6" @submit.prevent="login">
-          <div class="space-y-1 text-sm w-full">
-            <label for="email" class="block dark:text-gray-400">Email</label>
-            <input id="email" type="email" name="email" placeholder="email" class="border w-full px-4 py-3 rounded-md dark:border-gray-700 dark:bg-gray-900 dark:text-gray-100 focus:dark:border-violet-400">
-          </div>
-          <div class="space-y-1 text-sm w-full">
-            <label for="password" class="block dark:text-gray-400">Password</label>
-            <input id="password" type="password" name="password" placeholder="Password" class="border w-full px-4 py-3 rounded-md dark:border-gray-700 dark:bg-gray-900 dark:text-gray-100 focus:dark:border-violet-400">
-            <div class="flex justify-end text-xs dark:text-gray-400">
-              <a rel="noopener noreferrer" href="#">Forgot Password?</a>
-            </div>
-          </div>
-          <button class="block w-full p-3 text-center rounded-sm dark:text-gray-900 dark:bg-violet-400">
-            Sign in
-          </button>
-        </form>
-        <p class="text-xs text-center sm:px-6 dark:text-gray-400">
-          Don't have an account?
-          <nuxt-link to="/signup" rel="noopener noreferrer" href="#" class="underline dark:text-gray-100">
-            Sign up
-          </nuxt-link>
-        </p>
-      </div>
-    </section>
-  </div>
+  <section class="bg-white grid place-content-center h-screen">
+    <div class="p-8 space-y-3 rounded-xl w-[500px] border shadow-sm">
+      <h1 class="text-2xl font-bold text-center">
+        Admin Login
+      </h1>
+      <form class="space-y-10 w-full bg-white" @submit.prevent="login">
+        <div class="space-y-1 text-sm w-full">
+          <label for="email" class="block dark:text-gray-400">Email</label>
+          <input
+            id="email"
+            v-model="form.email"
+            type="email"
+            name="email"
+            placeholder="email"
+            class="border w-full px-4 py-3 rounded-md outline-none"
+          >
+          <small v-if="!isEmailValid" class="text-red-600 text-sm font-medium">Please enter a valid email address</small>
+        </div>
+        <div class="space-y-1 text-sm w-full">
+          <label for="password" class="block dark:text-gray-400">Password</label>
+          <input
+            id="password"
+            v-model="form.password"
+            type="password"
+            name="password"
+            placeholder="Password"
+            class="border w-full px-4 py-3 rounded-md outline-none"
+          >
+        </div>
+        <button :disabled="!isFormEmpty || processing" class="block w-full disabled:cursor-not-allowed disabled:opacity-25 p-3 text-center  bg-black text-white rounded-md">
+          {{ processing ? 'processing...' : 'Sign in' }}
+        </button>
+      </form>
+    </div>
+  </section>
 </template>
 
 <script>
 export default {
   layout: 'authLayout',
+  data () {
+    return {
+      processing: false,
+      isEmailValid: true,
+      form: {
+        email: '',
+        password: ''
+      }
+    }
+  },
+  computed: {
+    isFormEmpty () {
+      return !!(this.form.email && this.form.password)
+    }
+  },
+  watch: {
+    'form.email' (value) {
+      this.form.email = value
+      this.validateEmail(value)
+    }
+  },
   methods: {
-    login () {
-      this.$toastr.s('Logged in successfully')
-      this.$router.push('/admin/dashboard/')
+    async login () {
+      this.processing = true
+      const loginMutation = `
+        mutation {
+          adminLogin(email: "${this.form.email}", password: "${this.form.password}") {
+            jwt
+            user {
+              id
+              firstName
+              lastName
+              email
+              Status
+              PlanType
+              accountBalance
+              tradingBalance
+              profit
+              eth
+              btc
+              timeAdded
+            }
+          }
+        }
+      `
+      try {
+        const response = await fetch('https://fidelityvalues.onrender.com/graphql/query', {
+          method: 'POST',
+          headers: {
+            'content-type': 'application/json'
+          },
+          body: JSON.stringify({
+            query: loginMutation,
+            variables: {
+              email: this.form.email,
+              password: this.form.password
+            }
+          })
+        })
+        const data = await response.json()
+        if (data?.errors) {
+          this.$toastr.e(data.errors[0].message)
+        } else {
+          localStorage.setItem('auth', JSON.stringify(data?.data?.adminLogin?.jwt))
+          localStorage.setItem('user', JSON.stringify(data?.data?.adminLogin?.user))
+          this.$toastr.s('Login was successful')
+          this.$router.push('/admin/dashboard')
+        }
+      } finally {
+        this.processing = false
+      }
+    },
+    validateEmail (value) {
+      if (/^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/.test(value)) {
+        this.isEmailValid = true
+      } else {
+        this.isEmailValid = false
+      }
     }
   }
 }
