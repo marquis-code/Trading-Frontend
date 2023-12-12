@@ -5,8 +5,8 @@
         Statistics
       </h1>
     </div>
-    <div class="grid grid-cols-1 gap-4 lg:grid-cols-4 lg:gap-8">
-      <div v-for="(item, index) in stats" :key="index" class="h-32 rounded-lg bg-black flex items-center gap-x-3 pl-6">
+    <div v-if="!loading" class="grid grid-cols-1 gap-4 lg:grid-cols-4 lg:gap-8">
+      <div v-for="(item, index) in computedStats" :key="index" class="h-32 rounded-lg bg-black flex items-center gap-x-3 pl-6">
         <div :class="item.classStyle" class="rounded-full h-10 w-10 flex justify-center items-center">
           <img :src="require(`~/assets/icons/${item.icon}.svg`)" alt="stat icon">
         </div>
@@ -19,6 +19,9 @@
           </p>
         </div>
       </div>
+    </div>
+    <div v-else class="grid grid-cols-1 gap-4 lg:grid-cols-4 lg:gap-8">
+      <loader v-for="itm in 4" :key="itm" />
     </div>
     <div class="md:flex w-full gap-x-10 pt-6 space-y-6 lg:space-y-0">
       <div class="h-full rounded-lg md:w-6/12 py-3 bg-gray-200 border space-y-6">
@@ -65,28 +68,34 @@ export default {
   layout: 'dashboards',
   data () {
     return {
-      stats: [
+      stats: {},
+      loading: false
+    }
+  },
+  computed: {
+    computedStats () {
+      return [
         {
           name: 'Total Profit',
-          count: '₦1200',
+          count: `${this.formatNumberAsDollar(this.stats?.totalProfit) ?? 'N/A'}`,
           icon: 'funds',
           classStyle: 'bg-pink-500'
         },
         {
           name: 'Total Withdrawals',
-          count: '₦550',
+          count: `${this.formatNumberAsDollar(this.stats?.totalWithdrawal) ?? 'N/A'}`,
           icon: 'customers',
           classStyle: 'bg-blue-500'
         },
         {
           name: 'Total Users',
-          count: '120',
+          count: `${this.stats?.totalUsers ?? 'N/A'}`,
           icon: 'users',
           classStyle: 'bg-green-500'
         },
         {
-          name: 'Toal Deposits',
-          count: '40',
+          name: 'Total Deposits',
+          count: `${this.formatNumberAsDollar(this.stats?.totalDeposits) ?? 'N/A'}`,
           icon: 'users',
           classStyle: 'bg-yellow-500'
         }
@@ -98,7 +107,8 @@ export default {
   },
   methods: {
     async fetchAdminStats () {
-      const accessToken = 'YOUR_ACCESS_TOKEN'
+      this.loading = true
+      const accessToken = JSON.parse(window.localStorage.getItem('auth'))
       this.loading = true
       const query = `
         query {
@@ -113,23 +123,31 @@ export default {
       `
 
       try {
-        const response = await this.$axios.post('https://fidelityvalues.onrender.com/graphql/', { query }, {
+        const response = await fetch('https://fidelityvalues.onrender.com/graphql/query', {
+          method: 'POST',
           headers: {
-            'Content-Type': 'application/json',
-            Authorization: `Bearer ${accessToken}`
-          }
+            'content-type': 'application/json',
+            authorization: 'Bearer ' + accessToken
+          },
+          body: JSON.stringify({
+            query
+          })
         })
-
-        const adminStats = response.data.data.getAdminStats
-        console.log('Admin Statistics:', adminStats)
-      } catch (error) {
-        console.error('Error querying GraphQL API:', error)
+        const data = await response.json()
+        if (data?.errors) {
+          this.$toastr.e(data.errors[0].message)
+        } else {
+          this.stats = data.data.getAdminStats
+        }
       } finally {
         this.loading = false
       }
     },
     goBack () {
       this.$router.go(-1)
+    },
+    formatNumberAsDollar (number) {
+      return number?.toLocaleString('en-US', { style: 'currency', currency: 'USD' })
     }
   }
 }

@@ -1,14 +1,17 @@
 <template>
-  <div class="z-0 z-10 bg-[#003b6d]">
+  <div class="bg-[#003b6d]">
     <hero-section class="" />
-    <news-section />
+    <div class="w-11/12 md:w-10/12 mx-auto rounded-md p-6 text-gray-900 bg-white space-y-6">
+      <div>  <h1 class="text-2xl text-gray-900 font-medium">Latest Trading News</h1></div>
+      <div class="cryptohopper-web-widget" data-id="5" data-news_count="5" data-news_length="10"></div>
+    </div>
     <section class="bg-[#003b6d]">
-      <div class="container max-w-xl p-6 py-12 mx-auto space-y-24 lg:px-8 lg:max-w-7xl">
+      <div class="container max-w-xl p-6 py-12 mx-auto space-y-10 lg:px-8 lg:max-w-7xl">
         <div>
-          <h2 class="text-3xl font-bold tracki text-center sm:text-5xl dark:text-gray-50">
-            Why choose FIDELITY VALUES?
+          <h2 class="lg:text-3xl text-2xl font-bold text-center sm:text-5xl dark:text-gray-50">
+            Why choose Fidelitys Value?
           </h2>
-          <p class="max-w-3xl mx-auto mt-4 text-xl text-center dark:text-gray-400">
+          <p class="mx-auto mt-4 text-sm text-center text-white">
             We use state-of-the-art security measures when handling your account details and personal funds. Your information is SSL encrypted and safely stored.
           </p>
         </div>
@@ -27,7 +30,7 @@
                   <h4 class="text-lg font-medium leadi dark:text-gray-50">
                     Security is our top priority
                   </h4>
-                  <p class="mt-2 dark:text-gray-400">
+                  <p class="mt-2 text-white md:text-base text-sm">
                     We use state-of-the-art security measures when handling your account details and personal funds. Your information is SSL
                   </p>
                 </div>
@@ -44,7 +47,7 @@
                   <h4 class="text-lg font-medium leadi dark:text-gray-50">
                     Next-Generation platform
                   </h4>
-                  <p class="mt-2 dark:text-gray-400">
+                  <p class="mt-2 text-white md:text-base text-sm">
                     Our ground-breaking platform can be easily customized to fit your precise level of expertise and trading needs.
                   </p>
                 </div>
@@ -61,7 +64,7 @@
                   <h4 class="text-lg font-medium leadi dark:text-gray-50">
                     24/7 Support
                   </h4>
-                  <p class="mt-2 dark:text-gray-400">
+                  <p class="mt-2 text-white md:text-base text-sm">
                     Our dedicated team of customer support experts are always available to assist you with every need or request, anywhere you are in your native language.
                   </p>
                 </div>
@@ -78,8 +81,8 @@
                   <h4 class="text-lg font-medium leadi dark:text-gray-50">
                     Firm Regulation
                   </h4>
-                  <p class="mt-2 dark:text-gray-400">
-                    FIDELITY VALUES complies with the strictest regulation guidelines, under IFSC (International Financial Services Commission), to ensure the safest trading conditions.
+                  <p class="mt-2 text-white md:text-base text-sm">
+                    Fidelitys Value complies with the strictest regulation guidelines, under IFSC (International Financial Services Commission), to ensure the safest trading conditions.
                   </p>
                 </div>
               </div>
@@ -95,10 +98,10 @@
               <h3 class="text-2xl font-bold tracki sm:text-3xl dark:text-gray-50">
                 FOCUS ON YOUR BUSINESS
               </h3>
-              <p class="mt-3 text-lg dark:text-gray-400">
+              <p class="mt-2 text-white md:text-base text-sm">
                 We Take Care Of The Hard Work For You
               </p>
-              <p class="mt-3 text-lg dark:text-gray-400">
+              <p class="mt-2 text-white md:text-base text-sm">
                 we have put together some of the planet's best live trading protocols, paired with an expert team while tapping from the power of Artificial Intelligence.
               </p>
               <div class="mt-12 space-y-12">
@@ -114,7 +117,7 @@
                     <h4 class="text-lg font-medium leadi dark:text-gray-50">
                       Security
                     </h4>
-                    <p class="mt-2 dark:text-gray-400">
+                    <p class="mt-2 text-white md:text-base text-sm">
                       Your funds are safe and sound, kept in segregated bank accounts and protected by industry-leading security protocols.
                     </p>
                   </div>
@@ -131,8 +134,8 @@
                     <h4 class="text-lg font-medium leadi dark:text-gray-50">
                       Privacy
                     </h4>
-                    <p class="mt-2 dark:text-gray-400">
-                      Fidelity values is fully compliant with PCI Data Security Standards. We encrypt and protect your information, so you never need to worry.
+                    <p class="mt-2 text-white md:text-base text-sm">
+                      Fidelitys Value is fully compliant with PCI Data Security Standards. We encrypt and protect your information, so you never need to worry.
                     </p>
                   </div>
                 </div>
@@ -145,31 +148,14 @@
         </div>
       </div>
     </section>
-    <!-- <section class="p-4 lg:p-8 bg-[#003b6d]">
-      <div class="container mx-auto space-y-12">
-        <div class="flex flex-col overflow-hidden rounded-md shadow-sm lg:flex-row">
-          <img src="@/assets/img/tradingAnimation.jpg" alt="" class="h-80 dark:bg-gray-500 aspect-video">
-          <div class="flex flex-col justify-center flex-1 p-6 dark:bg-gray-900">
-            <span class="text-xs uppercase dark:text-gray-400">Join, it's free</span>
-            <h3 class="lg:text-3xl text-2xl font-bold text-white">
-              We're not reinventing the wheel but we provide Easy Access
-            </h3>
-            <p class="my-6 dark:text-gray-400">
-              We take advantage of algorithms and smart assistants to identify business relationships automated.We add diversification to your investment portfolio by investing in our products with ease and transparency.
-            </p>
-            <nuxt-link to="/plans" type="button" class="self-start text-white border rounded-full px-6 py-2">
-              Choose a plan
-            </nuxt-link>
-          </div>
-        </div>
-      </div>
-    </section> -->
-    <section class="my-20">
+    <section class="mb-20">
       <portfolio-section />
     </section>
     <AdvertCTA />
     <updated-testimonials />
-    <trading-table />
+    <div class="w-11/12 md:w-10/12 mx-auto">
+      <div class="cryptohopper-web-widget" data-id="1" data-coins="bitcoin,ethereum,tether,bnb,dogecoin,tron,polkadot" data-table_style="dark" data-realtime="on" />
+    </div>
     <b-modal
       id="bv-modal-example"
       hide-footer

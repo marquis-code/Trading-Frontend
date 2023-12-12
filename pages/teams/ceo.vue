@@ -1,7 +1,7 @@
 <template>
   <main>
-    <section class="text-gray-600 body-font">
-      <div class="container px-5 py-24 mx-auto flex flex-col">
+    <section class="text-gray-600 bg-white body-font">
+      <div class="container px-3 lg:px-5 py-24 mx-auto flex flex-col">
         <div class="lg:w-4/6 mx-auto">
           <div class="rounded-lg h-64 overflow-hidden">
             <img alt="content" class="object-cover object-center h-full w-full" src="@/assets/img/ceoMale.jpeg">
@@ -27,57 +27,44 @@
                   George Hovey
                 </h2>
                 <div class="w-12 h-1 bg-indigo-500 rounded mt-2 mb-4" />
-                <div class="bg-black rounded-md p-3 text-white text-left space-y-4">
+                <div class="bg-black rounded-md p-3 text-white text-left space-y-4 container">
                   <div>
-                    <p class="font-bold text-lg">
-                      Specialism
+                    <p class="font-bold text-sm md:text-lg">
+                      Office
                     </p>
-                    <p class="font-light">
-                      Growth, IFS Maven Equity Finance
+                    <p class="font-light text-sm Md:text-base">
+                      Denver, USA
                     </p>
                   </div>
                   <div>
-                    <p class="font-bold text-lg">
-                      Maven Office
+                    <p class="font-bold text-sm md:text-lg">
+                      Geographical focus
                     </p>
-                    <p class="font-light">
-                      Edinburgh, Aberdeen
-                    </p>
-                  </div>
-                  <div>
-                    <p class="font-bold text-lg">
-                      Office Tel No.
-                    </p>
-                    <p class="font-light">
-                      0131 306 2203
-                    </p>
-                  </div>
-                  <div>
-                    <p class="font-bold text-lg">
-                      Primary Geographical Focus
-                    </p>
-                    <p class="font-light">
-                      Scotland
+                    <p class="font-light text-sm Md:text-base">
+                      England
                     </p>
                   </div>
                 </div>
               </div>
             </div>
             <div class="sm:w-2/3 sm:pl-8 sm:py-8 sm:border-l border-gray-200 sm:border-t-0 border-t mt-4 pt-4 sm:mt-0  sm:text-left">
-              <p class="leading-relaxed text-lg mb-4">
-                Based in Edinburgh, Alan joined Maven in July 2012 and is responsible for sourcing and executing new equity investments with a particular focus on development capital investments in high growth disruptive businesses. Following an investment, Alan works with investee management teams to support on strategy and growth and holds a number of board seats.
+              <p class="leading-relaxed text-base md:text-lg mb-4">
+                George Hovey is an accomplished professional with a strong background in financial investment. As the Executive Director at Fidelitys Value, a leading financial investment company, George is based in Denver, Colorado. With over 10 years of experience, he has demonstrated exceptional skills in managing clients' portfolios and providing valuable financial advice.
               </p>
 
-              <p class="leading-relaxed text-lg mb-4">
-                Alan joined Maven from Quayle Munro where he had been recruited to help establish a Debt Advisory and Corporate Finance business in Scotland. Prior to this Alan spent seven years with RBS predominately working in the Structured Finance team financing mid-market private equity transactions. He latterly had responsibility for a portfolio of corporate and leveraged clients.
+              <p class="leading-relaxed text-base md:text-lg mb-4">
+                George holds a degree in Accounting, which has equipped him with a solid foundation in understanding the intricacies of financial markets. His expertise in analyzing market trends and identifying profitable investment opportunities has proven instrumental in helping clients achieve their financial goals.
               </p>
 
-              <p class="leading-relaxed text-lg mb-4">
-                Alan holds an Honours degree in Accountancy from the University of Glasgow and is a Chartered Accountant – qualifying with the Institute of Chartered Accountants Scotland (ICAS) through the unconventional TOPP scheme during his time with RBS.
+              <p class="leading-relaxed text-base md:text-lg mb-4">
+                Throughout his career, George has been recognized for his outstanding contributions to the field of finance. He has been awarded numerous prestigious accolades in recognition of his exceptional performance, demonstrating his commitment to excellence and delivering results.
               </p>
 
-              <p class="leading-relaxed text-lg mb-4">
-                Outside of work, Alan enjoys fitness, attempting the occasional triathlon and playing golf. The majority of his time and enjoyment however is spent with his family and two young children.
+              <p class="leading-relaxed text-base md:text-lg mb-4">
+                Beyond his professional achievements, George is also a fitness enthusiast who believes in maintaining a healthy and balanced lifestyle. He values the importance of physical well-being and actively engages in activities that promote personal fitness. Moreover, George finds fulfillment in helping others, both in his professional and personal life. He takes great pleasure in assisting clients in reaching their financial aspirations and supporting individuals in their personal growth.
+              </p>
+              <p class="leading-relaxed text-base md:text-lg mb-4">
+                With his extensive experience, strong financial acumen, and commitment to client success, George Hovey is a trusted and respected figure in the financial investment industry
               </p>
             </div>
           </div>

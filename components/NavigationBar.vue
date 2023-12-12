@@ -3,7 +3,7 @@
     <header class="px-4 py-2 bg-[#003b6d] sticky top-0 z-50">
       <div class="container flex justify-between h-14 mx-auto">
         <nuxt-link rel="noopener noreferrer" to="/" aria-label="Back to homepage" class="flex items-center p-2">
-          <img src="@/assets/img/fidelityvalues.png" class="h-10 w-10" alt="">
+          <img src="@/assets/img/Fidelitysvalues.png" class="h-10 w-10" alt="">
         </nuxt-link>
         <ul class="items-stretch hidden space-x-3 lg:flex">
           <li class="flex items-center gap-x-3">
@@ -29,24 +29,52 @@
     </header>
     <b-sidebar
       id="sidebar-1"
-      title="Fidelity Values"
+      title="Fidelitys Value"
       backdrop-variant="dark"
       shadow
+      no-header
     >
-      <div class="flex-1 space-y-6 px-6">
-        <ul class="pt-2 pb-4 space-y-1 text-sm">
-          <li v-for="{title, url} in navigationItems" :key="title" class="rounded-sm">
-            <NuxtLink rel="noopener noreferrer" :to="url" class="flex items-center p-2 space-x-3 rounded-md cursor-pointer" @click="toggleMobileNavbar">
-              <span>{{ title }}</span>
-            </NuxtLink>
-          </li>
-          <div class="w-1/2 pt-6">
-            <button class="self-center px-8 py-2 font-medium bg-green-500 rounded-md w-full text-white border border-white" @click="$router.push('/login')">
-              Login
+      <template #default="{ hide }">
+        <div class="flex-1 space-y-6 p-6">
+          <div class="flex justify-between items-center">
+            <h4 id="sidebar-no-header-title">
+              <img
+                src="@/assets/img/Fidelitysvalues.png"
+                alt="logo"
+                class="h-10 w-10"
+              >
+            </h4>
+            <button @click="hide">
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                width="29"
+                height="29"
+                viewBox="0 0 24 24"
+                fill="none"
+                stroke="#000000"
+                stroke-width="2.5"
+                stroke-linecap="round"
+                stroke-linejoin="round"
+              >
+                <line x1="18" y1="6" x2="6" y2="18" />
+                <line x1="6" y1="6" x2="18" y2="18" />
+              </svg>
             </button>
           </div>
-        </ul>
-      </div>
+          <ul class="pt-2 pb-4 space-y-1 text-sm">
+            <li v-for="{title, url} in navigationItems" :key="title" class="rounded-sm">
+              <NuxtLink rel="noopener noreferrer" :to="url" class="flex items-center p-2 space-x-3 rounded-md cursor-pointer" @click="toggleMobileNavbar">
+                <span>{{ title }}</span>
+              </NuxtLink>
+            </li>
+            <div class="w-full pt-6">
+              <button class="self-center px-8 py-2.5 font-medium bg-green-700 rounded-md w-full text-white border border-white" @click="$router.push('/login')">
+                Login
+              </button>
+            </div>
+          </ul>
+        </div>
+      </template>
     </b-sidebar>
   </main>
 </template>

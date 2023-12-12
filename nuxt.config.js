@@ -2,7 +2,7 @@ const path = require('path')
 export default {
   // Global page headers: https://go.nuxtjs.dev/config-head
   head: {
-    title: 'Fidelity Values',
+    title: 'Fidelitys Value',
     meta: [
       { charset: 'utf-8' },
       { name: 'viewport', content: 'width=device-width, initial-scale=1' },
@@ -21,17 +21,10 @@ export default {
         id: 'tawk',
         src: '/js/chatbot.js'
       },
-      // {
-      //   id: 'NASDAQ',
-      //   src: 'https://articlefeeds.nasdaq.com/nasdaq/symbols?symbol={SYMBOL}'
-      // },
-      // {
-      //   id: 'Yahoo Finance',
-      //   src: 'http://feeds.finance.yahoo.com/rss/2.0/headline?s={SYMBOL}&region=US&lang=en-US'
-      // },
-      { src: 'https://webdev.prosp.devexperts.com:8095/widget/chart-react.js', async: true },
-      { src: 'https://webdev.prosp.devexperts.com:8095/widget/vendors.js', async: true },
-      { src: '/js/trading-view.js' }
+      {
+        id: 'tradingview',
+        src: 'https://www.cryptohopper.com/widgets/js/script'
+      }
     ]
   },
 
@@ -42,6 +35,7 @@ export default {
   plugins: [
     { src: '~/plugins/vue-carousel.js', mode: 'client' },
     { src: '~/plugins/toastr.js', mode: 'client' },
+    { src: '~/plugins/enlargeImage.js', mode: 'client' },
     { src: '~/plugins/slider.js', mode: 'client' },
     { src: '~/plugins/trading-view.js', mode: 'client' },
     '~/plugins/bootstrap-vue.client',
@@ -154,12 +148,12 @@ export default {
   // PWA module configuration: https://go.nuxtjs.dev/pwa
   pwa: {
     meta: {
-      title: 'Fidelity Values',
+      title: 'Fidelitys Value',
       author: 'Marquis'
     },
     manifest: {
-      name: 'Fidelity Values',
-      short_name: 'Fidelity Values',
+      name: 'Fidelitys Value',
+      short_name: 'Fidelitys Value',
       lang: 'en',
       display: 'standalone'
     }
@@ -182,6 +176,9 @@ export default {
         loader: 'frontmatter-markdown-loader',
         include: path.resolve(__dirname, 'contents')
       })
+    },
+    babel: {
+      compact: true
     }
   },
   bootstrapVue: {

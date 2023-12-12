@@ -3,7 +3,7 @@
     <h1 class="text-center text-3xl font-bold text-white">
       Our Portfolio
     </h1>
-    <section class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
+    <section class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 pt-4">
       <div
         v-for="(itm, idx) in portfolios"
         :key="idx"
@@ -21,15 +21,15 @@
         >
           <div class="p-4">
             <nuxt-link :to="`/portfolio/${itm.url}`" class="p-4 sm:p-6">
-              <time datetime="2022-10-10" class="block text-xs text-white/90">
+              <!-- <time datetime="2022-10-10" class="block text-xs text-white/90">
                 Portfolio ({{ idx + 1 }})
-              </time>
+              </time> -->
 
-              <h3 class="mt-0.5 text-lg text-white">
+              <h3 class="mt-0.5 text-xl text-white">
                 {{ itm.name }}
               </h3>
 
-              <p class="mt-2 line-clamp-3 text-sm/relaxed text-white/95">
+              <p class="mt-2 line-clamp-3 text-sm/relaxed text-white/95 font-semibold">
                 {{ itm.description }}
               </p>
             </nuxt-link>
@@ -66,7 +66,7 @@ export default {
         {
           name: 'Indigo',
           url: 'indigo',
-          description: 'In December 2018 Maven Investor Partners exited from Indigo Belcom generating a 4.2x return in just two years since it first invested. Indigo designs, installs and maintains telecom networks across the UK and Europe, enabling customers such as Vodafone, Sky and BT to deliver fixed line, broadband, mobile and other data services to a wide variety of corporate, enterprise and consumer end users. Maven supported the business with the strategic acquisition of Belcom247 in September 2017, together forming the enlarged Indigo-Belcom Group. Following the successful acquisition, revenues increased from £12 million to a forecast of over £30 million in the year the exit completed, with underlying profits increasing from £1.3 million to over £4 million.',
+          description: 'In December 2018 Fidelitys Value Investor Partners exited from Indigo Belcom generating a 4.2x return in just two years since it first invested. Indigo designs, installs and maintains telecom networks across the UK and Europe, enabling customers such as Vodafone, Sky and BT to deliver fixed line, broadband, mobile and other data services to a wide variety of corporate, enterprise and consumer end users. Fidelitys Value supported the business with the strategic acquisition of Belcom247 in September 2017, together forming the enlarged Indigo-Belcom Group. Following the successful acquisition, revenues increased from £12 million to a forecast of over £30 million in the year the exit completed, with underlying profits increasing from £1.3 million to over £4 million.',
           imgUrl: 'https://www.mavencp.com/hubfs/indigo-servers.jpg'
         }
       ]
@@ -74,7 +74,6 @@ export default {
   },
   methods: {
     handleClick (itm) {
-      console.log(item, 'clicke item')
       this.$router.push(`/portfolio/${itm.url}`)
     }
   }

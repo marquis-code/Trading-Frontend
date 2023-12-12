@@ -4,7 +4,7 @@
       <div class="container px-3 md:px-5 py-24 mx-auto flex flex-col">
         <div class="lg:w-4/6 mx-auto">
           <div class="rounded-lg h-64 overflow-hidden">
-            <img alt="content" class="object-cover object-center h-full w-full" src="@/assets/img/investment-director.jpeg">
+            <img alt="content" class="object-cover object-center h-full w-full" src="@/assets/img/investment-manager-one.jpeg">
           </div>
           <div class="flex flex-col sm:flex-row mt-10">
             <div class="sm:w-1/3 text-center sm:pr-8 sm:py-8">
@@ -24,24 +24,24 @@
               </div>
               <div class="flex flex-col items-center text-center justify-center">
                 <h2 class="font-medium title-font mt-4 text-gray-900 text-lg">
-                  Adam Lehan Thomson
+                  Breanna Marrie Riley
                 </h2>
                 <div class="w-12 h-1 bg-indigo-500 rounded mt-2 mb-4" />
                 <div class="bg-black rounded-md p-3 text-white text-left space-y-4 container">
                   <div>
-                    <p class="font-bold text-sm md:text-lg">
+                    <p class="font-bold text-lg">
                       Office
                     </p>
                     <p class="font-light text-sm Md:text-base">
-                      Birmingham, Uk
+                      Birmingham, UK
                     </p>
                   </div>
                   <div>
-                    <p class="font-bold text-sm md:text-lg">
+                    <p class="font-bold text-lg">
                       Geographical focus
                     </p>
                     <p class="font-light text-sm Md:text-base">
-                      Asia
+                      Europe
                     </p>
                   </div>
                 </div>
@@ -49,22 +49,23 @@
             </div>
             <div class="sm:w-2/3 sm:pl-8 sm:py-8 sm:border-l border-gray-200 sm:border-t-0 border-t mt-4 pt-4 sm:mt-0  sm:text-left">
               <p class="leading-relaxed text-base md:text-lg mb-4">
-                Adam Lehan Thomson is an accomplished investment director at Fidelitys Value, specializing in the development of capital, investment guidance, and business structure. With a wealth of experience in the financial industry, Adam has consistently demonstrated his expertise in fostering business growth and ensuring long-term sustainability.
+                Breanna Marrie Riley is a highly skilled investment manager based in Detroit, known for her expertise as a reputable broker and financial advisor. With over 8 years of experience in managing and developing clients' portfolios, Breanna has established herself as a trusted professional in the financial industry.
               </p>
 
               <p class="leading-relaxed text-base md:text-lg mb-4">
-                Equipped with an honorary degree in Business Management and a certification as an accountant, Adam possesses a strong educational foundation that complements his practical knowledge. His deep understanding of financial principles and regulations enables him to navigate complex investment landscapes with ease, making him a trusted advisor for both individuals and organizations.
+
+As an investment manager, Breanna possesses an innate ability to analyze market trends and make well-informed investment decisions. Her keen eye for detail and strategic thinking enable her to identify lucrative opportunities that align with her clients' financial goals. With a strong track record of delivering impressive returns, Breanna has earned the trust and loyalty of a diverse clientele.
               </p>
 
               <p class="leading-relaxed text-base md:text-lg mb-4">
-                Recognized for his ability to deliver consistent results, Adam's expertise allows for seamless business continuity at the top level. His strategic thinking and keen attention to detail ensure that every investment decision is well-informed and aligned with his clients' objectives. Adam's meticulous approach to risk management and thorough analysis of market trends provide his clients with peace of mind and confidence in their investment strategies.
+                Outside of her professional endeavors, Breanna finds solace and joy in spending time outdoors and immersing herself in nature. She is an avid hiker, relishing the opportunity to explore scenic trails and connect with the natural world. This passion for the outdoors not only rejuvenates her but also reflects her appreciation for the beauty and serenity that nature offers.
               </p>
 
               <p class="leading-relaxed text-base md:text-lg mb-4">
-                Beyond his professional accomplishments, Adam is known for his strong leadership skills and ability to inspire and motivate his team. With his inclusive management style, he fosters a collaborative environment that encourages innovative thinking and drives exceptional performance. Adam's dedication to building strong relationships with his clients and colleagues has earned him a reputation for professionalism, integrity, and trustworthiness.
+                Breanna's love for nature extends beyond her personal life as she recognizes the importance of sustainable investing. She actively promotes environmentally conscious investment strategies, helping her clients align their portfolios with their values and contribute to a greener future.
               </p>
               <p class="leading-relaxed text-base md:text-lg mb-4">
-                In addition to his responsibilities as an investment director, Adam actively contributes to the financial community by sharing his knowledge and insights through thought leadership articles and speaking engagements. He is sought after as a guest speaker at industry conferences, where he imparts his wisdom on investment strategies and market trends.
+                With a blend of financial expertise and a genuine love for nature, Breanna Marrie Riley brings a unique perspective to her role as an investment manager. Her dedication to her clients' financial success, coupled with her passion for the outdoors, sets her apart as a trusted advisor in the industry.
               </p>
             </div>
           </div>

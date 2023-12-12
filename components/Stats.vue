@@ -96,13 +96,13 @@ export default {
         {
           name: 'Breanna Marrie Riley',
           title: 'CEO',
-          img: 'ceo.jpeg',
+          img: 'investment-manager-one.jpeg',
           profileUrl: 'ceo'
         },
         {
           name: 'Sonia Ann Lindsey',
           title: 'Investment Manager',
-          img: 'investment-manager.jpeg',
+          img: 'investment-manager-two.jpeg',
           profileUrl: 'investment-manager'
         },
         {

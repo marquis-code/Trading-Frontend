@@ -1,37 +1,38 @@
 <template>
   <div class="bg-[#003b6d] h-screen">
-    <section class="bg-[#003b6d] flex justify-center items-center pt-20">
+    <section class="bg-[#003b6d] flex justify-center items-center pt-20 container mx-auto">
       <div
-        class="w-full max-w-md p-8 space-y-3 rounded-xl bg-gray-900 dark:text-gray-100"
+        class="w-full max-w-md p-8 space-y-3 rounded-xl bg-white"
       >
         <h1 class="text-2xl font-bold text-center">
           Login
         </h1>
         <form class="space-y-10" @submit.prevent="login">
           <div class="space-y-1 text-sm w-full">
-            <label for="email" class="block dark:text-gray-400">Email</label>
+            <label for="email" class="block text-gray-900 font-medium">Email</label>
             <input
               id="email"
               v-model="form.email"
               type="email"
               name="email"
               placeholder="email"
-              class="border w-full outline-none px-4 py-3 rounded-md dark:border-gray-700 dark:bg-gray-900 dark:text-gray-100 focus:dark:border-violet-400"
+              class="border w-full outline-none px-4 py-3 rounded-md border-gray-900 text-gray-900"
             >
           </div>
-          <div class="space-y-1 text-sm w-full">
+          <div class="space-y-1 text-sm w-full relative">
             <label
               for="password"
-              class="block dark:text-gray-400"
+              class="block text-gray-900 font-medium"
             >Password</label>
             <input
               id="password"
               v-model="form.password"
-              type="password"
+              :type="showPassword ? 'text': 'password'"
               name="password"
               placeholder="Password"
-              class="border w-full outline-none px-4 py-3 rounded-md dark:border-gray-700 dark:bg-gray-900 dark:text-gray-100 focus:dark:border-violet-400"
+              class="border w-full outline-none px-4 py-3 rounded-md border-gray-900 text-gray-900"
             >
+            <img @click="showPassword = !showPassword" :src="require(`@/assets/icons/${eye}`)" alt="" class="absolute cursor-pointer top-9 right-4 h-6 w-6">
           </div>
           <div class="w-full">
             <button
@@ -45,15 +46,26 @@
             </button>
           </div>
         </form>
-        <p class="text-sm text-center sm:px-6 dark:text-gray-400">
+        <p class="text-sm text-center sm:px-6 text-gray-900">
           Don't have an account?
           <nuxt-link
             to="/signup"
             rel="noopener noreferrer"
             href="#"
-            class="underline dark:text-gray-100"
+            class="underline text-gray-900"
           >
             Sign up
+          </nuxt-link>
+        </p>
+        <p class="text-sm text-center sm:px-6 text-gray-900">
+          Forgot password?
+          <nuxt-link
+            to="/forgot"
+            rel="noopener noreferrer"
+            href="#"
+            class="underline text-gray-900"
+          >
+            change password
           </nuxt-link>
         </p>
       </div>
@@ -63,9 +75,11 @@
 
 <script>
 export default {
+  layout: 'authLayout',
   data () {
     return {
       processing: false,
+      showPassword: false,
       form: {
         email: '',
         password: ''
@@ -75,6 +89,9 @@ export default {
   computed: {
     isFormEmpty () {
       return !!(this.form.email && this.form.password)
+    },
+    eye () {
+      return !this.showPassword ? 'eye-close.svg' : 'eye-open.svg'
     }
   },
   mounted () {
@@ -130,10 +147,10 @@ export default {
         if (data?.errors) {
           this.$toastr.e(data.errors[0].message)
         } else {
-          localStorage.setItem('auth', JSON.stringify(data?.data?.userLogin?.jwt))
-          localStorage.setItem('user', JSON.stringify(data?.data?.userLogin?.user))
+          window.localStorage.setItem('auth', JSON.stringify(data?.data?.userLogin?.jwt))
+          window.localStorage.setItem('user', JSON.stringify(data?.data?.userLogin?.user))
           this.$toastr.s('Login was successful')
-          this.$router.push('/admin/dashboard')
+          this.$router.push('/dashboard')
         }
       } finally {
         this.processing = false

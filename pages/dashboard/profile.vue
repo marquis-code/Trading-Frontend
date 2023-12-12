@@ -2,7 +2,7 @@
   <main
     class="lg:flex justify-start items-start gap-x-10 space-y-10 lg:space-y-0"
   >
-    <section class="bg-white lg:w-7/12 rounded-md border">
+    <section class="bg-white lg:w-5/12 rounded-md border">
       <p class="border-b pl-6 py-4 text-sm font-semibold">
         Keep Your Profile Up-To-Date
       </p>
@@ -31,18 +31,18 @@
           <span class="text-xs text-gray-500">We'll never share your details with anyone else</span>
         </div>
 
-        <div class="space-y-1">
+        <!-- <div class="space-y-1">
           <label class="text-xs text-gray-700 font-medium">Wallet Address:</label>
           <input v-model="updatedUserData.walletAddress" type="text" class="py-2 border rounded-md w-full outline-none pl-6">
-        </div>
+        </div> -->
         <div class="w-full">
-          <button :disabled="!isFormEmpty" :class="[!isFormEmpty ? 'opacity-25 cursor-not-allowed' : null]" class="bg-green-500 w-1/2 disabled:cursor-not-allowed disabled:opacity-25 text-white rounded-lg px-6 py-3 text-sm">
+          <button :disabled="!isFormEmpty" :class="[!isFormEmpty ? 'opacity-25 cursor-not-allowed' : null]" class="bg-green-500 w-full disabled:cursor-not-allowed disabled:opacity-25 text-white rounded-lg px-6 py-3 text-sm">
             {{ processing ? 'processing...' : 'Update' }}
           </button>
         </div>
       </form>
     </section>
-    <section class="bg-white lg:w-5/12 rounded-md border">
+    <!-- <section class="bg-white lg:w-5/12 rounded-md border">
       <p class="border-b text-sm font-semibold py-4 pl-6">
         Personal Legal Identification
       </p>
@@ -167,7 +167,7 @@
           </div>
         </div>
       </div>
-    </section>
+    </section> -->
   </main>
 </template>
 
@@ -182,52 +182,116 @@ export default {
         firstName: '',
         lastName: '',
         email: '',
-        password: '',
-        walletAddress: ''
+        password: ''
       }
     }
   },
   computed: {
     isFormEmpty () {
-      return !!(this.updatedUserData.firstName && this.updatedUserData.lastName && this.updatedUserData.email && this.updatedUserData.password && this.updatedUserData.walletAddress)
+      return !!(this.updatedUserData.firstName && this.updatedUserData.lastName && this.updatedUserData.email && this.updatedUserData.password)
     }
+  },
+  mounted () {
+    this.getUserInfo()
   },
   methods: {
     async updateUser () {
       this.processing = true
+      const accessToken = JSON.parse(window.localStorage.getItem('auth'))
+      const user = JSON.parse(window.localStorage.getItem('user'))
       try {
-        const response = await this.$axios.post('https://fidelityvalues.onrender.com/graphql/', {
-          query: `
-            mutation updateUser($userId: String!, $input: UpdateUser!) {
-              updateUser(userId: $userId, input: { firstName: $firstName, lastName: $lastName, email: $email, password: $password, walletAddress: $walletAddress}) {
-                id
-                firstName
-                lastName
-                email
-                Status
-                accountBalance
-                tradingBalance
-                profit
-                walletAddress
-                timeAdded
-              }
+        const updateUserMutation = `
+          mutation updateUser($userId: String!, $input: UpdateUser!) {
+            updateUser(userId: $userId, input: $input) {
+              id
+              firstName
+              lastName
+              email
+              Status
+              PlanType
+              accountBalance
+              tradingBalance
+              profit
+              eth
+              btc
+              timeAdded
             }
-          `,
-          variables: {
-            userId: this.userId,
-            input: this.updatedUserData
           }
-        })
-
-        // Access the response data
-        const updatedUser = response.data.data.updateUser
-
-        // Use the updated user data as needed
-        console.log(updatedUser)
-      } catch (error) {
-        console.error('GraphQL mutation failed:', error)
+        `
+        const response = await fetch(
+          'https://fidelityvalues.onrender.com/graphql/query',
+          {
+            method: 'POST',
+            headers: {
+              'content-type': 'application/json',
+              authorization: 'Bearer ' + accessToken
+            },
+            body: JSON.stringify({
+              query: updateUserMutation,
+              variables: {
+                userId: user?.id ?? '',
+                input: {
+                  firstName: this.updatedUserData.firstName,
+                  lastName: this.updatedUserData.lastName,
+                  password: this.updatedUserData.password,
+                  email: this.updatedUserData.email
+                }
+              }
+            })
+          }
+        )
+        const data = await response.json()
+        if (data?.errors) {
+          this.$toastr.e(data.errors[0].message)
+        } else {
+          this.$toastr.s('You have successfully updated your profile')
+        }
       } finally {
         this.processing = false
+      }
+    },
+    async getUserInfo () {
+      this.loading = true
+      const accessToken = JSON.parse(window.localStorage.getItem('auth'))
+      this.loading = true
+      const query = `
+        query {
+          getUser {
+            id
+            firstName
+            lastName
+            email
+            Status
+            PlanType
+            accountBalance
+            tradingBalance
+            profit
+            eth
+            btc
+            timeAdded
+          }
+        }
+      `
+
+      try {
+        const response = await fetch('https://fidelityvalues.onrender.com/graphql/query', {
+          method: 'POST',
+          headers: {
+            'content-type': 'application/json',
+            authorization: 'Bearer ' + accessToken
+          },
+          body: JSON.stringify({
+            query
+          })
+        })
+        const data = await response.json()
+        if (data?.errors) {
+          this.$toastr.e(data.errors[0].message)
+        } else {
+          this.updatedUserData = data.data.getUser
+        }
+      } finally {
+        this.loading = false
       }
     }
   }

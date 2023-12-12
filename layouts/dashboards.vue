@@ -6,7 +6,7 @@
           class="grid h-10 w-32 place-content-center rounded-lg"
         >
           <button rel="noopener noreferrer" to="/dashboard" aria-label="Back to homepage" class="flex items-center p-2">
-            <img src="@/assets/img/fidelityvalues.png" alt="logo" class="h-10 w-10">
+            <img src="@/assets/img/Fidelitysvalues.png" alt="logo" class="h-10 w-10">
           </button>
         </span>
 
@@ -63,7 +63,7 @@
       <div class="flex flex-col h-screen p-6 w-full dark:bg-gray-900 dark:text-gray-100">
         <div class="space-y-3">
           <div class="flex items-center justify-between">
-            <img src="@/assets/img/fidelityvalues.png" alt="logo" class="h-10 w-10">
+            <img src="@/assets/img/Fidelitysvalues.png" alt="logo" class="h-10 w-10">
             <button class="p-2" @click="toggleNavbar">
               <svg
                 xmlns="http://www.w3.org/2000/svg"
@@ -159,11 +159,8 @@
         </div>
         <div class="hidden lg:flex items-center gap-x-3 py-3 pr-6">
           <p class="text-sm lg:text-base">
-            Hi, {{ `${user?.firstName}` `${user?.lastName}` }}
+            Hi, {{ loggedUser?.firstName }}  {{ loggedUser?.lastName }}
           </p>
-          <!-- <p v-else>
-            Hello, Admin
-          </p> -->
           <div class="relative flex-shrink-0">
             <span class="absolute bottom-0 right-0 w-4 h-4 dark:bg-green-600 border rounded-full dark:text-gray-100 dark:border-gray-900" />
             <img src="https://source.unsplash.com/50x50/?portrait" alt="" class="w-10 h-10 border rounded-full dark:bg-gray-500 dark:border-gray-700">
@@ -179,7 +176,7 @@
 
 <script>
 import Swal from 'sweetalert2/dist/sweetalert2.js'
-import 'sweetalert2/src/sweetalert2.scss'
+// import 'sweetalert2/src/sweetalert2.scss'
 export default {
   data () {
     return {
@@ -187,6 +184,7 @@ export default {
       showMobile: false,
       isMobile: false,
       user: null,
+      loggedUser: null,
       window: {
         width: 0,
         height: 0
@@ -202,11 +200,11 @@ export default {
           icon: 'users',
           url: '/admin/dashboard/users'
         },
-        {
-          name: 'Funds',
-          icon: 'funds',
-          url: '/admin/dashboard/funds-history'
-        },
+        // {
+        //   name: 'Funds',
+        //   icon: 'funds',
+        //   url: '/admin/dashboard/funds-history'
+        // },
         {
           name: 'Withdrawals',
           icon: 'accounts',
@@ -235,13 +233,11 @@ export default {
   mounted () {
     this.onResize()
     window.addEventListener('resize', this.onResize, { passive: true })
-    if (window.process) {
-      const user = window.localStorage.getItem('user')
-      const parsedUser = JSON.parse(user)
-      this.user = parsedUser
-      if (Object.keys(parsedUser)?.length) {
-        this.$router.push('/dashboard')
-      }
+    const user = JSON.parse(window.localStorage.getItem('user'))
+    if (user === null) {
+      this.$router.push('/admin')
+    } else {
+      this.loggedUser = user
     }
   },
   methods: {
@@ -266,21 +262,14 @@ export default {
         confirmButtonText: 'Yes, logout!'
       }).then((result) => {
         if (result.value) {
-          localStorage.removeItem('user')
-          localStorage.removeItem('auth')
+          window.localStorage.removeItem('user')
+          window.localStorage.removeItem('auth')
           this.$router.push('/admin')
         } else {
           this.$swal('Cancelled', "You're still logged in!", 'info')
         }
       })
     }
-    // init () {
-    //   if (!window.process) {
-    //     const result = window.localStorage.getItem('user')
-    //     const parsed = JSON.parse(result)
-    //     this.user = parsed
-    //   }
-    // }
   }
 }
 </script>

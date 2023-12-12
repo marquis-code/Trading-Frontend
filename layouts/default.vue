@@ -3,8 +3,24 @@
     <navigation-bar />
     <Nuxt />
     <footer-section />
+    <div id="floating-div" class="fixed bottom-0 left-0 p-2 bg-gray-800 text-white">
+      <div
+        id="cr-widget-marquee"
+        data-coins="bitcoin,ethereum,tether,ripple,cardano"
+        data-theme="dark"
+        data-show-symbol="true"
+        data-show-icon="true"
+        data-show-period-change="true"
+        data-period-change="24H"
+        data-api-url="https://api.cryptorank.io/v0"
+      >
+        <!-- <a href="https://cryptorank.io">Coins by Cryptorank</a> -->
+        <script src="https://cryptorank.io/widget/marquee.js" />
+      </div>
+    </div>
   </main>
 </template>
+
 <style>
 .page-enter-active,
 .page-leave-active {

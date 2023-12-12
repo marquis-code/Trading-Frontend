@@ -8,14 +8,14 @@
           </h2>
 
           <p
-            class="text-center text-sm md:text-base max-w-2xl text-white/90 md:mt-6 md:block md:text-lg md:leading-relaxed"
+            class="text-center text-sm md:text-base max-w-2xl text-white/90 md:mt-6 md:block font-medium md:leading-relaxed"
           >
-            Fidelity values is a leading private equity and property manager, with around 100 executives based across our UK office network. We partner with ambitious, entrepreneurial management teams to accelerate growth, and serve thousands of investors with the goal of delivering exceptional returns.
+            Fidelitys value is a leading private equity and property manager, with around 100 executives based across our UK office network. We partner with ambitious, entrepreneurial management teams to accelerate growth, and serve thousands of investors with the goal of delivering exceptional returns.
           </p>
         </div>
       </div>
     </section>
-    <section class="text-gray-600 body-font">
+    <section class="text-gray-600 body-font bg-white">
       <div class="md:container md:px-5 py-24 mx-auto flex flex-wrap flex-col">
         <div class="flex w-11/12 md:w-6/12 mx-auto justify-center items-center flex-wrap mb-20" data-aos="zoom-in" data-aos-delay="500">
           <a href="#whoweare" class="sm:px-6 py-3 w-1/2 sm:w-auto justify-center sm:justify-start border-b-2 title-font font-medium bg-gray-100 inline-flex items-center leading-none border-indigo-500 text-indigo-500 tracking-wider rounded-t">
@@ -65,14 +65,14 @@
           </h1>
           <div class="space-y-4">
             <p class="lg:w-2/3 mx-auto leading-relaxed text-sm md:text-base">
-              Fidelity values was formed in 2009 following a management buyout of the private equity business of Aberdeen Asset Management PLC. The senior team who led the transaction have worked together since 2004 and have transformed Fidelity values into one of the UK’s most active SME investors, helping hundreds of management teams to achieve their business ambitions.
+              Fidelitys Value was formed in 2009 following a management buyout of the private equity business of Aberdeen Asset Management PLC. The senior team who led the transaction have worked together since 2004 and have transformed Fidelitys Value into one of the UK’s most active SME investors, helping hundreds of management teams to achieve their business ambitions.
             </p>
 
             <p class="lg:w-2/3 mx-auto leading-relaxed text-sm md:text-base">
               We now have a presence across all regions of the UK, with a team that is recognised as having a collaborative and respectful culture, in supporting the growth of a wide range of public and private companies.
             </p>
             <p class="lg:w-2/3 mx-auto leading-relaxed text-sm md:text-base">
-              In 2021 Fidelity values was acquired by Mattioli Woods PLC, a leading provider of specialist wealth management and financial planning services. This partnership continues our ethos of supporting ambition, working with like-minded people who share the same passion and enthusiasm for delivering exceptional client outcomes.
+              In 2021 Fidelitys Value was acquired by Mattioli Woods PLC, a leading provider of specialist wealth management and financial planning services. This partnership continues our ethos of supporting ambition, working with like-minded people who share the same passion and enthusiasm for delivering exceptional client outcomes.
             </p>
           </div>
         </div>
@@ -96,7 +96,7 @@
 
                 <div class="p-8 sm:p-16 lg:p-24">
                   <h2 class="text-xl font-bold sm:text-3xl">
-                    Meet the Fidelity Values team
+                    Meet the Fidelitys Value team
                   </h2>
 
                   <p class="mt-4 text-gray-600 leading-loose">
@@ -116,7 +116,7 @@
             </div>
           </div>
         </div>
-        <div id="ourvalues" class="text-gray-600 body-font mt-10" data-aos="zoom-in" data-aos-delay="500">
+        <div id="ourvalues" class="text-gray-900 body-font mt-10" data-aos="zoom-in" data-aos-delay="500">
           <h1 class="md:text-4xl text-2xl text-center font-bold">
             Our values
           </h1>
@@ -213,7 +213,7 @@
                   </div>
                   <div class="flex-grow pl-4">
                     <p class="leading-relaxed text-sm md:text-base">
-                      Fidelity values is a signatory to the Investing in Women Code, a commitment to support the advancement of female entrepreneurship in the UK.
+                      Fidelitys Value is a signatory to the Investing in Women Code, a commitment to support the advancement of female entrepreneurship in the UK.
                     </p>
                   </div>
                 </div>

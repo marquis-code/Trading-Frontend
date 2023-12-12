@@ -4,7 +4,7 @@
       <div class="md:flex justify-between items-center space-y-10 md:space-y-0">
         <div class="">
           <div class="flex justify-center text-teal-600 sm:justify-start">
-            <img src="@/assets/img/fidelityvalues.png" class="p-0.5 h-10 w-10" alt="">
+            <img src="@/assets/img/Fidelitysvalues.png" class="p-0.5 h-10 w-10" alt="">
           </div>
 
           <p
@@ -22,7 +22,7 @@
               Company
             </p>
 
-            <ul class="mt-8 space-y-4 text-sm">
+            <ul class="mt-2 space-y-4 text-sm">
               <li>
                 <nuxt-link
                   class=" transition hover:/75 text-sm"
@@ -49,41 +49,112 @@
                   Investment Plans
                 </nuxt-link>
               </li>
-
-              <!-- <li>
-                <a
-                  class=" transition hover:/75"
-                  href="/"
-                >
-                  Careers
-                </a>
-              </li> -->
             </ul>
           </div>
-<!--
           <div class="sm:text-left">
-            <p class="text-lg font-medium ">
-              Helpful Links
-            </p>
-
-            <ul class="mt-8 space-y-4 text-sm">
-              <li v-for="{title, url} in accessLinks" :key="title">
-                <nuxt-link
-                  class=" transition hover:/75 text-sm"
-                  :to="url"
-                >
-                  {{ title }}
-                </nuxt-link>
-              </li>
-            </ul>
-          </div> -->
-
-          <div class="md:text-center sm:text-left">
-            <p class="text-lg font-medium ">
+            <p class="text-lg font-medium md:flex justify-center items-center md:ml-20">
               Contact Us
             </p>
 
-            <ul class="mt-8 space-y-4 text-sm hidden md:block">
+            <!-- <div class="flex justify-end items-end"> -->
+            <ul class="mt-2 space-y-4 hidden md:flex justify-end items-end flex-col ">
+              <li class="flex items-center gap-x-3">
+                <!-- <div>
+                  <svg
+                    xmlns="http://www.w3.org/2000/svg"
+                    width="20"
+                    height="20"
+                    viewBox="0 0 24 24"
+                    fill="none"
+                    stroke="#ffffff"
+                    stroke-width="2"
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                  ><circle cx="12" cy="10" r="3" /><path d="M12 21.7C17.3 17 20 13 20 10a8 8 0 1 0-16 0c0 3 2.7 6.9 8 11.7z" /></svg>
+                </div> -->
+
+                <div class="flex justify-end items-end">
+                  <div class="w-6/12 flex gap-x-3 text-sm">
+                    <svg
+                      xmlns="http://www.w3.org/2000/svg"
+                      width="40"
+                      height="40"
+                      viewBox="0 0 24 24"
+                      fill="none"
+                      stroke="#ffffff"
+                      stroke-width="2"
+                      stroke-linecap="round"
+                      stroke-linejoin="round"
+                    ><circle cx="12" cy="10" r="3" /><path d="M12 21.7C17.3 17 20 13 20 10a8 8 0 1 0-16 0c0 3 2.7 6.9 8 11.7z" /></svg>
+                    The Business xchange Hub, Sunley house, 4 Bedford Park, Croydon 2AP, United Kingdom
+                  </div>
+                </div>
+              </li>
+              <li class="flex items-center gap-x-4 w-1/2">
+                <div>
+                  <svg
+                    xmlns="http://www.w3.org/2000/svg"
+                    class="h-5 w-5 shrink-0"
+                    fill="none"
+                    viewBox="0 0 24 24"
+                    stroke="currentColor"
+                    stroke-width="2"
+                  >
+                    <path
+                      stroke-linecap="round"
+                      stroke-linejoin="round"
+                      d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"
+                    />
+                  </svg>
+                </div>
+
+                <div>support@fidelitysvalue.com</div>
+              </li>
+
+              <li class="flex items-center gap-x-4 w-1/2">
+                <div>
+                  <svg
+                    xmlns="http://www.w3.org/2000/svg"
+                    class="h-5 w-5 shrink-0 "
+                    fill="none"
+                    viewBox="0 0 24 24"
+                    stroke="currentColor"
+                    stroke-width="2"
+                  >
+                    <path
+                      stroke-linecap="round"
+                      stroke-linejoin="round"
+                      d="M3 5a2 2 0 012-2h3.28a1 1 0 01.948.684l1.498 4.493a1 1 0 01-.502 1.21l-2.257 1.13a11.042 11.042 0 005.516 5.516l1.13-2.257a1 1 0 011.21-.502l4.493 1.498a1 1 0 01.684.949V19a2 2 0 01-2 2h-1C9.716 21 3 14.284 3 6V5z"
+                    />
+                  </svg>
+                </div>
+
+                <div> +44 7418363214</div>
+              </li>
+            </ul>
+            <!-- </div> -->
+
+            <ul class="mt-2 space-y-4 text-sm md:hidden">
+              <li>
+                <a
+                  class="flex items-center justify-center pr-10 gap-1.5 ltr:sm:justify-start rtl:sm:justify-end"
+                  href="/"
+                >
+                  <svg
+                    xmlns="http://www.w3.org/2000/svg"
+                    width="20"
+                    height="20"
+                    viewBox="0 0 24 24"
+                    fill="none"
+                    stroke="#ffffff"
+                    stroke-width="2"
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                  ><circle cx="12" cy="10" r="3" /><path d="M12 21.7C17.3 17 20 13 20 10a8 8 0 1 0-16 0c0 3 2.7 6.9 8 11.7z" /></svg>
+
+                  <span class="flex-1 text-sm">The Business xchange Hub, Sunley house, 4 Bedford Park, Croydon 2AP, United Kingdom</span>
+                </a>
+              </li>
               <li>
                 <a
                   class="flex items-center justify-center gap-1.5 ltr:sm:justify-start rtl:sm:justify-end"
@@ -104,7 +175,7 @@
                     />
                   </svg>
 
-                  <span class="flex-1 text-sm">john@doe.com</span>
+                  <span class="flex-1 text-sm">support@Fidelitysvalues.com</span>
                 </a>
               </li>
 
@@ -128,27 +199,8 @@
                     />
                   </svg>
 
-                  <span class="flex-1 text-sm">0123456789</span>
+                  <span class="flex-1 text-sm">+44 7418363214</span>
                 </a>
-              </li>
-            </ul>
-
-            <ul class="mt-8 space-y-4 text-sm md:hidden">
-              <li>
-                <nuxt-link
-                  class=" transition hover:/75 text-sm"
-                  to="/plans"
-                >
-                  Investment Plans
-                </nuxt-link>
-              </li>
-              <li>
-                <nuxt-link
-                  class=" transition hover:/75 text-sm"
-                  to="/plans"
-                >
-                0123456789
-                </nuxt-link>
               </li>
             </ul>
           </div>
@@ -178,7 +230,7 @@
           </p>
 
           <p class="mt-4 text-sm  sm:order-first sm:mt-0">
-            &copy; 2023 Fidelity values.
+            &copy; 2023 Fidelitys value.
           </p>
         </div>
       </div>

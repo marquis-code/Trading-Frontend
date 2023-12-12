@@ -6,7 +6,7 @@
           class="grid h-10 w-32 place-content-center rounded-lg"
         >
           <button rel="noopener noreferrer" to="/dashboard" aria-label="Back to homepage" class="flex items-center p-2">
-            <img src="@/assets/img/fidelityvalues.png" alt="logo" class="h-10 w-10">
+            <img src="@/assets/img/Fidelitysvalues.png" alt="logo" class="h-10 w-10">
             <!-- <svg xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 32 32" class="w-8 h-8 dark:text-violet-400">
               <path d="M27.912 7.289l-10.324-5.961c-0.455-0.268-1.002-0.425-1.588-0.425s-1.133 0.158-1.604 0.433l0.015-0.008-10.324 5.961c-0.955 0.561-1.586 1.582-1.588 2.75v11.922c0.002 1.168 0.635 2.189 1.574 2.742l0.016 0.008 10.322 5.961c0.455 0.267 1.004 0.425 1.59 0.425 0.584 0 1.131-0.158 1.602-0.433l-0.014 0.008 10.322-5.961c0.955-0.561 1.586-1.582 1.588-2.75v-11.922c-0.002-1.168-0.633-2.189-1.573-2.742zM27.383 21.961c0 0.389-0.211 0.73-0.526 0.914l-0.004 0.002-10.324 5.961c-0.152 0.088-0.334 0.142-0.53 0.142s-0.377-0.053-0.535-0.145l0.005 0.002-10.324-5.961c-0.319-0.186-0.529-0.527-0.529-0.916v-11.922c0-0.389 0.211-0.73 0.526-0.914l0.004-0.002 10.324-5.961c0.152-0.090 0.334-0.143 0.53-0.143s0.377 0.053 0.535 0.144l-0.006-0.002 10.324 5.961c0.319 0.185 0.529 0.527 0.529 0.916z" />
               <path d="M22.094 19.451h-0.758c-0.188 0-0.363 0.049-0.515 0.135l0.006-0.004-4.574 2.512-5.282-3.049v-6.082l5.282-3.051 4.576 2.504c0.146 0.082 0.323 0.131 0.508 0.131h0.758c0.293 0 0.529-0.239 0.529-0.531v-0.716c0-0.2-0.11-0.373-0.271-0.463l-0.004-0.002-5.078-2.777c-0.293-0.164-0.645-0.26-1.015-0.26-0.39 0-0.756 0.106-1.070 0.289l0.010-0.006-5.281 3.049c-0.636 0.375-1.056 1.055-1.059 1.834v6.082c0 0.779 0.422 1.461 1.049 1.828l0.009 0.006 5.281 3.049c0.305 0.178 0.67 0.284 1.061 0.284 0.373 0 0.723-0.098 1.027-0.265l-0.012 0.006 5.080-2.787c0.166-0.091 0.276-0.265 0.276-0.465v-0.716c0-0.293-0.238-0.529-0.529-0.529z" />
@@ -29,6 +29,37 @@
             </nuxt-link>
           </li>
         </ul>
+      </div>
+      <div class="sticky inset-x-0 bottom-0 border-t pt-3 border-gray-100">
+        <div class="flex justify-center items-center pb-3">
+          <button
+            class="group flex items-center justify-between gap-4 rounded-lg border border-indigo-600 bg-red-500 px-5 py-2 transition-colors hover:bg-transparent focus:outline-none focus:ring"
+            href="/download"
+            @click="handleLogout"
+          >
+            <span
+              class="font-medium text-white transition-colors group-hover:text-indigo-600 group-active:text-indigo-500"
+            >
+              Logout
+            </span>
+
+            <span
+              class="shrink-0 rounded-full border border-current bg-white p-2 text-indigo-600 group-active:text-indigo-500"
+            >
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                width="24"
+                height="24"
+                viewBox="0 0 24 24"
+                fill="none"
+                stroke="#f25155"
+                stroke-width="3"
+                stroke-linecap="round"
+                stroke-linejoin="round"
+              ><path d="M16 17l5-5-5-5M19.8 12H9M10 3H4v18h6" /></svg>
+            </span>
+          </button>
+        </div>
       </div>
 
       <div class="sticky inset-x-0 bottom-0 border-t border-gray-100">
@@ -53,7 +84,7 @@
       <div class="flex flex-col h-screen p-6 w-full dark:bg-gray-900 dark:text-gray-100">
         <div class="space-y-3">
           <div class="flex items-center justify-between">
-            <img src="@/assets/img/fidelityvalues.png" alt="logo" class="h-10 w-10">
+            <img src="@/assets/img/Fidelitysvalues.png" alt="logo" class="h-10 w-10">
             <button class="p-2" @click="toggleNavbar">
               <svg
                 xmlns="http://www.w3.org/2000/svg"
@@ -85,7 +116,7 @@
                   <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" class="w-5 h-5 fill-current dark:text-gray-400">
                     <path d="M469.666,216.45,271.078,33.749a34,34,0,0,0-47.062.98L41.373,217.373,32,226.745V496H208V328h96V496H480V225.958ZM248.038,56.771c.282,0,.108.061-.013.18C247.9,56.832,247.756,56.771,248.038,56.771ZM448,464H336V328a32,32,0,0,0-32-32H208a32,32,0,0,0-32,32V464H64V240L248.038,57.356c.013-.012.014-.023.024-.035L448,240Z" />
                   </svg>
-                  <!-- <img src="@/assets/img/fidelityvalues.png" alt="logo" class="h-10 w-10"> -->
+                  <!-- <img src="@/assets/img/Fidelitysvalues.png" alt="logo" class="h-10 w-10"> -->
                   <span>{{ name }}</span>
                 </NuxtLink>
               </li>
@@ -113,7 +144,7 @@
               <path d="M27.912 7.289l-10.324-5.961c-0.455-0.268-1.002-0.425-1.588-0.425s-1.133 0.158-1.604 0.433l0.015-0.008-10.324 5.961c-0.955 0.561-1.586 1.582-1.588 2.75v11.922c0.002 1.168 0.635 2.189 1.574 2.742l0.016 0.008 10.322 5.961c0.455 0.267 1.004 0.425 1.59 0.425 0.584 0 1.131-0.158 1.602-0.433l-0.014 0.008 10.322-5.961c0.955-0.561 1.586-1.582 1.588-2.75v-11.922c-0.002-1.168-0.633-2.189-1.573-2.742zM27.383 21.961c0 0.389-0.211 0.73-0.526 0.914l-0.004 0.002-10.324 5.961c-0.152 0.088-0.334 0.142-0.53 0.142s-0.377-0.053-0.535-0.145l0.005 0.002-10.324-5.961c-0.319-0.186-0.529-0.527-0.529-0.916v-11.922c0-0.389 0.211-0.73 0.526-0.914l0.004-0.002 10.324-5.961c0.152-0.090 0.334-0.143 0.53-0.143s0.377 0.053 0.535 0.144l-0.006-0.002 10.324 5.961c0.319 0.185 0.529 0.527 0.529 0.916z" />
               <path d="M22.094 19.451h-0.758c-0.188 0-0.363 0.049-0.515 0.135l0.006-0.004-4.574 2.512-5.282-3.049v-6.082l5.282-3.051 4.576 2.504c0.146 0.082 0.323 0.131 0.508 0.131h0.758c0.293 0 0.529-0.239 0.529-0.531v-0.716c0-0.2-0.11-0.373-0.271-0.463l-0.004-0.002-5.078-2.777c-0.293-0.164-0.645-0.26-1.015-0.26-0.39 0-0.756 0.106-1.070 0.289l0.010-0.006-5.281 3.049c-0.636 0.375-1.056 1.055-1.059 1.834v6.082c0 0.779 0.422 1.461 1.049 1.828l0.009 0.006 5.281 3.049c0.305 0.178 0.67 0.284 1.061 0.284 0.373 0 0.723-0.098 1.027-0.265l-0.012 0.006 5.080-2.787c0.166-0.091 0.276-0.265 0.276-0.465v-0.716c0-0.293-0.238-0.529-0.529-0.529z" />
             </svg> -->
-            <img src="@/assets/img/fidelityvalues.png" alt="logo" class="h-10 w-10">
+            <img src="@/assets/img/Fidelitysvalues.png" alt="logo" class="h-10 w-10">
           </div>
           <div>
             <button class="p-2" @click="toggleNavbar">
@@ -149,6 +180,8 @@
 </template>
 
 <script>
+import Swal from 'sweetalert2/dist/sweetalert2.js'
+// import 'sweetalert2/src/sweetalert2.scss'
 export default {
   data () {
     return {
@@ -191,11 +224,6 @@ export default {
           icon: 'dashboard',
           url: '/dashboard/investment'
         }
-        // {
-        //   name: 'Withdrawn',
-        //   icon: 'withdraw.png',
-        //   url: '/dashboard/withdraw'
-        // }
       ]
     }
   },
@@ -209,6 +237,10 @@ export default {
   mounted () {
     this.onResize()
     window.addEventListener('resize', this.onResize, { passive: true })
+    const user = window.localStorage.getItem('user')
+    if (user === null) {
+      this.$router.push('/login')
+    }
   },
   methods: {
     onResize () {
@@ -220,6 +252,25 @@ export default {
     },
     toggleNavbar () {
       this.showMobile = !this.showMobile
+    },
+    handleLogout () {
+      Swal.fire({
+        title: 'Are you sure?',
+        text: "You won't be able to revert this!",
+        type: 'warning',
+        showCancelButton: true,
+        confirmButtonColor: '#3085d6',
+        cancelButtonColor: '#d33',
+        confirmButtonText: 'Yes, logout!'
+      }).then((result) => {
+        if (result.value) {
+          window.localStorage.removeItem('user')
+          window.localStorage.removeItem('auth')
+          this.$router.push('/admin')
+        } else {
+          this.$swal('Cancelled', "You're still logged in!", 'info')
+        }
+      })
     }
   }
 }

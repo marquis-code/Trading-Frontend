@@ -1,8 +1,8 @@
 <template>
   <main
-    class="flex justify-between items-center px-6 md:flex-col md:justify-end md:items-end bg-blue-50"
+    class="flex justify-between items-center px-6 md:flex-col md:justify-end md:items-end bg-blue-50 relative"
   >
-    <div class="md:hidden flex justify-start items-start z-50">
+    <div class="xl:hidden flex justify-start items-start z-50 w-full">
       <button v-b-toggle.sidebar-1>
         <svg
           xmlns="http://www.w3.org/2000/svg"
@@ -26,7 +26,7 @@
             <div class="flex justify-between items-center">
               <h4 id="sidebar-no-header-title">
                 <img
-                  src="@/assets/img/fidelityvalues.png"
+                  src="@/assets/img/Fidelitysvalues.png"
                   alt="logo"
                   class="h-10 w-10"
                 >
@@ -48,7 +48,7 @@
                 </svg>
               </button>
             </div>
-            <nav class="mb-3">
+            <nav class="mb-3 flex justify-between flex-col">
               <ul class="mt-6 space-y-1">
                 <li class="space-y-6">
                   <nuxt-link
@@ -70,7 +70,47 @@
                   </nuxt-link>
                 </li>
               </ul>
+              <button class="w-full flex justify-center items-center gap-x-3 py-2.5 mt-16 rounded-md bg-red-500 text-white" @click="handleLogout">
+                Logout
+              </button>
             </nav>
+            <div class="absolute bottom-0 inset-x-0 border-t border-gray-100 flex items-center justify-between bg-white px-4 py-4 hover:bg-gray-50">
+              <div>
+                <a href="#" class="flex items-center gap-2">
+                  <img
+                    alt="Man"
+                    src="https://images.unsplash.com/photo-1600486913747-55e5470d6f40?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1770&q=80"
+                    class="h-10 w-10 rounded-full object-cover"
+                  >
+
+                  <div>
+                    <p class="text-xs">
+                      <strong class="block font-medium">{{ loggedUser?.firstName ?? "" }}
+                        {{ loggedUser?.lastName ?? "" }}</strong>
+
+                      <span> {{ loggedUser?.email ?? "" }}</span>
+                    </p>
+                  </div>
+                </a>
+              </div>
+              <!-- <button class="" @click="handleLogout">
+                <span
+                  class="shrink-0"
+                >
+                  <svg
+                    xmlns="http://www.w3.org/2000/svg"
+                    width="20"
+                    height="20"
+                    viewBox="0 0 24 24"
+                    fill="none"
+                    stroke="#f25155"
+                    stroke-width="3"
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                  ><path d="M16 17l5-5-5-5M19.8 12H9M10 3H4v18h6" /></svg>
+                </span>
+              </button> -->
+            </div>
           </div>
         </template>
       </b-sidebar>
@@ -87,9 +127,12 @@
 </template>
 
 <script>
+import Swal from 'sweetalert2/dist/sweetalert2.js'
+// import 'sweetalert2/src/sweetalert2.scss'
 export default {
   data () {
     return {
+      loggedUser: {},
       sidebarItems: [
         {
           name: 'Dashboard',
@@ -117,6 +160,35 @@ export default {
           url: '/dashboard/transaction-history'
         }
       ]
+    }
+  },
+  mounted () {
+    const user = JSON.parse(window.localStorage.getItem('user'))
+    if (!user) {
+      this.$router.push('/login')
+    } else {
+      this.loggedUser = user
+    }
+  },
+  methods: {
+    handleLogout () {
+      Swal.fire({
+        title: 'Are you sure?',
+        text: "You won't be able to revert this!",
+        type: 'warning',
+        showCancelButton: true,
+        confirmButtonColor: '#3085d6',
+        cancelButtonColor: '#d33',
+        confirmButtonText: 'Yes, logout!'
+      }).then((result) => {
+        if (result.value) {
+          window.localStorage.removeItem('user')
+          window.localStorage.removeItem('auth')
+          this.$router.push('/admin')
+        } else {
+          this.$swal('Cancelled', "You're still logged in!", 'info')
+        }
+      })
     }
   }
 }

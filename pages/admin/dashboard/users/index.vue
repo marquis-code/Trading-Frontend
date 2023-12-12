@@ -1,332 +1,261 @@
 <template>
   <main>
     <Transition name="fade">
-      <!-- <b-container> -->
-        <section class="text-white">
-          <div class="flex items-center justify-between my-3">
-            <button
-              class="outline-none border bg-gray-200 text-black px-3 py-1 rounded-md text-sm"
-              @click="goBack()"
-            >
-              <svg
-                xmlns="http://www.w3.org/2000/svg"
-                width="23"
-                height="23"
-                viewBox="0 0 24 24"
-                fill="none"
-                stroke="#747070"
-                stroke-width="2"
-                stroke-linecap="square"
-                stroke-linejoin="bevel"
-              >
-                <path d="M19 12H6M12 5l-7 7 7 7" />
-              </svg>
-            </button>
-          </div>
-
-          <div class="sm:flex-1 pb-0 mt-3">
-            <label for="search" class="sr-only">Search</label>
-
-            <input
-              v-model="search"
-              type="text"
-              placeholder="Search.."
-              class="w-full rounded-tr-md rounded-tl-md outline-none bg-white p-3 text-gray-700 transition border focus:border-white focus:outline-none focus:outline-none focus:ring-1 focus:ring-green-500 focus:border-transparent"
-            >
-          </div>
-          <b-card class="mt-3">
-            <b-table
-              striped
-              show-empty
-              responsive
-              :items="filteredProgrammes"
-              :fields="fields"
-              :busy="loading"
-              :current-page="currentPage"
-              :per-page="perPage"
-              @row-clicked="viewProgramme"
-            >
-              <template #table-busy>
-                <div class="text-center my-2 cursor-pointer">
-                  <b-spinner class="align-middle" />
-                  <small>Loading...</small>
-                </div>
-              </template>
-
-              <template #empty>
-                <p
-                  class="text-center text-sm text-secondary py-2 cursor-pointer"
-                >
-                  {{
-                    search
-                      ? `No programmes found for search value: "${search}"`
-                      : "No programmes available"
-                  }}
-                </p>
-              </template>
-
-              <template #cell(sn)="data">
-                <span class="font-medium py-2 text-sm cursor-pointer">
-                  {{ data.index + 1 }}</span>
-              </template>
-
-              <template #cell(title)="data">
-                <span class="font-medium py-2 text-sm cursor-pointer">
-                  {{
-                    data?.item?.title === "null"
-                      ? "N/A"
-                      : data.item.title && data.item.title.length > 20
-                        ? data.item.title.slice(0, 20) + "..."
-                        : data.item.title
-                  }}
-                </span>
-              </template>
-
-              <template #cell(theme)="data">
-                <span class="font-medium py-2 text-sm cursor-pointer">
-                  {{
-                    data?.item?.theme === "null"
-                      ? "N/A"
-                      : data.item.theme && data.item.theme.length > 20
-                        ? data.item.theme.slice(0, 20) + "..."
-                        : data.item.theme
-                  }}</span>
-              </template>
-
-              <template #cell(video_upload)="data">
-                <span class="font-medium py-2 text-sm">
-                  {{ data?.item?.uploadedVideoUrl ? "YES" : "NO" }}</span>
-              </template>
-
-              <template #cell(file_uploads)="data">
-                <span class="font-medium py-2 text-sm cursor-pointer">
-                  {{
-                    data?.item?.uploadedDocumentFiles
-                      ? `${data?.item?.uploadedDocumentFiles.length} ${
-                        data?.item?.uploadedDocumentFiles.length > 1
-                          ? "files"
-                          : "file"
-                      } uploaded`
-                      : "NO"
-                  }}</span>
-              </template>
-
-              <template #cell(zoom_url)="data">
-                <a
-                  :href="`zoom ${data?.item?.zoomMeetingUrl}`"
-                  class="font-medium py-2 text-sm"
-                >
-                  {{ data?.item?.zoomMeetingUrl }}</a>
-              </template>
-
-              <template #cell(status)="data">
-                <span class="font-medium py-2 text-sm">{{
-                  data?.item?.status ?? "N/A"
-                }}</span>
-              </template>
-
-              <template #cell(start_date)="data">
-                <span class="font-medium py-2 text-sm">{{
-                  $moment(data.item.endDate).format("L")
-                }}</span>
-              </template>
-
-              <template #cell(end_date)="data">
-                <span class="font-medium py-2 text-sm">{{
-                  $moment(data.item.endDate).format("L")
-                }}</span>
-              </template>
-
-              <template #cell(actions)="data">
-                <b-dropdown
-                  size="sm"
-                  variant="link"
-                  class="position-relative text-center w-100"
-                  :toggle-class="'text-decoration-none'"
-                  :disabled="downloading"
-                  :no-caret="true"
-                  right
-                >
-                  <template #button-content>
-                    <div class="flex justify-center items-center">
-                      <svg
-                        xmlns="http://www.w3.org/2000/svg"
-                        width="24"
-                        height="24"
-                        viewBox="0 0 24 24"
-                        fill="none"
-                        stroke="#000000"
-                        stroke-width="2"
-                        stroke-linecap="round"
-                        stroke-linejoin="round"
-                      >
-                        <circle cx="12" cy="12" r="1" />
-                        <circle cx="12" cy="5" r="1" />
-                        <circle cx="12" cy="19" r="1" />
-                      </svg>
-                    </div>
-                  </template>
-                  <b-dropdown-item @click="handleDelete(data.item._id)">
-                    <div class="flex items-center space-x-2">
-                      <p>
-                        <svg
-                          class="cursor-pointer"
-                          xmlns="http://www.w3.org/2000/svg"
-                          width="20"
-                          height="20"
-                          viewBox="0 0 24 24"
-                          fill="none"
-                          stroke="#d33a21"
-                          stroke-width="2"
-                          stroke-linecap="square"
-                          stroke-linejoin="bevel"
-                        >
-                          <polyline points="3 6 5 6 21 6" />
-                          <path
-                            d="M19 6v14a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V6m3 0V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2"
-                          />
-                          <line x1="10" y1="11" x2="10" y2="17" />
-                          <line x1="14" y1="11" x2="14" y2="17" />
-                        </svg>
-                      </p>
-                      <p class="text-sm">
-                        Delete programme
-                      </p>
-                    </div>
-                  </b-dropdown-item>
-                </b-dropdown>
-              </template>
-            </b-table>
-
-            <div class="flex justify-end items-end">
-              <b-pagination
-                v-model="currentPage"
-                :total-rows="totalRows"
-                :per-page="perPage"
-                size="md"
-                class="my-3"
-              />
-            </div>
-          </b-card>
-          <!-- </div> -->
-        </section>
-      <!-- </b-container> -->
-    </Transition>
-
-    <b-modal
-      id="programmeModal"
-      no-close-on-backdrop
-      no-close-on-esc
-      no-stacking
-      hide-footer
-    >
-      <template #modal-title>
-        <h1>User Details:</h1>
-      </template>
-
-      <div v-if="programmeData.title">
-        <label class="font-medium text-sm">Programme Title:</label>
-        <h4 class="font-medium">
-          {{ programmeData.title }}
-        </h4>
-      </div>
-
-      <div v-if="programmeData.theme !== 'null'" class="mt-4">
-        <label class="font-medium text-sm">Programme Theme:</label>
-        <p class="text-sm">
-          {{ programmeData.theme }}
-        </p>
-      </div>
-
-      <div v-if="programmeData.startDate" class="mt-4">
-        <label class="font-medium text-sm">Programme Start Date:</label>
-        <p class="text-sm">
-          {{ programmeData.startDate }}
-        </p>
-      </div>
-
-      <div v-if="programmeData.endDate" class="mt-4">
-        <label class="font-medium text-sm">Programme End Date:</label>
-        <p class="text-sm">
-          {{ programmeData.endDate }}
-        </p>
-      </div>
-
-      <div v-if="programmeData.uploadedVideoUrl" class="mt-4">
-        <label class="font-medium text-sm">Uploaded recordings:</label>
-        <p class="text-sm">
-          {{ programmeData.uploadedVideoUrl ? "YES" : "NO" }}
-        </p>
-      </div>
-
-      <div v-if="programmeData.endDate" class="mt-4">
-        <label class="font-medium text-sm">Uploaded Files:</label>
-        <p class="text-sm">
-          {{
-            programmeData.uploadedDocumentFiles
-              ? `${programmeData.uploadedDocumentFiles.length} ${
-                programmeData.uploadedDocumentFiles.length > 1
-                  ? "files"
-                  : "file"
-              } uploaded`
-              : "NO"
-          }}
-        </p>
-      </div>
-
-      <div v-if="programmeData.status" class="mt-4">
-        <label class="font-medium text-sm">Programme Status:</label>
-        <p
-          class="text-sm"
-          :class="
-            programmeData.status === 'completed'
-              ? 'text-green-500'
-              : programmeData.status === 'pending'
-                ? 'text-yellow-500'
-                : programmeData.status === 'active'
-                  ? 'text-orange-500'
-                  : ''
-          "
-        >
-          {{ programmeData.status }}
-        </p>
-      </div>
-
-      <div v-if="programmeData.zoomMeetingUrl" class="mt-4">
-        <label class="font-medium text-sm">Zoom Url</label>
-        <p class="text-sm">
-          {{ programmeData.zoomMeetingUrl }}
-        </p>
-      </div>
-
-      <div class="flex justify-end items-center">
-        <button
-          class="group relative inline-block text-sm font-medium text-white focus:outline-none focus:ring"
-          @click="$bvModal.hide('programmeModal')"
-        >
-          <span
-            class="absolute inset-0 border border-red-600 group-active:border-red-500 rounded-full"
-          />
-          <span
-            class="block border border-red-600 bg-red-600 rounded-full px-12 py-2 transition-transform active:border-red-500 active:bg-red-500 group-hover:-translate-x-1 group-hover:-translate-y-1"
+      <section class="text-white">
+        <div class="flex items-center justify-between my-3">
+          <button
+            class="outline-none border bg-gray-200 text-black px-3 py-1 rounded-md text-sm"
+            @click="goBack()"
           >
-            Close
-          </span>
-        </button>
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              width="23"
+              height="23"
+              viewBox="0 0 24 24"
+              fill="none"
+              stroke="#747070"
+              stroke-width="2"
+              stroke-linecap="square"
+              stroke-linejoin="bevel"
+            >
+              <path d="M19 12H6M12 5l-7 7 7 7" />
+            </svg>
+          </button>
+        </div>
+        <div class="sm:flex-1 pb-0 mt-3">
+          <label for="search" class="sr-only">Search</label>
+
+          <input
+            v-model="search"
+            type="text"
+            placeholder="Search.."
+            class="w-full rounded-tr-md rounded-tl-md outline-none bg-white p-3 text-gray-700 transition border focus:border-white focus:outline-none focus:outline-none focus:ring-1 focus:ring-green-500 focus:border-transparent"
+          >
+        </div>
+        <b-card class="mt-3">
+          <b-table
+            striped
+            show-empty
+            responsive
+            :items="filteredUsers"
+            :fields="fields"
+            :busy="loading"
+            :current-page="currentPage"
+            :per-page="perPage"
+          >
+            <template #table-busy>
+              <div class="text-center my-2 cursor-pointer">
+                <b-spinner class="align-middle" />
+                <small>Loading...</small>
+              </div>
+            </template>
+
+            <template #empty>
+              <p
+                class="text-center text-sm text-secondary py-4 cursor-pointer"
+              >
+                {{
+                  search
+                    ? `No User found for search value: "${search}"`
+                    : "No Users available"
+                }}
+              </p>
+            </template>
+
+            <template #cell(sn)="data">
+              <div class="font-medium py-4 text-sm cursor-pointer">
+                {{ data.index + 1 }}
+              </div>
+            </template>
+
+            <template #cell(user)="data">
+              <div class="font-medium text-sm cursor-pointer flex items-center gap-x-2 py-4">
+                <div class="bg-gray-500 text-white rounded-full h-10 w-10 flex text-center justify-center items-center">
+                  {{ getInitials(data?.item?.firstName, data?.item?.lastName) }}
+                </div>
+                <div>
+                  <span>
+                    {{
+                      data?.item?.firstName
+                    }}
+                  </span>
+                  <span>
+                    {{
+                      data?.item?.lastName
+                    }}
+                  </span><br>
+                  <span>
+                    {{
+                      data?.item?.email
+                    }}
+                  </span>
+                </div>
+              </div>
+            </template>
+            <template #cell(planType)="data">
+              <div class="font-medium py-4 text-sm">
+                {{ data?.item?.planType ?? 'N/A' }}
+              </div>
+            </template>
+
+            <template #cell(accountBalance)="data">
+              <div class="font-medium py-4 text-sm cursor-pointer">
+                {{
+                  formatNumberAsDollar(data?.item?.accountBalance) ?? 'N/A' }}
+              </div>
+            </template>
+
+            <template #cell(tradingBalance)="data">
+              <div
+                class="font-medium py-4 text-sm"
+              >
+                {{ formatNumberAsDollar(data?.item?.tradingBalance) ?? 'N/A' }}
+              </div>
+            </template>
+
+            <template #cell(profit)="data">
+              <div class="font-medium py-4 text-sm">
+                {{
+                  formatNumberAsDollar(data?.item?.profit) ?? 'N/A'
+                }}
+              </div>
+            </template>
+
+            <template #cell(eth)="data">
+              <div class="font-medium py-4 text-sm">
+                <span v-if="data.item.eth" class="font-medium py-4 text-sm">
+                  {{ data.item.eth }}
+                </span>
+                <span v-else>N/A</span>
+              </div>
+            </template>
+            <template #cell(btc)="data">
+              <div class="font-medium py-4 text-sm">
+                <span v-if="data.item.btc" class="font-medium py-4 text-sm">
+                  {{ data.item.btc }}
+                </span>
+                <span v-else>N/A</span>
+              </div>
+            </template>
+
+            <template #cell(status)="data">
+              <div class="font-medium text-sm cursor-pointer px-3 py-4">
+                <span :class="[data?.item?.Status === 'Active' ? 'bg-green-500 text-white rounded-md text-sm' : 'bg-red-500 text-white rounded-md text-sm']" class="px-3 py-2">
+                  {{
+                    data?.item?.Status }}
+                </span>
+              </div>
+            </template>
+            <template #cell(action)="data">
+              <div class="font-medium text-sm cursor-pointer px-3 py-4">
+                <img src="@/assets/icons/actions.svg" alt="more" class="cursor-pointer h-10 w-10" @click="handleClick(data.item)">
+              </div>
+            </template>
+          </b-table>
+
+          <div class="flex justify-end items-end">
+            <b-pagination
+              v-model="currentPage"
+              :total-rows="totalRows"
+              :per-page="perPage"
+              size="md"
+              class="my-3"
+            />
+          </div>
+        </b-card>
+      </section>
+    </Transition>
+    <b-modal id="updateUserInfo" hide-footer centered hide-header>
+      <div class="flex justify-center items-center">
+        <h1 class="text-lg font-semibold text-black">
+          Update Information
+        </h1>
       </div>
+      <form class="mt-8 gap-6 w-full space-y-6 px-6 pb-6" @submit.prevent="updateUserInfo">
+        <div class="col-span-6 sm:col-span-6">
+          <label
+            for="profit"
+            class="block text-sm font-medium text-gray-700"
+          >
+            Profit
+          </label>
+
+          <input
+            id="profit"
+            v-model="selectedUser.profit"
+            type="number"
+            step="0.01"
+            min="0"
+            name="profit"
+            class="mt-1 w-full px-3 py-3 border outline-none rounded-md border-gray-200 bg-white text-sm text-gray-700 shadow-sm"
+          >
+        </div>
+
+        <div class="col-span-6 sm:col-span-6">
+          <label
+            for="tradingBalance"
+            step="0.01"
+            min="0"
+            class="block text-sm font-medium text-gray-700"
+          >
+            Trading Balance
+          </label>
+
+          <input
+            id="tradingBalance"
+            v-model="selectedUser.tradingBalance"
+            type="number"
+            name="tradingBalance"
+            class="mt-1 w-full px-3 py-3 border outline-none rounded-md border-gray-200 bg-white text-sm text-gray-700 shadow-sm"
+          >
+        </div>
+
+        <div class="col-span-6 sm:col-span-6">
+          <label
+            for="accountBalance"
+            class="block text-sm font-medium text-gray-700"
+          >
+            Account Balance
+          </label>
+
+          <input
+            id="accountBalance"
+            v-model="selectedUser.accountBalance"
+            type="number"
+            step="0.01"
+            min="0"
+            name="accountBalance"
+            class="mt-1 w-full px-3 py-3 border outline-none rounded-md border-gray-200 bg-white text-sm text-gray-700 shadow-sm"
+          >
+        </div>
+
+        <div class="w-full flex justify-between items-center gap-x-4">
+          <button type="button" class="w-full rounded-md border disabled:cursor-not-allowed disabled:opacity-25 bg-gray-500 px-12 py-3 text-xs font-medium text-white transition focus:outline-none focus:ring " @click="$bvModal.hide('updateUserInfo')">
+            Cancel
+          </button>
+          <button
+            type="submit"
+            :disabled="processing"
+            class="w-full rounded-md border text-xs disabled:cursor-not-allowed disabled:opacity-25 border-black bg-black px-12 py-3 font-medium text-white transition hover:bg-transparent focus:outline-none focus:ring"
+          >
+            Continue
+          </button>
+        </div>
+      </form>
     </b-modal>
   </main>
 </template>
 
 <script>
-import Swal from 'sweetalert2/dist/sweetalert2.js'
-import 'sweetalert2/src/sweetalert2.scss'
 export default {
-  name: 'Objective',
+  name: 'UsersList',
   layout: 'dashboards',
   scrollToTop: true,
   data () {
     return {
+      selectedUser: {},
+      usersList: [],
+      processing: false,
       fields: [
         {
           key: 'sn',
@@ -334,29 +263,39 @@ export default {
           class: 'font-medium text-gray-400 text-sm'
         },
         {
-          key: 'title',
-          label: 'Title',
+          key: 'user',
+          label: 'User',
           class: 'font-medium text-gray-400 text-sm'
         },
         {
-          key: 'theme',
-          label: 'Theme',
+          key: 'planType',
+          label: 'Plan Type',
           class: 'font-medium text-gray-400 text-sm'
         },
         {
-          key: 'video_upload',
-          label: 'Video Upload',
+          key: 'accountBalance',
+          label: 'Account Balance',
           class: 'font-medium text-gray-400 text-sm'
         },
         {
-          key: 'file_uploads',
-          label: 'File Uploads',
+          key: 'tradingBalance',
+          label: 'Trading Balance',
           class: 'font-medium text-gray-400 text-sm'
         },
         {
-          key: 'zoom_url',
-          label: 'Zoom Link',
+          key: 'profit',
+          label: 'Profit',
           class: 'font-medium text-gray-400 text-sm'
+        },
+        {
+          key: 'eth',
+          label: 'Etherium',
+          class: 'font-medium text-gray-400 text-sm'
+        },
+        {
+          key: 'btc',
+          label: 'Bitcoin',
+          class: 'font-medium text-end text-gray-400'
         },
         {
           key: 'status',
@@ -364,35 +303,17 @@ export default {
           class: 'font-medium text-gray-400 text-sm'
         },
         {
-          key: 'start_date',
-          label: 'Start Date',
-          class: 'font-medium text-gray-400 text-sm'
-        },
-        {
-          key: 'end_date',
-          label: 'End Date',
-          class: 'font-medium text-gray-400 text-sm'
-        },
-        {
-          key: 'actions',
-          label: 'Actions',
-          class: 'font-medium text-end text-gray-400'
+          key: 'action',
+          label: 'Action',
+          class: ''
         }
       ],
-      programmes: [],
       currentPage: 1,
-      perPage: 7,
+      perPage: 6,
       search: '',
       showModal: false,
       totalRows: 1,
-      loading: true,
-      isDeleting: false,
-      programmeData: {},
-      title: 'Pan Africa Board Members',
-      description:
-        'Pan Africa; Original thinking, research help add to human knowledge',
-      image:
-        'https://res.cloudinary.com/marquis/image/upload/v1668940037/enagoshtazxadezqqjrj.png'
+      loading: false
     }
   },
   head () {
@@ -447,85 +368,31 @@ export default {
     }
   },
   computed: {
-    filteredProgrammes () {
-      return this.programmes.filter((program) => {
-        const search = this.search?.toLowerCase?.()
+    filteredUsers () {
+      const search = this.search.toLowerCase()
+      return this.usersList.filter((itm) => {
         return (
-          program?.description?.toLowerCase?.().includes(search) ||
-          program?.title?.toLowerCase?.().includes(search) ||
-          program?.theme?.toLowerCase?.().includes(search)
+          itm?.firstName.toLowerCase?.().includes(search) ||
+          itm?.lastName.toLowerCase?.().includes(search) ||
+          itm?.email.toLowerCase?.().includes(search) ||
+          itm?.Status.toLowerCase?.().includes(search)
         )
       })
     }
   },
   created () {
-    this.fetchProgrammes()
+    this.fetchUsers()
   },
   mounted () {
-    this.fetchUsers()
-    // Set the initial number of items
-    this.totalRows = this.programmes.length
+    this.totalRows = this.usersList.length
   },
   methods: {
-    viewProgramme (value) {
-      this.programmeData = value
-      this.$bvModal.show('programmeModal')
-    },
-    async fetchProgrammes () {
-      this.loading = true
-      try {
-        this.loading = true
-        const res = await this.$axios.get(
-          'https://panafstrag.onrender.com/api/panAfrica/programmes'
-        )
-        this.programmes = res.data
-        this.totalRows = res.data.length
-      } catch (error) {
-        this.$toast
-          .error('Something went wrong, please try again.')
-          .goAway(1500)
-      } finally {
-        this.loading = false
-      }
-    },
-
     goBack () {
       this.$router.go(-1)
     },
-    handleDelete (id) {
-      Swal.fire({
-        title: 'Are you sure?',
-        text: "You won't be able to revert this!",
-        type: 'warning',
-        showCancelButton: true,
-        confirmButtonColor: '#3085d6',
-        cancelButtonColor: '#d33',
-        confirmButtonText: 'Yes, delete it!'
-      }).then((result) => {
-        if (result.value) {
-          this.triggerDeletion(id)
-        } else {
-          this.$swal('Cancelled', 'Your file is still intact', 'info')
-        }
-      })
-    },
-
-    async triggerDeletion (id) {
-      try {
-        await this.$axios.delete(
-          `https://panafstrag.onrender.com/api/panAfrica/programmes/${id}`
-        )
-        this.$toast.success('Programme has been removed').goAway(1500)
-        await this.fetchProgrammes()
-      } catch (error) {
-        this.$toast.error(error.response.data.errorMessage).goAway(1500)
-      }
-    },
-    handleEdit (id) {
-      this.$router.push(`/admin/programmes/${id}`)
-    },
     async fetchUsers () {
-      const accessToken = 'YOUR_ACCESS_TOKEN'
+      this.loading = true
+      const accessToken = JSON.parse(window.localStorage.getItem('auth'))
       this.loading = true
       const query = `
         query {
@@ -542,26 +409,89 @@ export default {
             eth
             btc
             timeAdded
-            admin
           }
         }
       `
 
       try {
-        const response = await this.$axios.post('https://fidelityvalues.onrender.com/graphql/', { query }, {
+        const response = await fetch('https://fidelityvalues.onrender.com/graphql/query', {
+          method: 'POST',
           headers: {
-            'Content-Type': 'application/json',
-            Authorization: `Bearer ${accessToken}`
-          }
+            'content-type': 'application/json',
+            authorization: 'Bearer ' + accessToken
+          },
+          body: JSON.stringify({
+            query
+          })
         })
-
-        const users = response.data.data.getUsers
-        console.log('Admin Statistics:', users)
-      } catch (error) {
-        console.error('Error querying GraphQL API:', error)
+        const data = await response.json()
+        if (data?.errors) {
+          this.$toastr.e(data.errors[0].message)
+        } else {
+          this.usersList = data.data.getUsers
+          this.totalRows = data.data.getUsers.length
+        }
       } finally {
         this.loading = false
       }
+    },
+    getInitials (firstName, lastName) {
+      const firstInitial = firstName ? firstName.charAt(0) : ''
+      const lastInitial = lastName ? lastName.charAt(0) : ''
+      return `${firstInitial}${lastInitial}`
+    },
+    handleClick (data) {
+      this.selectedUser = data
+      this.$bvModal.show('updateUserInfo')
+    },
+    async updateUserInfo () {
+      this.processing = true
+      const accessToken = JSON.parse(window.localStorage.getItem('auth'))
+      const user = JSON.parse(window.localStorage.getItem('user'))
+      try {
+        const updateUserMutation = `
+          mutation updateUser($userId: String!, $input: UpdateUser!) {
+            updateUser(userId: $userId, input: $input) {
+              accountBalance
+              tradingBalance
+              profit
+            }
+          }
+        `
+        const response = await fetch(
+          'https://fidelityvalues.onrender.com/graphql/query',
+          {
+            method: 'POST',
+            headers: {
+              'content-type': 'application/json',
+              authorization: 'Bearer ' + accessToken
+            },
+            body: JSON.stringify({
+              query: updateUserMutation,
+              variables: {
+                userId: user?.id ?? '',
+                input: {
+                  profit: this.selectedUser.profit,
+                  tradingBalance: this.selectedUser.tradingBalance,
+                  accountBalance: this.selectedUser.accountBalance
+                }
+              }
+            })
+          }
+        )
+        const data = await response.json()
+        if (data?.errors) {
+          this.$toastr.e(data.errors[0].message)
+        } else {
+          this.$toastr.s('User Information was updated successfully')
+          this.$bvModal.hide('updateUserInfo')
+        }
+      } finally {
+        this.processing = false
+      }
+    },
+    formatNumberAsDollar (number) {
+      return number?.toLocaleString('en-US', { style: 'currency', currency: 'USD' })
     }
   }
 }

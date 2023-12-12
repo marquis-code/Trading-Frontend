@@ -2,10 +2,10 @@
   <section>
     <div class="dark:bg-[#003b6d]">
       <div class="container flex flex-col items-center px-4 py-16 pb-24 mx-auto text-center lg:pb-56 md:py-32 md:px-10 lg:px-32 dark:text-gray-900 space-y-6">
-        <h1 class="text-5xl font-bold leadi sm:text-6xl xl:max-w-3xl dark:text-white">
+        <h1 class="text-4xl font-bold leadi sm:text-6xl xl:max-w-3xl dark:text-white">
           Trade global financial markets
         </h1>
-        <div class="space-y-3 text-white">
+        <div class="space-y-3 text-white text-sm">
           <p class="">
             ON OVER 1,000 ASSETS
           </p>
@@ -13,13 +13,17 @@
             Forex, Stocks, Commodities, Indices & Cryptocurrencies
           </p>
         </div>
-        <div class="flex flex-wrap justify-center">
-          <nuxt-link to="/login" type="button" class="px-8 py-2.5 m-2 text-sm font-medium rounded dark:text-gray-50 bg-[#01257D] hover:bg-[#20305a]">
-            Get started
-          </nuxt-link>
-          <nuxt-link to="/about" type="button" class="px-8 py-2.5 m-2 text-sm border rounded dark:border-gray-700 dark:text-white">
-            Learn more
-          </nuxt-link>
+        <div class="flex justify-center gap-x-6">
+          <div class="w-full">
+            <nuxt-link to="/login" type="button" class="px-8 w-full block py-3 m-2 text-sm font-medium rounded dark:text-gray-50 bg-[#01257D] hover:bg-[#20305a]">
+              Get started
+            </nuxt-link>
+          </div>
+          <div class="w-full">
+            <nuxt-link to="/about" type="button" class="px-8 w-full block py-3 m-2 text-sm border rounded dark:border-gray-700 dark:text-white">
+              Learn more
+            </nuxt-link>
+          </div>
         </div>
       </div>
     </div>

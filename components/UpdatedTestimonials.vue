@@ -38,7 +38,7 @@ export default {
           position: 'Australia'
         },
         {
-          description: 'Financial stabilty was a challenge until Fidelity Values . I think everyone show try them! ',
+          description: 'Financial stabilty was a challenge until Fidelitys Value . I think everyone show try them! ',
           user: 'Austin Jenkins',
           position: 'Virginia'
         },

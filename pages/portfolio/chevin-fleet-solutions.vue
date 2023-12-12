@@ -10,18 +10,6 @@
           </h2>
         </div>
       </div>
-      <!-- <div class="mx-auto w-10/12 absolute bottom-0 ">
-        <div class="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-6 bg-gray-800 py-3">
-          <div v-for="(item, idx) in portfolioDetails" :key="idx" class="space-y-2">
-            <h1 class="font-bold text-white">
-              {{ item.title }}
-            </h1>
-            <p class="font-light text-white">
-              {{ item.description }}
-            </p>
-          </div>
-        </div>
-      </div> -->
       <div class="mx-auto w-full absolute bottom-0 ">
         <div class="grid grid-cols-3 md:grid-cols-3 lg:grid-cols-5 gap-6 bg-gray-800 py-3">
           <div v-for="(item, idx) in portfolioDetails" :key="idx" class="space-y-2 w-10/12 mx-auto">
@@ -35,10 +23,10 @@
         </div>
       </div>
     </section>
-    <section class="py-16 w-11/12 mx-auto">
+    <section class="py-16 w-11/12 mx-auto bg-white">
       <div class="lg:flex lg:gap-x-10 space-y-10 lg:space-y-0">
         <div class="lg:w-6/12">
-          <p class="text-gray-800 text-base leading-loose">
+          <p class="text-gray-900 text-base leading-loose">
             Belper business Chevin Fleet Solutions, is the leading global provider of fleet management software solutions to customers in both private and public sectors, with offices in the UK, USA, Belgium, France, and Australia. Its flagship fleet management product, ‘FleetWave’, is used in more than 180 countries across multiple sectors to manage around two million vehicles and associated assets.
           </p>
           <p class="text-gray-800 text-base leading-loose mt-10">
@@ -50,7 +38,7 @@
         </div>
       </div>
     </section>
-    <section class="text-gray-600 body-font">
+    <section class="text-gray-900 body-font">
       <div class="container px-5 pb-16 mx-auto">
         <div class="xl:w-1/2 lg:w-3/4 w-full mx-auto text-center border-4 border-yellow-600 shadow-md rounded-md p-10">
           <svg xmlns="http://www.w3.org/2000/svg" fill="currentColor" class="inline-block w-8 h-8 text-gray-400 mb-8" viewBox="0 0 975.036 975.036">
@@ -60,7 +48,7 @@
             We are delighted to have secured the MEIF funding and, in turn, the opportunity to expand our business horizons. This level of financial backing will allow us to strengthen our product range, broaden our client base, and enhance global opportunity. It will further define our footprint in fleet management.
           </p>
           <span class="inline-block h-1 w-10 rounded bg-indigo-500 mt-8 mb-6" />
-          <p class="text-gray-500 font-semibold">
+          <p class="text-gray-900 font-semibold">
             Ashley Sowerby, Founder and Managing Director of Chevin Fleet Solutions
           </p>
         </div>
@@ -88,7 +76,7 @@ export default {
         },
         {
           title: 'Fund',
-          description: 'MEIF Maven Debt Finance'
+          description: 'MEIF Fidelitys Value Debt Finance'
         },
         {
           title: 'Status',

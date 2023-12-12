@@ -39,12 +39,11 @@
             striped
             show-empty
             responsive
-            :items="filteredProgrammes"
+            :items="transactionsList"
             :fields="fields"
             :busy="loading"
             :current-page="currentPage"
             :per-page="perPage"
-            @row-clicked="viewProgramme"
           >
             <template #table-busy>
               <div class="text-center my-2 cursor-pointer">
@@ -59,8 +58,8 @@
               >
                 {{
                   search
-                    ? `No programmes found for search value: "${search}"`
-                    : "No programmes available"
+                    ? `No Transactions found for search value: "${search}"`
+                    : "No Transactions available"
                 }}
               </p>
             </template>
@@ -70,71 +69,46 @@
                 {{ data.index + 1 }}</span>
             </template>
 
-            <template #cell(title)="data">
+            <template #cell(amount)="data">
               <span class="font-medium py-2 text-sm cursor-pointer">
                 {{
-                  data?.item?.title === "null"
-                    ? "N/A"
-                    : data.item.title && data.item.title.length > 20
-                      ? data.item.title.slice(0, 20) + "..."
-                      : data.item.title
+                  data?.item?.amount
                 }}
               </span>
             </template>
 
-            <template #cell(theme)="data">
+            <template #cell(wallet)="data">
               <span class="font-medium py-2 text-sm cursor-pointer">
                 {{
-                  data?.item?.theme === "null"
-                    ? "N/A"
-                    : data.item.theme && data.item.theme.length > 20
-                      ? data.item.theme.slice(0, 20) + "..."
-                      : data.item.theme
-                }}</span>
+                  data?.item?.wallet }}</span>
             </template>
 
-            <template #cell(video_upload)="data">
+            <template #cell(transactionType)="data">
               <span class="font-medium py-2 text-sm">
-                {{ data?.item?.uploadedVideoUrl ? "YES" : "NO" }}</span>
+                {{ data?.item?.transactionType }}</span>
             </template>
 
-            <template #cell(file_uploads)="data">
+            <template #cell(transactionStatus)="data">
               <span class="font-medium py-2 text-sm cursor-pointer">
                 {{
-                  data?.item?.uploadedDocumentFiles
-                    ? `${data?.item?.uploadedDocumentFiles.length} ${
-                      data?.item?.uploadedDocumentFiles.length > 1
-                        ? "files"
-                        : "file"
-                    } uploaded`
-                    : "NO"
-                }}</span>
+                  data?.item?.transactionStatus }}</span>
             </template>
 
-            <template #cell(zoom_url)="data">
-              <a
-                :href="`zoom ${data?.item?.zoomMeetingUrl}`"
+            <template #cell(user)="data">
+              <span
                 class="font-medium py-2 text-sm"
               >
-                {{ data?.item?.zoomMeetingUrl }}</a>
+                {{ data?.item?.user }}</span>
             </template>
 
-            <template #cell(status)="data">
+            <template #cell(proof)="data">
               <span class="font-medium py-2 text-sm">{{
-                data?.item?.status ?? "N/A"
+                data?.item?.proof
               }}</span>
             </template>
 
-            <template #cell(start_date)="data">
-              <span class="font-medium py-2 text-sm">{{
-                $moment(data.item.endDate).format("L")
-              }}</span>
-            </template>
-
-            <template #cell(end_date)="data">
-              <span class="font-medium py-2 text-sm">{{
-                $moment(data.item.endDate).format("L")
-              }}</span>
+            <template #cell(timeAdded)="data">
+              <span class="font-medium py-2 text-sm">{{ data.item.timeAdded }}</span>
             </template>
 
             <template #cell(actions)="data">
@@ -166,7 +140,7 @@
                     </svg>
                   </div>
                 </template>
-                <b-dropdown-item @click="handleDelete(data.item._id)">
+                <!-- <b-dropdown-item @click="handleDelete(data.item._id)">
                   <div class="flex items-center space-x-2">
                     <p>
                       <svg
@@ -193,7 +167,7 @@
                       Delete programme
                     </p>
                   </div>
-                </b-dropdown-item>
+                </b-dropdown-item> -->
               </b-dropdown>
             </template>
           </b-table>
@@ -212,121 +186,17 @@
       </section>
       <!-- </b-container> -->
     </Transition>
-
-    <b-modal
-      id="programmeModal"
-      no-close-on-backdrop
-      no-close-on-esc
-      no-stacking
-      hide-footer
-    >
-      <template #modal-title>
-        <h1>Deposit Details:</h1>
-      </template>
-
-      <div v-if="programmeData.title">
-        <label class="font-medium text-sm">Programme Title:</label>
-        <h4 class="font-medium">
-          {{ programmeData.title }}
-        </h4>
-      </div>
-
-      <div v-if="programmeData.theme !== 'null'" class="mt-4">
-        <label class="font-medium text-sm">Programme Theme:</label>
-        <p class="text-sm">
-          {{ programmeData.theme }}
-        </p>
-      </div>
-
-      <div v-if="programmeData.startDate" class="mt-4">
-        <label class="font-medium text-sm">Programme Start Date:</label>
-        <p class="text-sm">
-          {{ programmeData.startDate }}
-        </p>
-      </div>
-
-      <div v-if="programmeData.endDate" class="mt-4">
-        <label class="font-medium text-sm">Programme End Date:</label>
-        <p class="text-sm">
-          {{ programmeData.endDate }}
-        </p>
-      </div>
-
-      <div v-if="programmeData.uploadedVideoUrl" class="mt-4">
-        <label class="font-medium text-sm">Uploaded recordings:</label>
-        <p class="text-sm">
-          {{ programmeData.uploadedVideoUrl ? "YES" : "NO" }}
-        </p>
-      </div>
-
-      <div v-if="programmeData.endDate" class="mt-4">
-        <label class="font-medium text-sm">Uploaded Files:</label>
-        <p class="text-sm">
-          {{
-            programmeData.uploadedDocumentFiles
-              ? `${programmeData.uploadedDocumentFiles.length} ${
-                programmeData.uploadedDocumentFiles.length > 1
-                  ? "files"
-                  : "file"
-              } uploaded`
-              : "NO"
-          }}
-        </p>
-      </div>
-
-      <div v-if="programmeData.status" class="mt-4">
-        <label class="font-medium text-sm">Programme Status:</label>
-        <p
-          class="text-sm"
-          :class="
-            programmeData.status === 'completed'
-              ? 'text-green-500'
-              : programmeData.status === 'pending'
-                ? 'text-yellow-500'
-                : programmeData.status === 'active'
-                  ? 'text-orange-500'
-                  : ''
-          "
-        >
-          {{ programmeData.status }}
-        </p>
-      </div>
-
-      <div v-if="programmeData.zoomMeetingUrl" class="mt-4">
-        <label class="font-medium text-sm">Zoom Url</label>
-        <p class="text-sm">
-          {{ programmeData.zoomMeetingUrl }}
-        </p>
-      </div>
-
-      <div class="flex justify-end items-center">
-        <button
-          class="group relative inline-block text-sm font-medium text-white focus:outline-none focus:ring"
-          @click="$bvModal.hide('programmeModal')"
-        >
-          <span
-            class="absolute inset-0 border border-red-600 group-active:border-red-500 rounded-full"
-          />
-          <span
-            class="block border border-red-600 bg-red-600 rounded-full px-12 py-2 transition-transform active:border-red-500 active:bg-red-500 group-hover:-translate-x-1 group-hover:-translate-y-1"
-          >
-            Close
-          </span>
-        </button>
-      </div>
-    </b-modal>
   </main>
 </template>
 
 <script>
-import Swal from 'sweetalert2/dist/sweetalert2.js'
-import 'sweetalert2/src/sweetalert2.scss'
 export default {
   name: 'Objective',
   layout: 'dashboards',
   scrollToTop: true,
   data () {
     return {
+      transactionsList: [],
       fields: [
         {
           key: 'sn',
@@ -334,43 +204,38 @@ export default {
           class: 'font-medium text-gray-400 text-sm'
         },
         {
-          key: 'title',
-          label: 'Title',
+          key: 'amount',
+          label: 'Amount',
           class: 'font-medium text-gray-400 text-sm'
         },
         {
-          key: 'theme',
-          label: 'Theme',
+          key: 'wallet',
+          label: 'Wallet',
           class: 'font-medium text-gray-400 text-sm'
         },
         {
-          key: 'video_upload',
-          label: 'Video Upload',
+          key: 'transactionType',
+          label: 'Transaction Type',
           class: 'font-medium text-gray-400 text-sm'
         },
         {
-          key: 'file_uploads',
-          label: 'File Uploads',
+          key: 'transactionStatus',
+          label: 'Transaction Status',
           class: 'font-medium text-gray-400 text-sm'
         },
         {
-          key: 'zoom_url',
-          label: 'Zoom Link',
+          key: 'user',
+          label: 'User',
           class: 'font-medium text-gray-400 text-sm'
         },
         {
-          key: 'status',
-          label: 'Status',
+          key: 'proof',
+          label: 'Proof',
           class: 'font-medium text-gray-400 text-sm'
         },
         {
-          key: 'start_date',
-          label: 'Start Date',
-          class: 'font-medium text-gray-400 text-sm'
-        },
-        {
-          key: 'end_date',
-          label: 'End Date',
+          key: 'timeAdded',
+          label: 'Time Addes',
           class: 'font-medium text-gray-400 text-sm'
         },
         {
@@ -379,20 +244,12 @@ export default {
           class: 'font-medium text-end text-gray-400'
         }
       ],
-      programmes: [],
       currentPage: 1,
       perPage: 7,
       search: '',
       showModal: false,
       totalRows: 1,
-      loading: true,
-      isDeleting: false,
-      programmeData: {},
-      title: 'Pan Africa Board Members',
-      description:
-        'Pan Africa; Original thinking, research help add to human knowledge',
-      image:
-        'https://res.cloudinary.com/marquis/image/upload/v1668940037/enagoshtazxadezqqjrj.png'
+      loading: false
     }
   },
   head () {
@@ -446,82 +303,68 @@ export default {
       ]
     }
   },
-  computed: {
-    filteredProgrammes () {
-      return this.programmes.filter((program) => {
-        const search = this.search?.toLowerCase?.()
-        return (
-          program?.description?.toLowerCase?.().includes(search) ||
-          program?.title?.toLowerCase?.().includes(search) ||
-          program?.theme?.toLowerCase?.().includes(search)
-        )
-      })
-    }
-  },
   created () {
-    this.fetchProgrammes()
+    this.fetchTransactions()
   },
   mounted () {
-    // Set the initial number of items
-    this.totalRows = this.programmes.length
+    this.totalRows = this.transactionsList.length
   },
   methods: {
-    viewProgramme (value) {
-      this.programmeData = value
-      this.$bvModal.show('programmeModal')
-    },
-    async fetchProgrammes () {
-      this.loading = true
-      try {
-        this.loading = true
-        const res = await this.$axios.get(
-          'https://panafstrag.onrender.com/api/panAfrica/programmes'
-        )
-        this.programmes = res.data
-        this.totalRows = res.data.length
-      } catch (error) {
-        this.$toast
-          .error('Something went wrong, please try again.')
-          .goAway(1500)
-      } finally {
-        this.loading = false
-      }
-    },
-
     goBack () {
       this.$router.go(-1)
     },
-    handleDelete (id) {
-      Swal.fire({
-        title: 'Are you sure?',
-        text: "You won't be able to revert this!",
-        type: 'warning',
-        showCancelButton: true,
-        confirmButtonColor: '#3085d6',
-        cancelButtonColor: '#d33',
-        confirmButtonText: 'Yes, delete it!'
-      }).then((result) => {
-        if (result.value) {
-          this.triggerDeletion(id)
-        } else {
-          this.$swal('Cancelled', 'Your file is still intact', 'info')
+    async fetchTransactions () {
+      this.loading = true
+      const accessToken = JSON.parse(window.localStorage.getItem('auth'))
+      this.loading = true
+      const query = `
+        query {
+          getTransactions {
+            id
+            amount
+            wallet
+            transactionType
+            transactionStatus
+            user {
+              id
+              firstName
+              lastName
+              email
+              Status
+              PlanType
+              accountBalance
+              tradingBalance
+              profit
+              eth
+              btc
+              timeAdded
+            }
+            proof
+            timeAdded
+          }
         }
-      })
-    },
+      `
 
-    async triggerDeletion (id) {
       try {
-        await this.$axios.delete(
-          `https://panafstrag.onrender.com/api/panAfrica/programmes/${id}`
-        )
-        this.$toast.success('Programme has been removed').goAway(1500)
-        await this.fetchProgrammes()
-      } catch (error) {
-        this.$toast.error(error.response.data.errorMessage).goAway(1500)
+        const response = await fetch('https://fidelityvalues.onrender.com/graphql/query', {
+          method: 'POST',
+          headers: {
+            'content-type': 'application/json',
+            authorization: 'Bearer ' + accessToken
+          },
+          body: JSON.stringify({
+            query
+          })
+        })
+        const data = await response.json()
+        if (data?.errors) {
+          this.$toastr.e(data.errors[0].message)
+        } else {
+          this.transactionsList = data.data.getTransactions
+        }
+      } finally {
+        this.loading = false
       }
-    },
-    handleEdit (id) {
-      this.$router.push(`/admin/programmes/${id}`)
     }
   }
 }
