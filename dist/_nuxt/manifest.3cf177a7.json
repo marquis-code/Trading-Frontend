@@ -1,0 +1,10 @@
+{
+  "name": "Fidelitys Value",
+  "short_name": "Fidelitys Value",
+  "description": "",
+  "icons": [],
+  "start_url": "/?standalone=true",
+  "display": "standalone",
+  "background_color": "#ffffff",
+  "lang": "en"
+}

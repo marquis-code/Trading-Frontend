@@ -43,7 +43,7 @@ export default {
           position: 'Virginia'
         },
         {
-          description: 'Frankly speaking, I sleep better at night knowing that my finances are getting better with Lucenttrader. ',
+          description: 'Frankly speaking, I sleep better at night knowing that my finances are getting better with Fidelitys Value. ',
           user: 'Joseph',
           position: 'London'
         }

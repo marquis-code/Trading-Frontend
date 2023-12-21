@@ -39,7 +39,11 @@ export default {
     { src: '~/plugins/slider.js', mode: 'client' },
     { src: '~/plugins/trading-view.js', mode: 'client' },
     '~/plugins/bootstrap-vue.client',
-    { src: '@/plugins/aos', mode: 'client' }
+    { src: '@/plugins/aos', mode: 'client' },
+    {
+      src: '~/plugins/tawk-messenger.client.js',
+      mode: 'client'
+    }
   ],
   purgeCSS: {
     whitelist: [

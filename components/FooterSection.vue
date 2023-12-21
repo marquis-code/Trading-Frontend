@@ -175,7 +175,7 @@
                     />
                   </svg>
 
-                  <span class="flex-1 text-sm">support@Fidelitysvalues.com</span>
+                  <span class="flex-1 text-sm">support@fidelitysvalue.com</span>
                 </a>
               </li>
 
