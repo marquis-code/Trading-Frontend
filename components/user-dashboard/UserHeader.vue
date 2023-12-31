@@ -149,11 +149,6 @@ export default {
           icon: 'deposit',
           url: '/dashboard/deposit'
         },
-            {
-          name: 'Withdraw',
-          icon: 'deposit',
-          url: '/dashboard/withdrawals'
-        },
         {
           name: 'Withdraw',
           icon: 'deposit',
