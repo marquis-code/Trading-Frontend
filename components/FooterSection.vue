@@ -108,7 +108,7 @@
                   </svg>
                 </div>
 
-                <div>support@fidelitysvalue.com</div>
+                <div>support@fintelvalues.com</div>
               </li>
 
               <li class="flex items-center gap-x-4 w-1/2">
