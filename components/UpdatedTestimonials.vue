@@ -38,12 +38,12 @@ export default {
           position: 'Australia'
         },
         {
-          description: 'Financial stabilty was a challenge until Fidelitys Value . I think everyone show try them! ',
+          description: 'Financial stabilty was a challenge until Fintel Values . I think everyone show try them! ',
           user: 'Austin Jenkins',
           position: 'Virginia'
         },
         {
-          description: 'Frankly speaking, I sleep better at night knowing that my finances are getting better with Fidelitys Value. ',
+          description: 'Frankly speaking, I sleep better at night knowing that my finances are getting better with Fintel Values. ',
           user: 'Joseph',
           position: 'London'
         }

@@ -175,7 +175,7 @@
                     />
                   </svg>
 
-                  <span class="flex-1 text-sm">support@fidelitysvalue.com</span>
+                  <span class="flex-1 text-sm">support@fintelvalues.com</span>
                 </a>
               </li>
 
@@ -230,7 +230,7 @@
           </p>
 
           <p class="mt-4 text-sm  sm:order-first sm:mt-0">
-            &copy; 2023 Fidelitys value.
+            &copy; 2023 Fintel values.
           </p>
         </div>
       </div>

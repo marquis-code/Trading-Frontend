@@ -2,7 +2,7 @@ const path = require('path')
 export default {
   // Global page headers: https://go.nuxtjs.dev/config-head
   head: {
-    title: 'Fidelitys Value',
+    title: 'Fintel Values',
     meta: [
       { charset: 'utf-8' },
       { name: 'viewport', content: 'width=device-width, initial-scale=1' },
@@ -152,12 +152,12 @@ export default {
   // PWA module configuration: https://go.nuxtjs.dev/pwa
   pwa: {
     meta: {
-      title: 'Fidelitys Value',
+      title: 'Fintel Values',
       author: 'Marquis'
     },
     manifest: {
-      name: 'Fidelitys Value',
-      short_name: 'Fidelitys Value',
+      name: 'Fintel Values',
+      short_name: 'Fintel Values',
       lang: 'en',
       display: 'standalone'
     }

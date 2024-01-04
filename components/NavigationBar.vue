@@ -29,7 +29,7 @@
     </header>
     <b-sidebar
       id="sidebar-1"
-      title="Fidelitys Value"
+      title="Fintel Values"
       backdrop-variant="dark"
       shadow
       no-header

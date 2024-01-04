@@ -49,7 +49,7 @@
             </div>
             <div class="sm:w-2/3 sm:pl-8 sm:py-8 sm:border-l border-gray-200 sm:border-t-0 border-t mt-4 pt-4 sm:mt-0  sm:text-left">
               <p class="leading-relaxed text-base md:text-lg mb-4">
-                George Hovey is an accomplished professional with a strong background in financial investment. As the Executive Director at Fidelitys Value, a leading financial investment company, George is based in Denver, Colorado. With over 10 years of experience, he has demonstrated exceptional skills in managing clients' portfolios and providing valuable financial advice.
+                George Hovey is an accomplished professional with a strong background in financial investment. As the Executive Director at Fintel Values, a leading financial investment company, George is based in Denver, Colorado. With over 10 years of experience, he has demonstrated exceptional skills in managing clients' portfolios and providing valuable financial advice.
               </p>
 
               <p class="leading-relaxed text-base md:text-lg mb-4">

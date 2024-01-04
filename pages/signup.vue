@@ -23,7 +23,7 @@
           <h2
             class="mt-6 text-2xl font-bold text-white sm:text-3xl md:text-4xl"
           >
-            Welcome to Fidelitys Value
+            Welcome to Fintel Values
           </h2>
 
           <p class="mt-4 leading-relaxed text-white/90">
@@ -53,7 +53,7 @@
             <h1
               class="mt-2 text-2xl font-bold text-gray-200 sm:text-3xl md:text-4xl"
             >
-              Welcome to Fidelitys Value
+              Welcome to Fintel Values
             </h1>
 
             <p class="mt-4 leading-relaxed text-sm text-white">

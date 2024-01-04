@@ -10,7 +10,7 @@
           <p
             class="text-center text-sm md:text-base max-w-2xl text-white/90 md:mt-6 md:block font-medium md:leading-relaxed"
           >
-            Fidelitys value is a leading private equity and property manager, with around 100 executives based across our UK office network. We partner with ambitious, entrepreneurial management teams to accelerate growth, and serve thousands of investors with the goal of delivering exceptional returns.
+            Fintel Values is a leading private equity and property manager, with around 100 executives based across our UK office network. We partner with ambitious, entrepreneurial management teams to accelerate growth, and serve thousands of investors with the goal of delivering exceptional returns.
           </p>
         </div>
       </div>
@@ -65,14 +65,14 @@
           </h1>
           <div class="space-y-4">
             <p class="lg:w-2/3 mx-auto leading-relaxed text-sm md:text-base">
-              Fidelitys Value was formed in 2009 following a management buyout of the private equity business of Aberdeen Asset Management PLC. The senior team who led the transaction have worked together since 2004 and have transformed Fidelitys Value into one of the UK’s most active SME investors, helping hundreds of management teams to achieve their business ambitions.
+              Fintel Values was formed in 2009 following a management buyout of the private equity business of Aberdeen Asset Management PLC. The senior team who led the transaction have worked together since 2004 and have transformed Fintel Values into one of the UK’s most active SME investors, helping hundreds of management teams to achieve their business ambitions.
             </p>
 
             <p class="lg:w-2/3 mx-auto leading-relaxed text-sm md:text-base">
               We now have a presence across all regions of the UK, with a team that is recognised as having a collaborative and respectful culture, in supporting the growth of a wide range of public and private companies.
             </p>
             <p class="lg:w-2/3 mx-auto leading-relaxed text-sm md:text-base">
-              In 2021 Fidelitys Value was acquired by Mattioli Woods PLC, a leading provider of specialist wealth management and financial planning services. This partnership continues our ethos of supporting ambition, working with like-minded people who share the same passion and enthusiasm for delivering exceptional client outcomes.
+              In 2021 Fintel Values was acquired by Mattioli Woods PLC, a leading provider of specialist wealth management and financial planning services. This partnership continues our ethos of supporting ambition, working with like-minded people who share the same passion and enthusiasm for delivering exceptional client outcomes.
             </p>
           </div>
         </div>
@@ -96,7 +96,7 @@
 
                 <div class="p-8 sm:p-16 lg:p-24">
                   <h2 class="text-xl font-bold sm:text-3xl">
-                    Meet the Fidelitys Value team
+                    Meet the Fintel Values team
                   </h2>
 
                   <p class="mt-4 text-gray-600 leading-loose">
@@ -213,7 +213,7 @@
                   </div>
                   <div class="flex-grow pl-4">
                     <p class="leading-relaxed text-sm md:text-base">
-                      Fidelitys Value is a signatory to the Investing in Women Code, a commitment to support the advancement of female entrepreneurship in the UK.
+                      Fintel Values is a signatory to the Investing in Women Code, a commitment to support the advancement of female entrepreneurship in the UK.
                     </p>
                   </div>
                 </div>

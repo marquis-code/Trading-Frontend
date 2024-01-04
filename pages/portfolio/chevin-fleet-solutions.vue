@@ -76,7 +76,7 @@ export default {
         },
         {
           title: 'Fund',
-          description: 'MEIF Fidelitys Value Debt Finance'
+          description: 'MEIF Fintel Values Debt Finance'
         },
         {
           title: 'Status',

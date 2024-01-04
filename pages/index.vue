@@ -9,7 +9,7 @@
       <div class="container max-w-xl p-6 py-12 mx-auto space-y-10 lg:px-8 lg:max-w-7xl">
         <div>
           <h2 class="lg:text-3xl text-2xl font-bold text-center sm:text-5xl dark:text-gray-50">
-            Why choose Fidelitys Value?
+            Why choose Fintel Values?
           </h2>
           <p class="mx-auto mt-4 text-sm text-center text-white">
             We use state-of-the-art security measures when handling your account details and personal funds. Your information is SSL encrypted and safely stored.
@@ -82,7 +82,7 @@
                     Firm Regulation
                   </h4>
                   <p class="mt-2 text-white md:text-base text-sm">
-                    Fidelitys Value complies with the strictest regulation guidelines, under IFSC (International Financial Services Commission), to ensure the safest trading conditions.
+                    Fintel Values complies with the strictest regulation guidelines, under IFSC (International Financial Services Commission), to ensure the safest trading conditions.
                   </p>
                 </div>
               </div>
@@ -135,7 +135,7 @@
                       Privacy
                     </h4>
                     <p class="mt-2 text-white md:text-base text-sm">
-                      Fidelitys Value is fully compliant with PCI Data Security Standards. We encrypt and protect your information, so you never need to worry.
+                      Fintel Values is fully compliant with PCI Data Security Standards. We encrypt and protect your information, so you never need to worry.
                     </p>
                   </div>
                 </div>

@@ -66,7 +66,7 @@ export default {
         {
           name: 'Indigo',
           url: 'indigo',
-          description: 'In December 2018 Fidelitys Value Investor Partners exited from Indigo Belcom generating a 4.2x return in just two years since it first invested. Indigo designs, installs and maintains telecom networks across the UK and Europe, enabling customers such as Vodafone, Sky and BT to deliver fixed line, broadband, mobile and other data services to a wide variety of corporate, enterprise and consumer end users. Fidelitys Value supported the business with the strategic acquisition of Belcom247 in September 2017, together forming the enlarged Indigo-Belcom Group. Following the successful acquisition, revenues increased from £12 million to a forecast of over £30 million in the year the exit completed, with underlying profits increasing from £1.3 million to over £4 million.',
+          description: 'In December 2018 Fintel Values Investor Partners exited from Indigo Belcom generating a 4.2x return in just two years since it first invested. Indigo designs, installs and maintains telecom networks across the UK and Europe, enabling customers such as Vodafone, Sky and BT to deliver fixed line, broadband, mobile and other data services to a wide variety of corporate, enterprise and consumer end users. Fintel Values supported the business with the strategic acquisition of Belcom247 in September 2017, together forming the enlarged Indigo-Belcom Group. Following the successful acquisition, revenues increased from £12 million to a forecast of over £30 million in the year the exit completed, with underlying profits increasing from £1.3 million to over £4 million.',
           imgUrl: 'https://www.mavencp.com/hubfs/indigo-servers.jpg'
         }
       ]
