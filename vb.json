@@ -1,0 +1,9 @@
+{
+  "successMessage": "Verification OTP sent.",
+  "data": {
+      "userId": "659efcc82a05c72754208a0d",
+      "phone": "09076543245",
+      "message": "\n    Hello From TrustXWallet\n    Please enter the OTP 1321 to verify your account.\n    This OTP is valid for 10 minutes.\n    ",
+      "otp": "1321"
+  }
+}
