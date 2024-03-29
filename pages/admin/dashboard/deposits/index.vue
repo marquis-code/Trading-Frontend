@@ -3,21 +3,9 @@
     <Transition name="fade">
       <section class="text-white">
         <div class="flex items-center justify-between my-3">
-          <button
-            class="outline-none border bg-gray-200 text-black px-3 py-1 rounded-md text-sm"
-            @click="goBack()"
-          >
-            <svg
-              xmlns="http://www.w3.org/2000/svg"
-              width="23"
-              height="23"
-              viewBox="0 0 24 24"
-              fill="none"
-              stroke="#747070"
-              stroke-width="2"
-              stroke-linecap="square"
-              stroke-linejoin="bevel"
-            >
+          <button class="outline-none border bg-gray-200 text-black px-3 py-1 rounded-md text-sm" @click="goBack()">
+            <svg xmlns="http://www.w3.org/2000/svg" width="23" height="23" viewBox="0 0 24 24" fill="none"
+              stroke="#747070" stroke-width="2" stroke-linecap="square" stroke-linejoin="bevel">
               <path d="M19 12H6M12 5l-7 7 7 7" />
             </svg>
           </button>
@@ -26,24 +14,12 @@
         <div class="sm:flex-1 pb-0 mt-3">
           <label for="search" class="sr-only">Search</label>
 
-          <input
-            v-model="search"
-            type="text"
-            placeholder="Search.."
-            class="w-full rounded-tr-md rounded-tl-md outline-none bg-white p-3 text-gray-700 transition border focus:border-white focus:outline-none focus:outline-none focus:ring-1 focus:ring-green-500 focus:border-transparent"
-          >
+          <input v-model="search" type="text" placeholder="Search.."
+            class="w-full rounded-tr-md rounded-tl-md outline-none bg-white p-3 text-gray-700 transition border focus:border-white focus:outline-none focus:outline-none focus:ring-1 focus:ring-green-500 focus:border-transparent">
         </div>
         <b-card class="mt-3">
-          <b-table
-            striped
-            show-empty
-            responsive
-            :items="filteredDeposits"
-            :fields="fields"
-            :busy="loading"
-            :current-page="currentPage"
-            :per-page="perPage"
-          >
+          <b-table striped show-empty responsive :items="filteredDeposits" :fields="fields" :busy="loading"
+            :current-page="currentPage" :per-page="perPage">
             <template #table-busy>
               <div class="text-center my-2 cursor-pointer">
                 <b-spinner class="align-middle" />
@@ -52,14 +28,12 @@
             </template>
 
             <template #empty>
-              <p
-                class="text-center text-sm text-secondary py-2 cursor-pointer"
-              >
+              <p class="text-center text-sm text-secondary py-2 cursor-pointer">
                 {{
-                  search
-                    ? `No Transactions found for search value: "${search}"`
-                    : "No Transactions available"
-                }}
+            search
+              ? `No Transactions found for search value: "${search}"`
+              : "No Transactions available"
+          }}
               </p>
             </template>
 
@@ -72,15 +46,15 @@
             <template #cell(amount)="data">
               <div class="font-medium py-4 text-sm cursor-pointer">
                 {{
-                  formatNumberAsDollar(data?.item?.amount) ?? 'N/A'
-                }}
+            formatNumberAsDollar(data?.item?.amount) ?? 'N/A'
+          }}
               </div>
             </template>
 
             <template #cell(wallet)="data">
               <div class="font-medium py-4 text-sm cursor-pointer">
                 {{
-                  data?.item?.wallet ?? 'N/A' }}
+            data?.item?.wallet ?? 'N/A' }}
               </div>
             </template>
 
@@ -92,9 +66,10 @@
 
             <template #cell(transactionStatus)="data">
               <div class="font-medium py-4 text-sm cursor-pointer">
-                <span class="px-3 py-2 rounded-full text-sm" :class="[data?.item?.transactionStatus === 'Pending' ? 'bg-yellow-500 text-white' : data?.item?.transactionStatus === 'Approved' ? 'text-white bg-green-500' : data?.item?.transactionStatus === 'Declined' ? 'text-white bg-red-500' : '']">
+                <span class="px-3 py-2 rounded-full text-sm"
+                  :class="[data?.item?.transactionStatus === 'Pending' ? 'bg-yellow-500 text-white' : data?.item?.transactionStatus === 'Approved' ? 'text-white bg-green-500' : data?.item?.transactionStatus === 'Declined' ? 'text-white bg-red-500' : '']">
                   {{
-                    data?.item?.transactionStatus ?? 'N/A' }}
+            data?.item?.transactionStatus ?? 'N/A' }}
                 </span>
               </div>
             </template>
@@ -106,18 +81,18 @@
                 <div>
                   <span>
                     {{
-                      data?.item?.user?.firstName
-                    }}
+            data?.item?.user?.firstName
+          }}
                   </span>
                   <span>
                     {{
-                      data?.item?.user?.lastName
-                    }}
+              data?.item?.user?.lastName
+            }}
                   </span><br>
                   <span>
                     {{
-                      data?.item?.user?.email
-                    }}
+              data?.item?.user?.email
+            }}
                   </span>
                 </div>
               </div>
@@ -143,10 +118,12 @@
             <template #cell(actions)="data">
               <div class="py-4">
                 <div v-if="data?.item?.transactionStatus === 'Pending'" class="flex items-center gap-x-3">
-                  <button class="text-white text-xs bg-green-500 w-full py-1.5 rounded-full" @click="handleAction(data.item, 'approve')">
+                  <button class="text-white text-xs bg-green-500 w-full py-1.5 rounded-full"
+                    @click="handleAction(data.item, 'approve')">
                     Approve
                   </button>
-                  <button class="text-white text-xs bg-red-500 w-full py-1.5 rounded-full" @click="handleAction(data.item, 'reject')">
+                  <button class="text-white text-xs bg-red-500 w-full py-1.5 rounded-full"
+                    @click="handleAction(data.item, 'reject')">
                     Reject
                   </button>
                 </div>
@@ -160,13 +137,7 @@
           </b-table>
 
           <div class="flex justify-end items-end">
-            <b-pagination
-              v-model="currentPage"
-              :total-rows="totalRows"
-              :per-page="perPage"
-              size="md"
-              class="my-3"
-            />
+            <b-pagination v-model="currentPage" :total-rows="totalRows" :per-page="perPage" size="md" class="my-3" />
           </div>
         </b-card>
         <!-- </div> -->
@@ -188,7 +159,7 @@ export default {
   layout: 'dashboards',
   scrollToTop: true,
   computed: {
-    filteredDeposits () {
+    filteredDeposits() {
       const search = this.search.toLowerCase()
       return this.transactionsList.filter((itm) => {
         return (
@@ -199,7 +170,7 @@ export default {
       })
     }
   },
-  data () {
+  data() {
     return {
       transactionsList: [],
       fields: [
@@ -257,7 +228,7 @@ export default {
       loading: false
     }
   },
-  head () {
+  head() {
     return {
       meta: [
         {
@@ -308,17 +279,17 @@ export default {
       ]
     }
   },
-  created () {
+  created() {
     this.fetchTransactions()
   },
-  mounted () {
+  mounted() {
     this.totalRows = this.transactionsList.length
   },
   methods: {
-    goBack () {
+    goBack() {
       this.$router.go(-1)
     },
-    async fetchTransactions () {
+    async fetchTransactions() {
       this.loading = true
       const accessToken = JSON.parse(window.localStorage.getItem('auth'))
       this.loading = true
@@ -351,7 +322,7 @@ export default {
       `
 
       try {
-        const response = await fetch('https://fidelityvalues.onrender.com/graphql/query', {
+        const response = await fetch('', {
           method: 'POST',
           headers: {
             'content-type': 'application/json',
@@ -372,12 +343,12 @@ export default {
         this.loading = false
       }
     },
-    getInitials (firstName, lastName) {
+    getInitials(firstName, lastName) {
       const firstInitial = firstName ? firstName.charAt(0) : ''
       const lastInitial = lastName ? lastName.charAt(0) : ''
       return `${firstInitial}${lastInitial}`
     },
-    formatDateTime (date) {
+    formatDateTime(date) {
       // Check if date is a string and convert it to a Date object
       if (typeof date === 'string') {
         date = new Date(date)
@@ -391,7 +362,7 @@ export default {
         return 'Invalid Date'
       }
     },
-    handleAction (data, type) {
+    handleAction(data, type) {
       Swal.fire({
         title: `${type === 'approve' ? 'Approve' : 'Reject'} Deposit`,
         text: "Please Note: You won't be able to revert this!",
@@ -408,7 +379,7 @@ export default {
         }
       })
     },
-    async processTransaction (transactionId, status) {
+    async processTransaction(transactionId, status) {
       this.processing = true
       const accessToken = JSON.parse(window.localStorage.getItem('auth'))
       const statusType = status === 'approve' ? 'Approved' : status === 'reject' ? 'Declined' : 'Pending'
@@ -419,7 +390,7 @@ export default {
             }
           `
         const response = await fetch(
-          'https://fidelityvalues.onrender.com/graphql/query',
+          '',
           {
             method: 'POST',
             headers: {
@@ -445,7 +416,7 @@ export default {
         this.processing = false
       }
     },
-    formatNumberAsDollar (number) {
+    formatNumberAsDollar(number) {
       return number?.toLocaleString('en-US', { style: 'currency', currency: 'USD' })
     }
   }
@@ -456,13 +427,16 @@ export default {
 .fade-enter-active {
   transition: all 0.3s cubic-bezier(0.52, 0.02, 0.19, 1.02) 0.15s;
 }
+
 .fade-leave-active {
   transition: all 0.3as cubic-bezier(0.52, 0.02, 0.19, 1.02);
 }
+
 .fade-enter-from {
   opacity: 0;
   transform: scale(0.8);
 }
+
 .fade-leave-to {
   transform: scale(0.8);
 }

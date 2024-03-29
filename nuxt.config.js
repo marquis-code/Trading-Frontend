@@ -61,24 +61,6 @@ export default {
 
   // Modules for dev and build (recommended): https://go.nuxtjs.dev/config-modules
   buildModules: ['@nuxtjs/moment', '@nuxt/postcss8'],
-  // graphql: {
-  //   /**
-  //    * An Object of your GraphQL clients
-  //    */
-  //   clients: {
-  //     default: {
-  //       /**
-  //        * The client endpoint url
-  //        */
-  //       endpoint: 'https://fidelityvalues.onrender.com/graphql/query',
-  //       /**
-  //        * Per-client options overrides
-  //        * See: https://github.com/prisma-labs/graphql-request#passing-more-options-to-fetch
-  //        */
-  //       options: {}
-  //     }
-  //   }
-  // },
   loadingIndicator: {
     name: 'chasing-dots',
     color: 'purple',
@@ -128,25 +110,9 @@ export default {
   // Axios module configuration: https://go.nuxtjs.dev/config-axios
   axios: {
     // proxy: true,
-    baseURL: 'https://fidelityvalues.onrender.com'
+    baseURL: ''
   },
   auth: {
-    // strategies: {
-    //   graphql: {
-    //     scheme: '~/schemes/graphqlScheme.js',
-    //     provider: 'nuxt-auth-graphql',
-    //     endpoint: 'https://fidelityvalues.onrender.com/graphql/query', // Your GraphQL API endpoint
-    //     tokenType: 'Bearer',
-    //     tokenName: 'Authorization'
-    //   }
-    // },
-    // redirect: {
-    //   login: '/login',
-    //   register: { url: '/api/auth/user', method: 'post', propertyName: 'user' },
-    //   logout: '/login?logout=true',
-    //   callback: false,
-    //   home: '/dashboard'
-    // }
   },
 
   // PWA module configuration: https://go.nuxtjs.dev/pwa
@@ -231,7 +197,7 @@ export default {
     graphql: {
       clients: {
         default: {
-          endpoint: 'https://fidelityvalues.onrender.com/graphql/query'
+          endpoint: ''
         }
       }
     }
@@ -239,7 +205,7 @@ export default {
   apollo: {
     clientConfigs: {
       default: {
-        httpEndpoint: 'https://fidelityvalues.onrender.com/graphql/query' // Your graphql endpiont
+        httpEndpoint: '' // Your graphql endpiont
       }
     }
   }

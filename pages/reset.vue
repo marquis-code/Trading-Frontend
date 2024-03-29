@@ -1,9 +1,7 @@
 <template>
   <div class="bg-[#003b6d] h-screen">
     <section class="bg-[#003b6d] flex justify-center items-center pt-20 container mx-auto">
-      <div
-        class="w-full max-w-md p-8 space-y-6 rounded-xl bg-white"
-      >
+      <div class="w-full max-w-md p-8 space-y-6 rounded-xl bg-white">
         <h1 class="text-3xl font-bold">
           Almost Done!
         </h1>
@@ -13,34 +11,19 @@
         <form class="space-y-10" @submit.prevent="login">
           <div class="space-y-1 text-sm w-full">
             <label for="token" class="block text-gray-900 font-medium">Token</label>
-            <input
-              id="token"
-              v-model="form.resetCode"
-              type="tel"
-              name="token"
-              placeholder="email"
-              class="border w-full outline-none px-4 py-3 rounded-md border-gray-900 text-gray-900"
-            >
+            <input id="token" v-model="form.resetCode" type="tel" name="token" placeholder="email"
+              class="border w-full outline-none px-4 py-3 rounded-md border-gray-900 text-gray-900">
           </div>
           <div class="space-y-1 text-sm w-full">
             <label for="password" class="block text-gray-900 font-medium">New Password</label>
-            <input
-              id="password"
-              v-model="form.password"
-              type="password"
-              name="password"
-              placeholder="password"
-              class="border w-full outline-none px-4 py-3 rounded-md border-gray-900 text-gray-900"
-            >
+            <input id="password" v-model="form.password" type="password" name="password" placeholder="password"
+              class="border w-full outline-none px-4 py-3 rounded-md border-gray-900 text-gray-900">
           </div>
           <div class="w-full">
-            <button
-              :disabled="!isFormEmpty"
-              :class="[
-                !isFormEmpty || processing ? 'opacity-25 cursor-not-allowed' : '',
-              ]"
-              class="w-full shrink-0 text-xs disabled:cursor-not-allowed disabled:opacity-25 rounded-md border border-green-500 bg-green-600 px-12 py-3 font-medium text-white transition"
-            >
+            <button :disabled="!isFormEmpty" :class="[
+          !isFormEmpty || processing ? 'opacity-25 cursor-not-allowed' : '',
+        ]"
+              class="w-full shrink-0 text-xs disabled:cursor-not-allowed disabled:opacity-25 rounded-md border border-green-500 bg-green-600 px-12 py-3 font-medium text-white transition">
               {{ processing ? "processing..." : "Submit" }}
             </button>
           </div>
@@ -53,7 +36,7 @@
 <script>
 export default {
   layout: 'authLayout',
-  data () {
+  data() {
     return {
       user: '',
       processing: false,
@@ -65,15 +48,15 @@ export default {
     }
   },
   computed: {
-    isFormEmpty () {
+    isFormEmpty() {
       return !!(this.form.password && this.form.resetCode)
     }
   },
-  mounted () {
+  mounted() {
     this.user = JSON.parse(window.localStorage.getItem('user-email'))
   },
   methods: {
-    async login () {
+    async login() {
       this.processing = true
       const resetPasswordMutation = `
       mutation resetPassword($email: String!, $newPassword: String!, $resetCode: String!) {
@@ -82,20 +65,20 @@ export default {
         `
       try {
         const response = await fetch(
-          'https://fidelityvalues.onrender.com/graphql/query', {
-            method: 'POST',
-            headers: {
-              'content-type': 'application/json'
-            },
-            body: JSON.stringify({
-              query: resetPasswordMutation,
-              variables: {
-                email: this.user,
-                newPassword: this.form.password,
-                resetCode: this.form.resetCode
-              }
-            })
-          }
+          '', {
+          method: 'POST',
+          headers: {
+            'content-type': 'application/json'
+          },
+          body: JSON.stringify({
+            query: resetPasswordMutation,
+            variables: {
+              email: this.user,
+              newPassword: this.form.password,
+              resetCode: this.form.resetCode
+            }
+          })
+        }
         )
         const data = await response.json()
         if (data?.errors) {
@@ -113,6 +96,4 @@ export default {
 }
 </script>
 
-<style>
-
-</style>
+<style></style>

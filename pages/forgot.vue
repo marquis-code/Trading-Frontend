@@ -1,35 +1,25 @@
 <template>
   <div class="bg-[#003b6d] h-screen">
     <section v-if="!token_sent" class="bg-[#003b6d] flex justify-center items-center pt-20 container mx-auto">
-      <div
-        class="w-full max-w-md p-8 space-y-6 rounded-xl bg-white"
-      >
+      <div class="w-full max-w-md p-8 space-y-6 rounded-xl bg-white">
         <h1 class="text-3xl font-bold">
           Don't worry!
         </h1>
         <p class="text-gray-500 text-sm leading-loose">
-          we are here to help you recover your password. Enter the email address you used when you joined and we'll send you instructions to reset your password.
+          we are here to help you recover your password. Enter the email address you used when you joined and we'll send
+          you instructions to reset your password.
         </p>
         <form class="space-y-10" @submit.prevent="handleForgetPassword">
           <div class="space-y-1 text-sm w-full">
             <label for="email" class="block text-gray-900 font-medium">Email</label>
-            <input
-              id="email"
-              v-model="form.email"
-              type="email"
-              name="email"
-              placeholder="email"
-              class="border w-full outline-none px-4 py-3 rounded-md border-gray-900 text-gray-900"
-            >
+            <input id="email" v-model="form.email" type="email" name="email" placeholder="email"
+              class="border w-full outline-none px-4 py-3 rounded-md border-gray-900 text-gray-900">
           </div>
           <div class="w-full">
-            <button
-              :disabled="!isFormEmpty"
-              :class="[
-                !isFormEmpty || processing ? 'opacity-25 cursor-not-allowed' : '',
-              ]"
-              class="w-full shrink-0 text-xs disabled:cursor-not-allowed disabled:opacity-25 rounded-md border border-green-500 bg-green-600 px-12 py-3 font-medium text-white transition"
-            >
+            <button :disabled="!isFormEmpty" :class="[
+      !isFormEmpty || processing ? 'opacity-25 cursor-not-allowed' : '',
+    ]"
+              class="w-full shrink-0 text-xs disabled:cursor-not-allowed disabled:opacity-25 rounded-md border border-green-500 bg-green-600 px-12 py-3 font-medium text-white transition">
               {{ processing ? "processing..." : "Submit" }}
             </button>
           </div>
@@ -51,7 +41,7 @@
 <script>
 export default {
   layout: 'authLayout',
-  data () {
+  data() {
     return {
       processing: false,
       token_sent: false,
@@ -61,11 +51,11 @@ export default {
     }
   },
   computed: {
-    isFormEmpty () {
+    isFormEmpty() {
       return !!(this.form.email)
     }
   },
-  mounted () {
+  mounted() {
     if (window.process) {
       const user = window.localStorage.getItem('user')
       const parsedUser = JSON.parse(user)
@@ -75,7 +65,7 @@ export default {
     }
   },
   methods: {
-    async handleForgetPassword () {
+    async handleForgetPassword() {
       this.processing = true
       const resetPassword = `
           mutation SendResetPasswordCode($email: String!) {
@@ -84,18 +74,18 @@ export default {
         `
       try {
         const response = await fetch(
-          'https://fidelityvalues.onrender.com/graphql/query', {
-            method: 'POST',
-            headers: {
-              'content-type': 'application/json'
-            },
-            body: JSON.stringify({
-              query: resetPassword,
-              variables: {
-                email: this.form.email
-              }
-            })
-          }
+          '', {
+          method: 'POST',
+          headers: {
+            'content-type': 'application/json'
+          },
+          body: JSON.stringify({
+            query: resetPassword,
+            variables: {
+              email: this.form.email
+            }
+          })
+        }
         )
         const data = await response.json()
         if (data?.errors) {
