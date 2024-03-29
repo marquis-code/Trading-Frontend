@@ -1,28 +1,18 @@
 <template>
   <section class="bg-white space-y-6">
     <div class="lg:grid lg:min-h-screen lg:grid-cols-12 w-full">
-      <section
-        class="relative flex h-32 items-end bg-[#003b6d] lg:col-span-5 lg:h-full xl:col-span-6"
-      >
-        <img
-          alt="Night"
+      <section class="relative flex h-32 items-end bg-[#003b6d] lg:col-span-5 lg:h-full xl:col-span-6">
+        <img alt="Night"
           src="https://images.unsplash.com/photo-1627253781598-63b98c51da42?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2787&q=80"
-          class="absolute inset-0 h-full w-full object-cover opacity-80"
-        >
+          class="absolute inset-0 h-full w-full object-cover opacity-80">
 
         <div class="hidden lg:relative lg:block lg:p-12">
           <a class="block text-white" href="/">
             <span class="sr-only">Home</span>
-            <img
-              src="@/assets/img/Fidelitysvalues.png"
-              alt="logo"
-              class="h-10 w-10"
-            >
+            <img src="@/assets/img/Fidelitysvalues.png" alt="logo" class="h-10 w-10">
           </a>
 
-          <h2
-            class="mt-6 text-2xl font-bold text-white sm:text-3xl md:text-4xl"
-          >
+          <h2 class="mt-6 text-2xl font-bold text-white sm:text-3xl md:text-4xl">
             Welcome to Fintel Values
           </h2>
 
@@ -34,25 +24,16 @@
       </section>
 
       <main
-        class="items-center justify-center px-8 py-8 sm:px-12 lg:col-span-7 lg:px-16 lg:py-12 xl:col-span-6 bg-[#003b6d] w-full"
-      >
+        class="items-center justify-center px-8 py-8 sm:px-12 lg:col-span-7 lg:px-16 lg:py-12 xl:col-span-6 bg-[#003b6d] w-full">
         <div class="max-w-xl lg:max-w-3xl lg:mx-auto grid place-content-center h-full">
           <div class="relative -mt-16 block lg:hidden">
-            <a
-              class="inline-flex h-16 w-16 items-center justify-center rounded-full bg-white text-blue-600 sm:h-20 sm:w-20"
-              href="/"
-            >
+            <a class="inline-flex h-16 w-16 items-center justify-center rounded-full bg-white text-blue-600 sm:h-20 sm:w-20"
+              href="/">
               <span class="sr-only">Home</span>
-              <img
-                src="@/assets/img/Fidelitysvalues.png"
-                alt="logo"
-                class="h-10 w-10"
-              >
+              <img src="@/assets/img/Fidelitysvalues.png" alt="logo" class="h-10 w-10">
             </a>
 
-            <h1
-              class="mt-2 text-2xl font-bold text-gray-200 sm:text-3xl md:text-4xl"
-            >
+            <h1 class="mt-2 text-2xl font-bold text-gray-200 sm:text-3xl md:text-4xl">
               Welcome to Fintel Values
             </h1>
 
@@ -62,22 +43,14 @@
             </p>
           </div>
 
-          <form
-            class="lg:w-[500px] space-y-6 pt-10"
-            @submit.prevent="handleSubmit"
-          >
+          <form class="lg:w-[500px] space-y-6 pt-10" @submit.prevent="handleSubmit">
             <div class="col-span-6 sm:col-span-3">
               <label for="FirstName" class="block text-sm text-white">
                 First Name
               </label>
 
-              <input
-                id="FirstName"
-                v-model="form.first_name"
-                type="text"
-                name="first_name"
-                class="mt-1 w-full py-3 pl-3 outline-none border-none rounded-md border-gray-200 bg-white text-sm text-gray-700 shadow-sm"
-              >
+              <input id="FirstName" v-model="form.first_name" type="text" name="first_name"
+                class="mt-1 w-full py-3 pl-3 outline-none border-none rounded-md border-gray-200 bg-white text-sm text-gray-700 shadow-sm">
             </div>
 
             <div class="col-span-6 sm:col-span-3">
@@ -85,13 +58,8 @@
                 Last Name
               </label>
 
-              <input
-                id="LastName"
-                v-model="form.last_name"
-                type="text"
-                name="last_name"
-                class="mt-1 w-full py-3 pl-3 outline-none border-none rounded-md border-gray-200 bg-white text-sm text-gray-700 shadow-sm"
-              >
+              <input id="LastName" v-model="form.last_name" type="text" name="last_name"
+                class="mt-1 w-full py-3 pl-3 outline-none border-none rounded-md border-gray-200 bg-white text-sm text-gray-700 shadow-sm">
             </div>
 
             <div class="col-span-6">
@@ -99,13 +67,8 @@
                 Email
               </label>
 
-              <input
-                id="Email"
-                v-model="form.email"
-                type="email"
-                name="email"
-                class="mt-1 w-full py-3 pl-3 outline-none border-none rounded-md border-gray-200 bg-white text-sm text-gray-700 shadow-sm"
-              >
+              <input id="Email" v-model="form.email" type="email" name="email"
+                class="mt-1 w-full py-3 pl-3 outline-none border-none rounded-md border-gray-200 bg-white text-sm text-gray-700 shadow-sm">
             </div>
 
             <div class="col-span-6 sm:col-span-3">
@@ -113,28 +76,18 @@
                 Password
               </label>
 
-              <input
-                id="Password"
-                v-model="form.password"
-                type="password"
-                name="password"
-                class="mt-1 w-full py-3 pl-3 outline-none border-none rounded-md border-gray-200 bg-white text-sm text-gray-700 shadow-sm"
-              >
+              <input id="Password" v-model="form.password" type="password" name="password"
+                class="mt-1 w-full py-3 pl-3 outline-none border-none rounded-md border-gray-200 bg-white text-sm text-gray-700 shadow-sm">
             </div>
             <div class="col-span-6">
               <label for="referralCode" class="block text-sm text-white">
                 Referral Code
               </label>
 
-              <input
-                id="referralCode"
-                v-model="form.referralCode"
-                type="text"
-                name="referralCode"
-                class="mt-1 w-full py-3 pl-3 outline-none border-none rounded-md border-gray-200 bg-white text-sm text-gray-700 shadow-sm"
-              >
+              <input id="referralCode" v-model="form.referralCode" type="text" name="referralCode"
+                class="mt-1 w-full py-3 pl-3 outline-none border-none rounded-md border-gray-200 bg-white text-sm text-gray-700 shadow-sm">
             </div>
-<!--
+            <!--
             <div class="col-span-6">
               <p class="text-sm text-white">
                 By creating an account, you agree to our
@@ -147,15 +100,12 @@
             </div> -->
 
             <div class="w-full">
-              <button
-                :disabled="!isFormEmpty"
-                :class="[
-                  !isFormEmpty
-                    ? 'opacity-25 cursor-not-allowed'
-                    : '',
-                ]"
-                class="inline-block w-full shrink-0 text-xs rounded-md border border-green-500 bg-green-600 px-12 py-3 font-medium text-white transition"
-              >
+              <button :disabled="!isFormEmpty" :class="[
+            !isFormEmpty
+              ? 'opacity-25 cursor-not-allowed'
+              : '',
+          ]"
+                class="inline-block w-full shrink-0 text-xs rounded-md border border-green-500 bg-green-600 px-12 py-3 font-medium text-white transition">
                 {{ formBusy ? "processing..." : " Create an account" }}
               </button>
 
@@ -176,7 +126,7 @@
 <script>
 export default {
   layout: 'authLayout',
-  data () {
+  data() {
     return {
       processing: false,
       formBusy: false,
@@ -190,7 +140,7 @@ export default {
     }
   },
   computed: {
-    isFormEmpty () {
+    isFormEmpty() {
       return !!(
         this.form.first_name &&
         this.form.last_name &&
@@ -200,7 +150,7 @@ export default {
     }
   },
   methods: {
-    async handleSubmit () {
+    async handleSubmit() {
       this.formBusy = true
       try {
         const signupMutation = `
@@ -212,7 +162,7 @@ export default {
         `
 
         const response = await fetch(
-          'https://fidelityvalues.onrender.com/graphql/query',
+          '',
           {
             method: 'POST',
             headers: {

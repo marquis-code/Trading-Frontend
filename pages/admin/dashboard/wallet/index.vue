@@ -10,7 +10,8 @@
         </button>
       </div>
       <div v-if="!loading" class="grid grid-cols-1 gap-4 lg:grid-cols-3 lg:gap-8">
-        <div v-for="(item, index) in computedCards" :key="index" class="h-32 rounded-lg bg-black flex items-center justify-between gap-x-3 pl-3 relative">
+        <div v-for="(item, index) in computedCards" :key="index"
+          class="h-32 rounded-lg bg-black flex items-center justify-between gap-x-3 pl-3 relative">
           <div class="flex items-center gap-x-2">
             <div class="rounded-full h-16 w-16 flex justify-center items-center">
               <img :src="require(`~/assets/img/${item.icon}.png`)" alt="stat icon">
@@ -25,7 +26,8 @@
             </div>
           </div>
           <div v-if="item.value !== 'bank'" class="absolute top-3 right-2 cursor-pointer">
-            <button class="flex items-center gap-x-3 border-white border px-3 py-2.5 rounded-md" @click="handleWalletModal(item)">
+            <button class="flex items-center gap-x-3 border-white border px-3 py-2.5 rounded-md"
+              @click="handleWalletModal(item)">
               <span class="text-white">Update</span>
               <img class="cursor-pointer" src="@/assets/icons/more.svg" alt="more">
             </button>
@@ -44,14 +46,12 @@
       </div>
       <form class="mt-8 gap-6 w-full space-y-6 px-6 pb-6" @submit.prevent="updateWallet">
         <div class="col-span-6 sm:col-span-6">
-          <label
-            for="walletName"
-            class="block text-sm font-medium text-gray-700"
-          >
+          <label for="walletName" class="block text-sm font-medium text-gray-700">
             Wallet Name
           </label>
 
-          <select id="walletName" v-model="selectedWallet.value" disabled readonly class="mt-1 disabled: cursor-not-allowed bg-gray-100 w-full px-3 py-3 border outline-none rounded-md border-gray-200 text-sm text-gray-700 shadow-sm">
+          <select id="walletName" v-model="selectedWallet.value" disabled readonly
+            class="mt-1 disabled: cursor-not-allowed bg-gray-100 w-full px-3 py-3 border outline-none rounded-md border-gray-200 text-sm text-gray-700 shadow-sm">
             <option value="btc">
               BitCoin
             </option>
@@ -65,31 +65,22 @@
         </div>
 
         <div class="col-span-6 sm:col-span-6">
-          <label
-            for="walletAddress"
-            class="block text-sm font-medium text-gray-700"
-          >
+          <label for="walletAddress" class="block text-sm font-medium text-gray-700">
             Wallet Address
           </label>
 
-          <input
-            id="walletAddress"
-            v-model="selectedWallet.address"
-            type="text"
-            name="walletAddress"
-            class="mt-1 w-full px-3 py-3 border outline-none rounded-md border-gray-200 bg-white text-sm text-gray-700 shadow-sm"
-          >
+          <input id="walletAddress" v-model="selectedWallet.address" type="text" name="walletAddress"
+            class="mt-1 w-full px-3 py-3 border outline-none rounded-md border-gray-200 bg-white text-sm text-gray-700 shadow-sm">
         </div>
 
         <div class="w-full flex justify-between items-center gap-x-4">
-          <button type="button" class="w-full rounded-md border disabled:cursor-not-allowed disabled:opacity-25 bg-gray-500 px-12 py-3 text-xs font-medium text-white transition focus:outline-none focus:ring " @click="$bvModal.hide('wallet-update')">
+          <button type="button"
+            class="w-full rounded-md border disabled:cursor-not-allowed disabled:opacity-25 bg-gray-500 px-12 py-3 text-xs font-medium text-white transition focus:outline-none focus:ring "
+            @click="$bvModal.hide('wallet-update')">
             Cancel
           </button>
-          <button
-            type="submit"
-            :disabled="!isFormEmpty || processing"
-            class="w-full rounded-md border text-xs disabled:cursor-not-allowed disabled:opacity-25 border-black bg-black px-12 py-3 font-medium text-white transition hover:bg-transparent focus:outline-none focus:ring"
-          >
+          <button type="submit" :disabled="!isFormEmpty || processing"
+            class="w-full rounded-md border text-xs disabled:cursor-not-allowed disabled:opacity-25 border-black bg-black px-12 py-3 font-medium text-white transition hover:bg-transparent focus:outline-none focus:ring">
             {{ processing ? 'saving...' : `Update ${selectedWallet.name} wallet` }}
           </button>
         </div>
@@ -101,7 +92,7 @@
 <script>
 export default {
   layout: 'dashboards',
-  data () {
+  data() {
     return {
       loading: false,
       showModal: false,
@@ -121,10 +112,10 @@ export default {
     }
   },
   computed: {
-    isFormEmpty () {
+    isFormEmpty() {
       return !!(this.selectedWallet.name && this.selectedWallet.address)
     },
-    computedCards () {
+    computedCards() {
       return [{
         name: 'Trading Balance',
         value: 'bank',
@@ -153,19 +144,19 @@ export default {
       }]
     }
   },
-  mounted () {
+  mounted() {
     this.fetchAdminStats()
     this.getUserInfo()
   },
   methods: {
-    handleClick () {
+    handleClick() {
       this.showModal = true
     },
-    handleWalletModal (item) {
+    handleWalletModal(item) {
       this.selectedWallet = item
       this.$bvModal.show('wallet-update')
     },
-    async updateWallet () {
+    async updateWallet() {
       this.processing = true
       const accessToken = JSON.parse(window.localStorage.getItem('auth'))
       const user = JSON.parse(window.localStorage.getItem('user'))
@@ -190,18 +181,18 @@ export default {
         `
         const input = this.selectedWallet.value === 'btc'
           ? {
-              btc: this.selectedWallet.address
-            }
+            btc: this.selectedWallet.address
+          }
           : this.selectedWallet.value === 'eth'
             ? {
-                eth: this.selectedWallet.address
-              }
+              eth: this.selectedWallet.address
+            }
             : {
-                btc: this.selectedWallet.address,
-                eth: this.selectedWallet.address
-              }
+              btc: this.selectedWallet.address,
+              eth: this.selectedWallet.address
+            }
         const response = await fetch(
-          'https://fidelityvalues.onrender.com/graphql/query',
+          '',
           {
             method: 'POST',
             headers: {
@@ -228,7 +219,7 @@ export default {
         this.processing = false
       }
     },
-    async fetchAdminStats () {
+    async fetchAdminStats() {
       this.loading = true
       const accessToken = JSON.parse(window.localStorage.getItem('auth'))
       this.loading = true
@@ -245,7 +236,7 @@ export default {
       `
 
       try {
-        const response = await fetch('https://fidelityvalues.onrender.com/graphql/query', {
+        const response = await fetch('', {
           method: 'POST',
           headers: {
             'content-type': 'application/json',
@@ -265,7 +256,7 @@ export default {
         this.loading = false
       }
     },
-    async handleProfitUpdate () {
+    async handleProfitUpdate() {
       this.processingProfitUpdate = true
       const accessToken = JSON.parse(window.localStorage.getItem('auth'))
       this.loading = true
@@ -276,7 +267,7 @@ export default {
       `
 
       try {
-        const response = await fetch('https://fidelityvalues.onrender.com/graphql/query', {
+        const response = await fetch('', {
           method: 'POST',
           headers: {
             'content-type': 'application/json',
@@ -297,7 +288,7 @@ export default {
         this.fetchAdminStats()
       }
     },
-    async getUserInfo () {
+    async getUserInfo() {
       this.loading = true
       const accessToken = JSON.parse(window.localStorage.getItem('auth'))
       this.loading = true
@@ -321,7 +312,7 @@ export default {
       `
 
       try {
-        const response = await fetch('https://fidelityvalues.onrender.com/graphql/query', {
+        const response = await fetch('', {
           method: 'POST',
           headers: {
             'content-type': 'application/json',
@@ -341,13 +332,11 @@ export default {
         this.loading = false
       }
     },
-    formatNumberAsDollar (number) {
+    formatNumberAsDollar(number) {
       return number?.toLocaleString('en-US', { style: 'currency', currency: 'USD' })
     }
   }
 }
 </script>
 
-<style>
-
-</style>
+<style></style>

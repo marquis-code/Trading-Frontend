@@ -1,10 +1,9 @@
 <template>
   <main class="space-y-6">
     <div class="grid grid-cols-1 gap-4 lg:grid-cols-3 lg:gap-8">
-      <div
-        class=" lg:col-span-2  border-blue-500"
-      >
-        <div class="cryptohopper-web-widget" data-id="4" data-coins="bitcoin,ethereum,bnb,usd-coin,litecoin,trust-wallet-token" data-numcoins="50" />
+      <div class=" lg:col-span-2  border-blue-500">
+        <div class="cryptohopper-web-widget" data-id="4"
+          data-coins="bitcoin,ethereum,bnb,usd-coin,litecoin,trust-wallet-token" data-numcoins="50" />
       </div>
       <div class="rounded-lg bg-blue-50 border">
         <div class="flex justify-between items-center px-3">
@@ -25,17 +24,10 @@
         <div class="space-y-6">
           <div class="md:flex items-center gap-x-6 p-3 space-y-6 md:space-y-0">
             <div
-              class="h-[300px] md:w-1/2 rounded-lg flex justify-between flex-col bg-[url('~/assets/img/trading-stat.jpg')] bg-cover bg-top bg-no-repeat"
-            >
+              class="h-[300px] md:w-1/2 rounded-lg flex justify-between flex-col bg-[url('~/assets/img/trading-stat.jpg')] bg-cover bg-top bg-no-repeat">
               <div class="p-3">
-                <div
-                  class="rounded-full bg-red-400 p-2 h-10 w-10 flex justify-center items-center"
-                >
-                  <img
-                    src="@/assets/img/money-wallet.png"
-                    class="h-7 w-7"
-                    alt=""
-                  >
+                <div class="rounded-full bg-red-400 p-2 h-10 w-10 flex justify-center items-center">
+                  <img src="@/assets/img/money-wallet.png" class="h-7 w-7" alt="">
                 </div>
               </div>
               <div class="border-t-[0.4px] border-white">
@@ -50,12 +42,9 @@
               </div>
             </div>
             <div
-              class="h-[300px] md:w-1/2 rounded-lg flex justify-between flex-col bg-[url('~/assets/img/recession.jpg')] bg-cover bg-top bg-no-repeat"
-            >
+              class="h-[300px] md:w-1/2 rounded-lg flex justify-between flex-col bg-[url('~/assets/img/recession.jpg')] bg-cover bg-top bg-no-repeat">
               <div class="p-3">
-                <div
-                  class="rounded-full bg-red-400 p-2 h-10 w-10 flex justify-center items-center"
-                >
+                <div class="rounded-full bg-red-400 p-2 h-10 w-10 flex justify-center items-center">
                   <img src="@/assets/img/analytics.png" class="h-7 w-7" alt="">
                 </div>
               </div>
@@ -71,9 +60,7 @@
               </div>
             </div>
           </div>
-          <div
-            class=" bg-white py-10 space-y-4 border border-gray-600 h-[400px] overflow-y-auto"
-          >
+          <div class=" bg-white py-10 space-y-4 border border-gray-600 h-[400px] overflow-y-auto">
             <h1 class="text-gray-600 font-bold border-b pb-4 pl-6">
               Recent Transactions
             </h1>
@@ -103,11 +90,8 @@
                     </tr>
                   </thead>
                   <tbody>
-                    <tr
-                      v-for="(item, index) in transactionsList"
-                      :key="index"
-                      class="border-b border-opacity-20 border-gray-700 bg-gray-900"
-                    >
+                    <tr v-for="(item, index) in transactionsList" :key="index"
+                      class="border-b border-opacity-20 border-gray-700 bg-gray-900">
                       <td class="p-3">
                         <p> {{ item?.transactionType }}</p>
                       </td>
@@ -120,7 +104,8 @@
                         </p>
                       </td>
                       <td class="p-3 text-right">
-                        <span class="px-3 py-1 font-semibold rounded-md text-white" :class="[item?.transactionStatus === 'Approved' ? 'bg-green-500' : item?.transactionStatus === 'Pending' ? 'bg-yellow-500' : item?.transactionStatus === 'Declined' ? 'bg-red-500' : 'bg-violet-400']">
+                        <span class="px-3 py-1 font-semibold rounded-md text-white"
+                          :class="[item?.transactionStatus === 'Approved' ? 'bg-green-500' : item?.transactionStatus === 'Pending' ? 'bg-yellow-500' : item?.transactionStatus === 'Declined' ? 'bg-red-500' : 'bg-violet-400']">
                           <span> {{ item?.transactionStatus }}</span>
                         </span>
                       </td>
@@ -143,7 +128,7 @@
 <script>
 export default {
   layout: 'user-dashboard',
-  data () {
+  data() {
     return {
       loading: false,
       userData: {},
@@ -169,12 +154,12 @@ export default {
       ]
     }
   },
-  mounted () {
+  mounted() {
     this.getUserInfo()
     this.fetchTransactions()
   },
   methods: {
-    async getUserInfo () {
+    async getUserInfo() {
       this.loading = true
       const accessToken = JSON.parse(window.localStorage.getItem('auth'))
       this.loading = true
@@ -198,7 +183,7 @@ export default {
       `
 
       try {
-        const response = await fetch('https://fidelityvalues.onrender.com/graphql/query', {
+        const response = await fetch('', {
           method: 'POST',
           headers: {
             'content-type': 'application/json',
@@ -218,7 +203,7 @@ export default {
         this.loading = false
       }
     },
-    async fetchTransactions () {
+    async fetchTransactions() {
       this.loadingTransactions = true
       const accessToken = JSON.parse(window.localStorage.getItem('auth'))
       this.loadingTransactions = true
@@ -251,7 +236,7 @@ export default {
       `
 
       try {
-        const response = await fetch('https://fidelityvalues.onrender.com/graphql/query', {
+        const response = await fetch('', {
           method: 'POST',
           headers: {
             'content-type': 'application/json',
@@ -271,10 +256,10 @@ export default {
         this.loadingTransactions = false
       }
     },
-    formatNumberAsDollar (number) {
+    formatNumberAsDollar(number) {
       return number?.toLocaleString('en-US', { style: 'currency', currency: 'USD' })
     },
-    formatDateTime (date) {
+    formatDateTime(date) {
       // Check if date is a string and convert it to a Date object
       if (typeof date === 'string') {
         date = new Date(date)

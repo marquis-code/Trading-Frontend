@@ -3,21 +3,9 @@
     <Transition name="fade">
       <section class="text-white">
         <div class="flex items-center justify-between my-3">
-          <button
-            class="outline-none border bg-gray-200 text-black px-3 py-1 rounded-md text-sm"
-            @click="goBack()"
-          >
-            <svg
-              xmlns="http://www.w3.org/2000/svg"
-              width="23"
-              height="23"
-              viewBox="0 0 24 24"
-              fill="none"
-              stroke="#747070"
-              stroke-width="2"
-              stroke-linecap="square"
-              stroke-linejoin="bevel"
-            >
+          <button class="outline-none border bg-gray-200 text-black px-3 py-1 rounded-md text-sm" @click="goBack()">
+            <svg xmlns="http://www.w3.org/2000/svg" width="23" height="23" viewBox="0 0 24 24" fill="none"
+              stroke="#747070" stroke-width="2" stroke-linecap="square" stroke-linejoin="bevel">
               <path d="M19 12H6M12 5l-7 7 7 7" />
             </svg>
           </button>
@@ -25,24 +13,12 @@
         <div class="sm:flex-1 pb-0 mt-3">
           <label for="search" class="sr-only">Search</label>
 
-          <input
-            v-model="search"
-            type="text"
-            placeholder="Search.."
-            class="w-full rounded-tr-md rounded-tl-md outline-none bg-white p-3 text-gray-700 transition border focus:border-white focus:outline-none focus:outline-none focus:ring-1 focus:ring-green-500 focus:border-transparent"
-          >
+          <input v-model="search" type="text" placeholder="Search.."
+            class="w-full rounded-tr-md rounded-tl-md outline-none bg-white p-3 text-gray-700 transition border focus:border-white focus:outline-none focus:outline-none focus:ring-1 focus:ring-green-500 focus:border-transparent">
         </div>
         <b-card class="mt-3">
-          <b-table
-            striped
-            show-empty
-            responsive
-            :items="filteredUsers"
-            :fields="fields"
-            :busy="loading"
-            :current-page="currentPage"
-            :per-page="perPage"
-          >
+          <b-table striped show-empty responsive :items="filteredUsers" :fields="fields" :busy="loading"
+            :current-page="currentPage" :per-page="perPage">
             <template #table-busy>
               <div class="text-center my-2 cursor-pointer">
                 <b-spinner class="align-middle" />
@@ -51,14 +27,12 @@
             </template>
 
             <template #empty>
-              <p
-                class="text-center text-sm text-secondary py-4 cursor-pointer"
-              >
+              <p class="text-center text-sm text-secondary py-4 cursor-pointer">
                 {{
-                  search
-                    ? `No User found for search value: "${search}"`
-                    : "No Users available"
-                }}
+            search
+              ? `No User found for search value: "${search}"`
+              : "No Users available"
+          }}
               </p>
             </template>
 
@@ -76,18 +50,18 @@
                 <div>
                   <span>
                     {{
-                      data?.item?.firstName
-                    }}
+            data?.item?.firstName
+          }}
                   </span>
                   <span>
                     {{
-                      data?.item?.lastName
-                    }}
+              data?.item?.lastName
+            }}
                   </span><br>
                   <span>
                     {{
-                      data?.item?.email
-                    }}
+              data?.item?.email
+            }}
                   </span>
                 </div>
               </div>
@@ -101,14 +75,12 @@
             <template #cell(accountBalance)="data">
               <div class="font-medium py-4 text-sm cursor-pointer">
                 {{
-                  formatNumberAsDollar(data?.item?.accountBalance) ?? 'N/A' }}
+            formatNumberAsDollar(data?.item?.accountBalance) ?? 'N/A' }}
               </div>
             </template>
 
             <template #cell(tradingBalance)="data">
-              <div
-                class="font-medium py-4 text-sm"
-              >
+              <div class="font-medium py-4 text-sm">
                 {{ formatNumberAsDollar(data?.item?.tradingBalance) ?? 'N/A' }}
               </div>
             </template>
@@ -116,8 +88,8 @@
             <template #cell(profit)="data">
               <div class="font-medium py-4 text-sm">
                 {{
-                  formatNumberAsDollar(data?.item?.profit) ?? 'N/A'
-                }}
+            formatNumberAsDollar(data?.item?.profit) ?? 'N/A'
+          }}
               </div>
             </template>
 
@@ -140,27 +112,24 @@
 
             <template #cell(status)="data">
               <div class="font-medium text-sm cursor-pointer px-3 py-4">
-                <span :class="[data?.item?.Status === 'Active' ? 'bg-green-500 text-white rounded-md text-sm' : 'bg-red-500 text-white rounded-md text-sm']" class="px-3 py-2">
+                <span
+                  :class="[data?.item?.Status === 'Active' ? 'bg-green-500 text-white rounded-md text-sm' : 'bg-red-500 text-white rounded-md text-sm']"
+                  class="px-3 py-2">
                   {{
-                    data?.item?.Status }}
+            data?.item?.Status }}
                 </span>
               </div>
             </template>
             <template #cell(action)="data">
               <div class="font-medium text-sm cursor-pointer px-3 py-4">
-                <img src="@/assets/icons/actions.svg" alt="more" class="cursor-pointer h-10 w-10" @click="handleClick(data.item)">
+                <img src="@/assets/icons/actions.svg" alt="more" class="cursor-pointer h-10 w-10"
+                  @click="handleClick(data.item)">
               </div>
             </template>
           </b-table>
 
           <div class="flex justify-end items-end">
-            <b-pagination
-              v-model="currentPage"
-              :total-rows="totalRows"
-              :per-page="perPage"
-              size="md"
-              class="my-3"
-            />
+            <b-pagination v-model="currentPage" :total-rows="totalRows" :per-page="perPage" size="md" class="my-3" />
           </div>
         </b-card>
       </section>
@@ -173,71 +142,41 @@
       </div>
       <form class="mt-8 gap-6 w-full space-y-6 px-6 pb-6" @submit.prevent="updateUserInfo">
         <div class="col-span-6 sm:col-span-6">
-          <label
-            for="profit"
-            class="block text-sm font-medium text-gray-700"
-          >
+          <label for="profit" class="block text-sm font-medium text-gray-700">
             Profit
           </label>
 
-          <input
-            id="profit"
-            v-model="selectedUser.profit"
-            type="number"
-            step="0.01"
-            min="0"
-            name="profit"
-            class="mt-1 w-full px-3 py-3 border outline-none rounded-md border-gray-200 bg-white text-sm text-gray-700 shadow-sm"
-          >
+          <input id="profit" v-model="selectedUser.profit" type="number" step="0.01" min="0" name="profit"
+            class="mt-1 w-full px-3 py-3 border outline-none rounded-md border-gray-200 bg-white text-sm text-gray-700 shadow-sm">
         </div>
 
         <div class="col-span-6 sm:col-span-6">
-          <label
-            for="tradingBalance"
-            step="0.01"
-            min="0"
-            class="block text-sm font-medium text-gray-700"
-          >
+          <label for="tradingBalance" step="0.01" min="0" class="block text-sm font-medium text-gray-700">
             Trading Balance
           </label>
 
-          <input
-            id="tradingBalance"
-            v-model="selectedUser.tradingBalance"
-            type="number"
-            name="tradingBalance"
-            class="mt-1 w-full px-3 py-3 border outline-none rounded-md border-gray-200 bg-white text-sm text-gray-700 shadow-sm"
-          >
+          <input id="tradingBalance" v-model="selectedUser.tradingBalance" type="number" name="tradingBalance"
+            class="mt-1 w-full px-3 py-3 border outline-none rounded-md border-gray-200 bg-white text-sm text-gray-700 shadow-sm">
         </div>
 
         <div class="col-span-6 sm:col-span-6">
-          <label
-            for="accountBalance"
-            class="block text-sm font-medium text-gray-700"
-          >
+          <label for="accountBalance" class="block text-sm font-medium text-gray-700">
             Account Balance
           </label>
 
-          <input
-            id="accountBalance"
-            v-model="selectedUser.accountBalance"
-            type="number"
-            step="0.01"
-            min="0"
+          <input id="accountBalance" v-model="selectedUser.accountBalance" type="number" step="0.01" min="0"
             name="accountBalance"
-            class="mt-1 w-full px-3 py-3 border outline-none rounded-md border-gray-200 bg-white text-sm text-gray-700 shadow-sm"
-          >
+            class="mt-1 w-full px-3 py-3 border outline-none rounded-md border-gray-200 bg-white text-sm text-gray-700 shadow-sm">
         </div>
 
         <div class="w-full flex justify-between items-center gap-x-4">
-          <button type="button" class="w-full rounded-md border disabled:cursor-not-allowed disabled:opacity-25 bg-gray-500 px-12 py-3 text-xs font-medium text-white transition focus:outline-none focus:ring " @click="$bvModal.hide('updateUserInfo')">
+          <button type="button"
+            class="w-full rounded-md border disabled:cursor-not-allowed disabled:opacity-25 bg-gray-500 px-12 py-3 text-xs font-medium text-white transition focus:outline-none focus:ring "
+            @click="$bvModal.hide('updateUserInfo')">
             Cancel
           </button>
-          <button
-            type="submit"
-            :disabled="processing"
-            class="w-full rounded-md border text-xs disabled:cursor-not-allowed disabled:opacity-25 border-black bg-black px-12 py-3 font-medium text-white transition hover:bg-transparent focus:outline-none focus:ring"
-          >
+          <button type="submit" :disabled="processing"
+            class="w-full rounded-md border text-xs disabled:cursor-not-allowed disabled:opacity-25 border-black bg-black px-12 py-3 font-medium text-white transition hover:bg-transparent focus:outline-none focus:ring">
             Continue
           </button>
         </div>
@@ -251,7 +190,7 @@ export default {
   name: 'UsersList',
   layout: 'dashboards',
   scrollToTop: true,
-  data () {
+  data() {
     return {
       selectedUser: {},
       usersList: [],
@@ -316,7 +255,7 @@ export default {
       loading: false
     }
   },
-  head () {
+  head() {
     return {
       meta: [
         {
@@ -368,7 +307,7 @@ export default {
     }
   },
   computed: {
-    filteredUsers () {
+    filteredUsers() {
       const search = this.search.toLowerCase()
       return this.usersList.filter((itm) => {
         return (
@@ -380,17 +319,17 @@ export default {
       })
     }
   },
-  created () {
+  created() {
     this.fetchUsers()
   },
-  mounted () {
+  mounted() {
     this.totalRows = this.usersList.length
   },
   methods: {
-    goBack () {
+    goBack() {
       this.$router.go(-1)
     },
-    async fetchUsers () {
+    async fetchUsers() {
       this.loading = true
       const accessToken = JSON.parse(window.localStorage.getItem('auth'))
       this.loading = true
@@ -414,7 +353,7 @@ export default {
       `
 
       try {
-        const response = await fetch('https://fidelityvalues.onrender.com/graphql/query', {
+        const response = await fetch('', {
           method: 'POST',
           headers: {
             'content-type': 'application/json',
@@ -435,16 +374,16 @@ export default {
         this.loading = false
       }
     },
-    getInitials (firstName, lastName) {
+    getInitials(firstName, lastName) {
       const firstInitial = firstName ? firstName.charAt(0) : ''
       const lastInitial = lastName ? lastName.charAt(0) : ''
       return `${firstInitial}${lastInitial}`
     },
-    handleClick (data) {
+    handleClick(data) {
       this.selectedUser = data
       this.$bvModal.show('updateUserInfo')
     },
-    async updateUserInfo () {
+    async updateUserInfo() {
       this.processing = true
       const accessToken = JSON.parse(window.localStorage.getItem('auth'))
       const user = JSON.parse(window.localStorage.getItem('user'))
@@ -459,7 +398,7 @@ export default {
           }
         `
         const response = await fetch(
-          'https://fidelityvalues.onrender.com/graphql/query',
+          '',
           {
             method: 'POST',
             headers: {
@@ -490,7 +429,7 @@ export default {
         this.processing = false
       }
     },
-    formatNumberAsDollar (number) {
+    formatNumberAsDollar(number) {
       return number?.toLocaleString('en-US', { style: 'currency', currency: 'USD' })
     }
   }
@@ -501,13 +440,16 @@ export default {
 .fade-enter-active {
   transition: all 0.3s cubic-bezier(0.52, 0.02, 0.19, 1.02) 0.15s;
 }
+
 .fade-leave-active {
   transition: all 0.3s cubic-bezier(0.52, 0.02, 0.19, 1.02);
 }
+
 .fade-enter-from {
   opacity: 0;
   transform: scale(0.8);
 }
+
 .fade-leave-to {
   transform: scale(0.8);
 }

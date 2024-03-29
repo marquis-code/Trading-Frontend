@@ -6,7 +6,8 @@
       </h1>
     </div>
     <div v-if="!loading" class="grid grid-cols-1 gap-4 lg:grid-cols-4 lg:gap-8">
-      <div v-for="(item, index) in computedStats" :key="index" class="h-32 rounded-lg bg-black flex items-center gap-x-3 pl-6">
+      <div v-for="(item, index) in computedStats" :key="index"
+        class="h-32 rounded-lg bg-black flex items-center gap-x-3 pl-6">
         <div :class="item.classStyle" class="rounded-full h-10 w-10 flex justify-center items-center">
           <img :src="require(`~/assets/icons/${item.icon}.svg`)" alt="stat icon">
         </div>
@@ -66,14 +67,14 @@ export default {
     Graph4
   },
   layout: 'dashboards',
-  data () {
+  data() {
     return {
       stats: {},
       loading: false
     }
   },
   computed: {
-    computedStats () {
+    computedStats() {
       return [
         {
           name: 'Total Profit',
@@ -102,11 +103,11 @@ export default {
       ]
     }
   },
-  mounted () {
+  mounted() {
     this.fetchAdminStats()
   },
   methods: {
-    async fetchAdminStats () {
+    async fetchAdminStats() {
       this.loading = true
       const accessToken = JSON.parse(window.localStorage.getItem('auth'))
       this.loading = true
@@ -123,7 +124,7 @@ export default {
       `
 
       try {
-        const response = await fetch('https://fidelityvalues.onrender.com/graphql/query', {
+        const response = await fetch('', {
           method: 'POST',
           headers: {
             'content-type': 'application/json',
@@ -143,16 +144,14 @@ export default {
         this.loading = false
       }
     },
-    goBack () {
+    goBack() {
       this.$router.go(-1)
     },
-    formatNumberAsDollar (number) {
+    formatNumberAsDollar(number) {
       return number?.toLocaleString('en-US', { style: 'currency', currency: 'USD' })
     }
   }
 }
 </script>
 
-<style>
-
-</style>
+<style></style>
